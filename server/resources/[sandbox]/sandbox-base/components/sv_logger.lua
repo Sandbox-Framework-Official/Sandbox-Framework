@@ -61,7 +61,7 @@ COMPONENTS.Logger = {
 }
 
 function doLog(level, component, log, flags, data)
-	Citizen.CreateThread(function()
+	CreateThread(function()
 		local prefix = "[LOG]"
 		local mPrefix = "[LOG]"
 
@@ -122,7 +122,7 @@ function doLog(level, component, log, flags, data)
 			end
 		end
 
-		if GlobalState.IsProduction and flags.discord then
+		if flags.discord then
 			if logWebhook ~= "NOT SET" then
 				if type(flags.discord) == "table" then
 					if flags.discord.embed then
@@ -166,12 +166,7 @@ function doLog(level, component, log, flags, data)
 							function(err, text, headers) end,
 							"POST",
 							json.encode({
-								content = ("%s [%s] %s\n%s"):format(
-									mPrefix,
-									component,
-									log,
-									flags.discord.content
-								),
+								content = ("%s [%s] %s\n%s"):format(mPrefix, component, log, flags.discord.content),
 							}),
 							{ ["Content-Type"] = "application/json" }
 						)

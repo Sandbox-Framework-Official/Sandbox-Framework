@@ -2,13 +2,11 @@ COMPONENTS.Discord = {
 	_name = "base",
 	RichPresence = function(self)
 		SetDiscordAppId(COMPONENTS.Convar.DISCORD_APP.value)
-		SetDiscordRichPresenceAsset("sandboxrp_large_icon")
-		SetDiscordRichPresenceAssetText("Join Today: SandboxRP.gg")
-		--SetDiscordRichPresenceAssetSmall("info")
-		SetDiscordRichPresenceAction(0, "Apply Now", "https://sandboxrp.gg")
-		SetDiscordRichPresenceAction(1, "Join Our Discord", "https://discord.gg/sandboxgg")
+		SetDiscordRichPresenceAsset("logo")
+		SetDiscordRichPresenceAssetText("Join Today: https://dsc.gg/Notyetbuddeh")
+		SetDiscordRichPresenceAction(0, "Watch our trailer", "https://www.youtube.com")
 
-		Citizen.CreateThread(function()
+		CreateThread(function()
 			while true do
 				local char = LocalPlayer.state.Character
 				local playerCount = GlobalState["PlayerCount"] or 0
@@ -27,8 +25,8 @@ COMPONENTS.Discord = {
 				else
 					SetRichPresence(
 						string.format(
-							"[%d/%d]%s - Selecting a Character", 
-							playerCount, 
+							"[%d/%d]%s - Selecting a Character",
+							playerCount,
 							GlobalState.MaxPlayers,
 							queueCount > 0 and string.format(" (Queue: %d)", queueCount) or ""
 						)
@@ -38,12 +36,15 @@ COMPONENTS.Discord = {
 				-- SetDiscordRichPresenceAssetSmallText(
 				-- 	string.format("%s/%s [Queue: %s]", playerCount, GlobalState.MaxPlayers, queueCount)
 				-- )
-				Citizen.Wait(30000)
+				Wait(30000)
 			end
 		end)
 	end,
 }
 
-Citizen.CreateThread(function()
+CreateThread(function()
+	--if GetConvar("web_baseUrl", "") ~= "https://sandbox-rp-lj7b87.users.cfx.re/" then
+	--	return
+	--end
 	COMPONENTS.Discord:RichPresence()
 end)
