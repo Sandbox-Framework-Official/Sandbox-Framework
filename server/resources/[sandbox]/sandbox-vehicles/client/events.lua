@@ -33,7 +33,7 @@ AddEventHandler("Vehicles:Client:CharacterLogin", function()
 
 				if vehClassData and vehClassData.topSpeed and not Police:IsPdCar(VEHICLE_INSIDE) then
 					-- UNCOMMENT THIS BELOW FOR THE HARD CAPPED TOP SPEEDS POG
-					VEHICLE_TOP_SPEED = vehClassData.topSpeed / 2.237
+					--VEHICLE_TOP_SPEED = vehClassData.topSpeed / 2.237
 				end
 
 				TriggerEvent("Vehicles:Client:EnterVehicle", VEHICLE_INSIDE, VEHICLE_SEAT, VEHICLE_CLASS)
