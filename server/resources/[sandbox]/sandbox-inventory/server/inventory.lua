@@ -1069,7 +1069,7 @@ function DoSwap(source, data, cb)
 			return
 		end
 
-		local ids = MySQL.rawExecute.await("SELECT id, owner, type, slot FROM inventory WHERE (slot = ? AND owner = ? AND type = ?) OR (slot = ? AND owner = ? AND type = ?)", {
+		local ids = MySQL.rawExecute.await("SELECT id, owner, type, slot, item_id FROM inventory WHERE (slot = ? AND owner = ? AND type = ?) OR (slot = ? AND owner = ? AND type = ?)", {
 			data.slotFrom,
 			tostring(data.ownerFrom),
 			data.invTypeFrom,
@@ -1078,37 +1078,36 @@ function DoSwap(source, data, cb)
 			data.invTypeTo,
 		});
 
-		local idsFrom = {}
-		local idsTo = {}
+		local moveTo = {}
+		for k,v in ipairs(ids) do
 
-		for k, v in ipairs(ids) do
-			if v.owner == tostring(data.ownerFrom) and v.type == data.invTypeFrom and v.slot == data.slotFrom then
-				table.insert(idsFrom, v.id)
+			if v.slot == data.slotFrom then
+				moveTo[#moveTo+1] = {
+					invTypeTo = data.invTypeTo,
+					slotTo = data.slotTo,
+					ownerTo = tostring(data.ownerTo),
+					id = v.id
+				}
 			else
-				table.insert(idsTo, v.id)
+				moveTo[#moveTo+1] = {
+					invTypeTo = data.invTypeFrom,
+					slotTo = data.slotFrom,
+					ownerTo = tostring(data.ownerFrom),
+					id = v.id
+				}
 			end
 		end
 
 		local queries = {}
 
-		if #idsFrom > 0 then
+		for k,v in pairs(moveTo) do
 			table.insert(queries, {
-				query = "UPDATE inventory SET slot = ?, owner = ?, type = ? WHERE id IN (" .. table.concat(idsFrom, ', ') .. ")",
+				query = "UPDATE inventory SET slot = ?, owner = ?, type = ? WHERE id = ?",
 				values = {
-					data.slotTo,
-					tostring(data.ownerTo),
-					data.invTypeTo,
-				},
-			})
-		end
-
-		if #idsTo > 0 then
-			table.insert(queries, {
-				query = "UPDATE inventory SET slot = ?, owner = ?, type = ? WHERE id IN (" .. table.concat(idsTo, ', ') .. ")",
-				values = {
-					data.slotFrom,
-					tostring(data.ownerFrom),
-					data.invTypeFrom,
+					v.slotTo,
+					v.ownerTo,
+					v.invTypeTo,
+					v.id
 				},
 			})
 		end
