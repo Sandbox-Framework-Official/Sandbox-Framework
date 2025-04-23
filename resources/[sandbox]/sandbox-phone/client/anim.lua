@@ -5,7 +5,7 @@
 local myPedId = nil
 
 local phoneProp = 0
-local phoneModel = `ifruit_12`
+local phoneModel = `prop_npc_phone_02`
 -- OR "prop_npc_phone"
 -- OR "prop_npc_phone_02"
 -- OR "prop_cs_phone_01"
