@@ -8,6 +8,7 @@
 		"build": "cross-env NODE_ENV=production webpack --config webpack/webpack.prod.js --color --progress"
 	},
 	"dependencies": {
+		"mythic-ckeditor": "file:local_package\\mythic-ckeditor",
 		"@babel/plugin-proposal-class-properties": "^7.18.6",
 		"@ckeditor/ckeditor5-build-classic": "^33.0.0",
 		"@ckeditor/ckeditor5-react": "^4.0.1",
