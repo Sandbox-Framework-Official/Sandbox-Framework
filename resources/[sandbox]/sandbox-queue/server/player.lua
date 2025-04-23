@@ -135,53 +135,53 @@ function PlayerClass(identifier, player, deferrals)
 			return self.Verified
 		end,
 
-		-- IsTokenBanned = function(self)
-		-- 	local tkns = {}
-		-- 	for i = 0, GetNumPlayerTokens(self.Source) - 1 do
-		-- 		table.insert(tkns, GetPlayerToken(self.Source, i))
-		-- 	end
+		IsTokenBanned = function(self)
+			local tkns = {}
+			for i = 0, GetNumPlayerTokens(self.Source) - 1 do
+				table.insert(tkns, GetPlayerToken(self.Source, i))
+			end
 
-		-- 	local p = promise.new()
+			local p = promise.new()
 
-		-- 	Database.Auth:find({
-		-- 		collection = "bans",
-		-- 		query = {
-		-- 			tokens = {
-		-- 				["$in"] = tkns,
-		-- 			},
-		-- 			["$or"] = {
-		-- 				{
-		-- 					expires = -1,
-		-- 				},
-		-- 				{
-		-- 					expires = {
-		-- 						["$gt"] = (os.time() * 1000),
-		-- 					},
-		-- 				},
-		-- 			},
-		-- 			active = true,
-		-- 		},
-		-- 	}, function(success, res)
-		-- 		if not success then
-		-- 			p:resolve(true)
-		-- 			return
-		-- 		end
+			Database.Auth:find({
+				collection = "bans",
+				query = {
+					tokens = {
+						["$in"] = tkns,
+					},
+					["$or"] = {
+						{
+							expires = -1,
+						},
+						{
+							expires = {
+								["$gt"] = (os.time() * 1000),
+							},
+						},
+					},
+					active = true,
+				},
+			}, function(success, res)
+				if not success then
+					p:resolve(true)
+					return
+				end
 
-		-- 		if #res == 0 then
-		-- 			p:resolve(nil)
-		-- 		else
-		-- 			local ban = nil
-		-- 			for k, v in ipairs(res) do
-		-- 				if ban == nil or (ban.expires ~= -1 and v.expires == -1 or v.expires > ban.expires) then
-		-- 					ban = v
-		-- 				end
-		-- 			end
-		-- 			p:resolve(ban)
-		-- 		end
-		-- 	end)
+				if #res == 0 then
+					p:resolve(nil)
+				else
+					local ban = nil
+					for k, v in ipairs(res) do
+						if ban == nil or (ban.expires ~= -1 and v.expires == -1 or v.expires > ban.expires) then
+							ban = v
+						end
+					end
+					p:resolve(ban)
+				end
+			end)
 
-		-- 	return Citizen.Await(p)
-		-- end,
+			return Citizen.Await(p)
+		end,
 
 		IsInGracePeriod = function(self)
 			if self.Grace == nil then
