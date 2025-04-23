@@ -388,23 +388,23 @@ QUEUE.Connect = function(self, source, playerName, setKickReason, deferrals)
 			return
 		end
 
-		local tknBan = ply:IsTokenBanned()
-		if tknBan ~= nil then
-			if tknBan.expires == -1 then
-				deferrals.done(string.format(Config.Strings.PermaBanned, tknBan.reason, tknBan._id or "N/A"))
-			else
-				deferrals.done(
-					string.format(
-						Config.Strings.Banned,
-						tknBan.reason,
-						os.date("%Y-%m-%d at %I:%M:%S %p", tostring(tknBan.expires)),
-						tknBan._id or "N/A"
-					)
-				)
-			end
-			CancelEvent()
-			return
-		end
+		-- local tknBan = ply:IsTokenBanned()
+		-- if tknBan ~= nil then
+		-- 	if tknBan.expires == -1 then
+		-- 		deferrals.done(string.format(Config.Strings.PermaBanned, tknBan.reason, tknBan._id or "N/A"))
+		-- 	else
+		-- 		deferrals.done(
+		-- 			string.format(
+		-- 				Config.Strings.Banned,
+		-- 				tknBan.reason,
+		-- 				os.date("%Y-%m-%d at %I:%M:%S %p", tostring(tknBan.expires)),
+		-- 				tknBan._id or "N/A"
+		-- 			)
+		-- 		)
+		-- 	end
+		-- 	CancelEvent()
+		-- 	return
+		-- end
 
 		-- if Data.Session.Count < MAX_PLAYERS then
 		--     self.Session:Add(ply)
