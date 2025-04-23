@@ -10,7 +10,7 @@
 - [Discord Link](https://discord.gg/A4QQ6JsDp3) - Offical Discord for Sandbox Framework community-driven support forum!
 
 ## Get Started
-- [sandbox-framework](https://github.com/Sandbox-Framework/sandbox-framework) - Get started with the official repository!
+- [sandbox-framework](https://github.com/Sandbox-Framework-Official/Sandbox-Framework) - Get started with the official repository!
 
 ## Project Maintainers
 - Leoskinner - Maintainer
