@@ -28,3 +28,4 @@ coord-line/
 server/resources/\[sandbox\]/sandbox-pwnzor2/pac.db
 server/config/database.cfg
 artifacts/
+server/server.cfg
