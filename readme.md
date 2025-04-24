@@ -7,7 +7,7 @@
 - This is a heavily modified version of Mythic Framework for Sandbox RP. This is a custom framework that uses a component system, all UI's are built in React.
 
 ## Official Discord
-- [Discord Link](https://discord.gg/A4QQ6JsDp3) - Offical Discord for Sandbox Framework community-driven support forum!
+- [Discord Link](https://discord.gg/A4QQ6JsDp3) - Official Discord for Sandbox Framework community-driven support forum!
 
 ## Get Started
 - [sandbox-framework](https://github.com/Sandbox-Framework-Official/Sandbox-Framework) - Get started with the official repository!
