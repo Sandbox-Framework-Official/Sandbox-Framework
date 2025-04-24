@@ -16,7 +16,8 @@
 - Leoskinner - Maintainer
 - PixelCodes - Maintainer
 - GamerDad - Maintainer
-
+- Zapped-Daddy - Maintainer
+  
 ## Credits
 - Alzar & Dr Nick - Original Maintainers and Creators
 
