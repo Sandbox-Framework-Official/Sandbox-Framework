@@ -1,16 +1,23 @@
-<div align=center><img src="https://i.ibb.co/Tm01NWq/banner.png"></div>
 
-# Sandbox Framework [![Awesome](https://cdn.jsdelivr.net/gh/sindresorhus/awesome@d7305f38d29fed78fa85652e3a63e154dd8e8829/media/badge.svg)](https://github.com/sindresorhus/awesome#readme)
-> A curated list of credits, links, and community information related to the framework.
+# Sandbox Framework
+
+<div align="center">
+  <img src="https://i.ibb.co/Tm01NWq/banner.png" alt="Sandbox Framework Banner">
+</div>
+
+[![Awesome](https://cdn.jsdelivr.net/gh/sindresorhus/awesome@d7305f38d29fed78fa85652e3a63e154dd8e8829/media/badge.svg)](https://github.com/sindresorhus/awesome#readme)
+
+A curated list of credits, links, and community information related to the Sandbox Framework.
 
 ## Description
-- This is a heavily modified version of Mythic Framework for Sandbox RP. This is a custom framework that uses a component system, all UI's are built in React.
+This is a heavily modified version of the **Mythic Framework** tailored for Sandbox Roleplay (RP). It features a custom component-based system with all UI elements built using **React**.
 
 ## Official Discord
 - [Discord Link](https://discord.gg/A4QQ6JsDp3) - Official Discord for Sandbox Framework community-driven support forum!
 
 ## Get Started
-- [sandbox-framework](https://github.com/Sandbox-Framework-Official/Sandbox-Framework) - Get started with the official repository!
+Get started with the official repository:  
+[Sandbox Framework GitHub](https://github.com/Sandbox-Framework-Official/Sandbox-Framework)
 
 ## Project Maintainers
 - Leoskinner - Maintainer
@@ -19,44 +26,52 @@
 - Zapped-Daddy - Maintainer
   
 ## Credits
-- Alzar & Dr Nick - Original Maintainers and Creators
+- **Alzar** & **Dr Nick** - Original Maintainers and Creators
 
-## Information
+## 🚧 Disclaimer 🚧
+We do not own this framework; our goal is to provide the support it deserves. The framework was originally built by **Alzar** and **Dr Nick**. Alzar has released the framework for community maintenance.  
+Original repositories:  
+- [Mythic Framework](https://github.com/Alzar/mythic-framework)  
+- [Sandbox FiveM](https://github.com/BadCodesGG/sandbox-fivem)
 
-# 🚧DISCLAIMER🚧
-We do not own this framework, and we am simply trying to give it the support it deserves. The framework was originally built by Alzar & Dr Nick. Alzar has taken the liberty of releasing the framework and allowing the team To Maintain it. You can Alzars orignal repo here [original mythic repository](https://github.com/Alzar/mythic-framework) and [original sandbox repository](https://github.com/BadCodesGG/sandbox-fivem) 
+## Requirements
+The following packages are required to run the Sandbox Framework:
 
-# Requirements 
-| Packages          | Link                                                                |
-| ----------------- | ------------------------------------------------------------------ |
-| NodeJS | [Download Here](https://nodejs.org/en/download?text=+) |
-| PNPM | [Download Here](https://pnpm.io/installation) |
-| MongoDB | [Download Here](https://www.mongodb.com/try/download/community) (v6.0.5) |
-| MariaDB | [Download Here](https://mariadb.org/download/?t=mariadb&p=mariadb&r=10.6.12&os=windows&cpu=x86_64&pkg=msi&m=acorn) (v10.6.12)
-| HeidiSQL | [Download Here](https://www.heidisql.com/download.php) (*can be installed via MariaDB)
+| Package     | Version   | Download Link                                                                 |
+|-------------|-----------|-------------------------------------------------------------------------------|
+| NodeJS      | Latest    | [NodeJS Download](https://nodejs.org/en/download?text=+)                     |
+| PNPM        | Latest    | [PNPM Installation](https://pnpm.io/installation)                            |
+| MongoDB     | v6.0.5    | [MongoDB Community](https://www.mongodb.com/try/download/community)          |
+| MariaDB     | v10.6.12  | [MariaDB Download](https://mariadb.org/download/?t=mariadb&p=mariadb&r=10.6.12&os=windows&cpu=x86_64&pkg=msi&m=acorn) |
+| HeidiSQL    | Latest    | [HeidiSQL Download](https://www.heidisql.com/download.php)                   |
+
+**Note**: HeidiSQL can be installed via MariaDB if preferred.
 
 ## Map Dependencies
-This is a map list used by **Mythic Framework** for business, government ect.
-Most of these maps are automatically started by the server (the ones that are not, will be signed with a "*") since they are already included in the **resources.cfg** file:
+The following maps are used by the **Mythic Framework** for businesses, government buildings, and other RP environments. Most are automatically started by the server via the `resources.cfg` file, except those marked with an asterisk (*) which require manual configuration.
 
-- [cfx-gabz-*](https://fivem.gabzv.com/category/subscription) (all the maps are used)
-- [cfx_gn_burgershot](https://gnstud.io/products/burgershot)
-- [cfx_gn_bx_food_props](https://gnstud.io/collections/props)
-- [gn_saloon](https://gnstud.io/products/black-woods-saloon)
-- [mz_hospital](https://gnstud.io/collections/medical/products/mount-zonah-hospital)
-- [dolu_last_train](https://dolu.tebex.io/package/4465265)
-- [dolu_shells](https://dolu.tebex.io/package/5141128)
-- [cafe_prego](https://artex.tebex.io/package/6084340)
-- [noodle_exchange](https://fivem.map4all-shop.com/package/4967545)
-- [xerogasstation](https://fivem.map4all-shop.com/package/5342855)
-- [artgallery](https://www.k4mb1maps.com/package/4672250)
-- [digital_den](https://patoche-mapping.tebex.io/package/5171582)
-- [Auto Exotics](https://lb-customs.tebex.io/package/4339272) *
-- [Smoke on the Water](https://mrhunter.tebex.io/package/5198707) *
-- [Ferrari Pawnshop](https://www.k4mb1maps.com/package/4672248) *
-- [Dreamworks Mechanics](https://juniors-interiors.tebex.io/category/1930382) *
-- [Dynasty8 real estate agency](https://forum.cfx.re/t/mlo-dynasty8-real-estate-agency/1842152) *
-- **rockford_records** he shut down his tebex :|
-- **nutt_sagma** he shut down his tebex :|
-- **tobii-mineshaft** he shut down his patreon :|
-- **tobii-fightclub** he shut down his patreon :|
+| Map                        | Source                                                                      | Notes                              |
+|----------------------------|-----------------------------------------------------------------------------|------------------------------------|
+| cfx-gabz-*                 | [Gabz Subscription](https://fivem.gabzv.com/category/subscription)          | All Gabz maps are used.            |
+| cfx_gn_burgershot          | [GNStud.io](https://gnstud.io/products/burgershot)                         | Burgershot map.                    |
+| cfx_gn_bx_food_props       | [GNStud.io](https://gnstud.io/collections/props)                           | Food props for RP.                 |
+| gn_saloon                  | [GNStud.io](https://gnstud.io/products/black-woods-saloon)                 | Black Woods Saloon map.            |
+| mz_hospital                | [GNStud.io](https://gnstud.io/collections/medical/products/mount-zonah-hospital) | Mount Zonah Hospital map.         |
+| dolu_last_train            | [Dolu Tebex](https://dolu.tebex.io/package/4465265)                        | Last Train map.                    |
+| dolu_shells                | [Dolu Tebex](https://dolu.tebex.io/package/5141128)                        | Shells map.                        |
+| cafe_prego                 | [Artex Tebex](https://artex.tebex.io/package/6084340)                      | Cafe Prego map.                    |
+| noodle_exchange            | [Map4All Shop](https://fivem.map4all-shop.com/package/4967545)             | Noodle Exchange map.               |
+| xerogasstation             | [Map4All Shop](https://fivem.map4all-shop.com/package/5342855)             | Gas station map.                   |
+| artgallery                 | [K4MB1 Maps](https://www.k4mb1maps.com/package/4672250)                    | Art gallery map.                   |
+| digital_den                | [Patoche Mapping](https://patoche-mapping.tebex.io/package/5171582)        | Digital Den map.                   |
+| Auto Exotics               | [LB Customs](https://lb-customs.tebex.io/package/4339272)                  | *Manual start required.            |
+| Smoke on the Water         | [MrHunter Tebex](https://mrhunter.tebex.io/package/5198707)                | *Manual start required.            |
+| Ferrari Pawnshop           | [K4MB1 Maps](https://www.k4mb1maps.com/package/4672248)                    | *Manual start required.            |
+| Dreamworks Mechanics       | [Juniors Interiors](https://juniors-interiors.tebex.io/category/1930382)   | *Manual start required.            |
+| Dynasty8 Real Estate Agency| [CFX Forum](https://forum.cfx.re/t/mlo-dynasty8-real-estate-agency/1842152)| *Manual start required.            |
+| rockford_records           | Unavailable (Tebex shut down)                                              | Source no longer accessible.       |
+| nutt_sagma                 | Unavailable (Tebex shut down)                                              | Source no longer accessible.       |
+| tobii-mineshaft            | Unavailable (Patreon shut down)                                            | Source no longer accessible.       |
+| tobii-fightclub            | Unavailable (Patreon shut down)                                            | Source no longer accessible.       |
+
+**Note**: For unavailable maps, consider searching for alternative MLOs or consult the [Discord community](https://discord.gg/A4QQ6JsDp3) for recommendations.
