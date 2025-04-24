@@ -1,5 +1,4 @@
-server_script "XB.lua"
-client_script "XB.lua"
+
 fx_version("cerulean")
 lua54("yes")
 game("gta5")

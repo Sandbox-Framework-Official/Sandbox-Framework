@@ -1,5 +1,4 @@
-server_script "XP.lua"
-client_script "XP.lua"
+
 name("ARP Restaurant")
 author("[Cool People Dev Team]")
 lua54("yes")

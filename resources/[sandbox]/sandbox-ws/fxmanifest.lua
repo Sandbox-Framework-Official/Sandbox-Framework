@@ -12,5 +12,5 @@ server_scripts({
 
 files {
     "cert.pem",
-    "key.pem"
+    --"key.pem" later
 }
