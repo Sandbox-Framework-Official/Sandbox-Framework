@@ -14,6 +14,8 @@
 
 ## Project Maintainers
 - Leoskinner - Maintainer
+- PixelCodes - Maintainer
+- GamerDad - Maintainer
 
 ## Credits
 - Alzar & Dr Nick - Original Maintainers and Creators
