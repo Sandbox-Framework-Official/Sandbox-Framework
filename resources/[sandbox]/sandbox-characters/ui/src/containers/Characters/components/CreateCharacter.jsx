@@ -49,7 +49,7 @@ export default () => {
 		<Fade in={true}>
 			<div className={classes.container} onClick={onClick}>
 				<div className={classes.details}>
-					<FontAwesomeIcon icon="plus-circle" />
+					<FontAwesomeIcon icon="circle-plus" />
 				</div>
 			</div>
 		</Fade>
