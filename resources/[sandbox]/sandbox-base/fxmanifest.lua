@@ -1,27 +1,26 @@
 fx_version("cerulean")
 games({ "gta5" })
 lua54("yes")
+version("1.0.0")
 server_script("@oxmysql/lib/MySQL.lua")
 client_script("@sandbox-pwnzor/client/check.lua")
 client_scripts({
 	"sh_init.lua",
 	"cl_init.lua",
-	"core/sh_*.lua",
-	"core/cl_*.lua",
+	"core/**/sh_*.lua",
+	'core/**/cl_*.lua',
 	"cl_config.lua",
 	"components/cl_*.lua",
 })
 
 server_scripts({
-	'oxmysql.js',
+	"oxmysql.js",
 	"sh_init.lua",
 	"sv_init.lua",
 	"sv_config.lua",
-	"core/sv_database.js",
-	"core/sv_generator.js",
-	"core/sv_regex.js",
-	"core/sh_*.lua",
-	"core/sv_*.lua",
+	"core/**/sv_*.js",
+	"core/**/sh_*.lua",
+	'core/**/sv_*.lua',
 	"components/sv_*.lua",
 })
 
