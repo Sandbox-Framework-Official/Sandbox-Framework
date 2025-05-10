@@ -35,30 +35,12 @@ function RegisterCallbacks()
 	
 	Callbacks:RegisterServerCallback("Characters:GetServerData", function(source, data, cb)
 		while Fetch:Source(source) == nil do
-			Citizen.Wait(1000)
+			Wait(1000)
 		end
 
 		local motd = GetConvar("motd", "Welcome to SandboxRP")
-		Database.Game:find({
-			collection = "changelogs",
-			options = {
-				sort = {
-					date = -1,
-				},
-			},
-			limit = 1,
-		}, function(success, results)
-			if not success then
-				cb({ changelog = nil, motd = "" })
-				return
-			end
 
-			if #results > 0 then
-				cb({ changelog = results[1], motd = motd })
-			else
-				cb({ changelog = nil, motd = motd })
-			end
-		end)
+		cb({ changelog = nil, motd = motd })
 	end)
 
 	Callbacks:RegisterServerCallback("Characters:GetCharacters", function(source, data, cb)
