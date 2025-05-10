@@ -196,73 +196,120 @@ function PlayerClass(identifier, player, deferrals)
 end
 
 function FetchDatabaseUser(identifier, player)
-	local p = promise.new()
 
-	Database.Auth:findOne({
-		collection = "users",
-		query = {
-			identifier = identifier,
-		},
-		limit = 1,
-		options = {
-			projection = {
-				name = 1,
-				forum = 1,
-				account = 1,
-				identifier = 1,
-				verified = 1,
-				joined = 1,
-				groups = 1,
-				avatar = 1,
-				priority = 1,
-			},
-		},
-	}, function(success, results)
-		if success and #results > 0 and results[1].identifier and results[1].identifier == identifier then
-			--[[
-				Added this check to update player names if they've changed
-				Also checking to see if player name was nil and if so
-				Update it as well, but even on player join, it should
-				prevent them from joining with an empty name
-			]]
-			--
-			if results[1].name == nil or results[1].name ~= GetPlayerName(player) then
-				Database.Auth:updateOne({
-					collection = "users",
-					query = {
-						identifier = results[1].identifier,
-					},
-					update = {
-						["$set"] = {
-							name = GetPlayerName(player),
-						},
-					},
-				}, function()
-					p:resolve(doc)
-				end)
-			else
-				p:resolve(results[1])
-			end
-		else
-			local doc = {
-				name = GetPlayerName(player),
-				account = Sequence:Get("Account"),
-				identifier = identifier,
-				verified = true,
-				joined = os.time() * 1000,
-				groups = {
-					"Whitelisted",
-				},
-				priority = 0,
-			}
-			Database.Auth:insertOne({
-				collection = "users",
-				document = doc,
-			}, function()
-				p:resolve(doc)
-			end)
-		end
-	end)
+	-- Build the SQL query
+	local User = MySQL.single.await("SELECT * FROM users WHERE identifier = ?", {identifier})
+	if User then
+		local Data = {
+			_id = User.id,
+			name = User.name,
+			account = User.account,
+			identifier = User.identifier,
+			verified = User.verified,
+			joined = User.joined,
+			groups = json.decode(User.groups),
+			avatar = User.avatar,
+			priority = User.priority,
+			discord = User.discord,
+		}
+		return Data
+	end
 
-	return Citizen.Await(p)
+	local doc = {
+		name = GetPlayerName(player),
+		account = Sequence:Get("Account"),
+		identifier = identifier,
+		verified = true,
+		joined = os.time() * 1000,
+		groups = {
+			"Whitelisted",
+		},
+		priority = 0,
+		discord = GetPlayerIdentifierByType(player, "discord"),
+	}
+
+	local InsertData =  MySQL.insert.await("INSERT INTO users (name, account, identifier, verified, joined, groups, priority, discord) VALUES (?, ?, ?, ?, ?, ?, ?, ?)", {
+		doc.name,
+		doc.account,
+		doc.identifier,
+		doc.verified,
+		doc.joined,
+		json.encode(doc.groups),
+		doc.priority,
+		doc.discord
+	})
+
+	return doc
 end
+
+-- function FetchDatabaseUser(identifier, player)
+-- 	local p = promise.new()
+
+-- 	Database.Auth:findOne({
+-- 		collection = "users",
+-- 		query = {
+-- 			identifier = identifier,
+-- 		},
+-- 		limit = 1,
+-- 		options = {
+-- 			projection = {
+-- 				name = 1,
+-- 				forum = 1,
+-- 				account = 1,
+-- 				identifier = 1,
+-- 				verified = 1,
+-- 				joined = 1,
+-- 				groups = 1,
+-- 				avatar = 1,
+-- 				priority = 1,
+-- 			},
+-- 		},
+-- 	}, function(success, results)
+-- 		if success and #results > 0 and results[1].identifier and results[1].identifier == identifier then
+-- 			--[[
+-- 				Added this check to update player names if they've changed
+-- 				Also checking to see if player name was nil and if so
+-- 				Update it as well, but even on player join, it should
+-- 				prevent them from joining with an empty name
+-- 			]]
+-- 			--
+-- 			if results[1].name == nil or results[1].name ~= GetPlayerName(player) then
+-- 				Database.Auth:updateOne({
+-- 					collection = "users",
+-- 					query = {
+-- 						identifier = results[1].identifier,
+-- 					},
+-- 					update = {
+-- 						["$set"] = {
+-- 							name = GetPlayerName(player),
+-- 						},
+-- 					},
+-- 				}, function()
+-- 					p:resolve(doc)
+-- 				end)
+-- 			else
+-- 				p:resolve(results[1])
+-- 			end
+-- 		else
+-- 			local doc = {
+-- 				name = GetPlayerName(player),
+-- 				account = Sequence:Get("Account"),
+-- 				identifier = identifier,
+-- 				verified = true,
+-- 				joined = os.time() * 1000,
+-- 				groups = {
+-- 					"Whitelisted",
+-- 				},
+-- 				priority = 0,
+-- 			}
+-- 			Database.Auth:insertOne({
+-- 				collection = "users",
+-- 				document = doc,
+-- 			}, function()
+-- 				p:resolve(doc)
+-- 			end)
+-- 		end
+-- 	end)
+
+-- 	return Citizen.Await(p)
+-- end  Not needed 
