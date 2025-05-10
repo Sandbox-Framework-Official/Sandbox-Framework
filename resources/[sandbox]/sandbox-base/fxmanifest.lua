@@ -13,6 +13,7 @@ client_scripts({
 })
 
 server_scripts({
+	'oxmysql.js',
 	"sh_init.lua",
 	"sv_init.lua",
 	"sv_config.lua",
