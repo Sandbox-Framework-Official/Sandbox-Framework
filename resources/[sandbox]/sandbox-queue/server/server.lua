@@ -280,35 +280,14 @@ QUEUE.Connect = function(self, source, playerName, setKickReason, deferrals)
 		end
 
 		if GlobalState.IsProduction then
-			while GetGameTimer() < (_dbReadyTime + (Config.Settings.QueueDelay * (1000 * 60))) do
-				local min = math.floor(
-					(
-						(math.floor(_dbReadyTime / 1000) + (Config.Settings.QueueDelay * 60))
-						- math.floor(GetGameTimer() / 1000)
-					) / 60
-				)
-				local secs = math.floor(
-					(
-						(math.floor(_dbReadyTime / 1000) + (Config.Settings.QueueDelay * 60))
-						- math.floor(GetGameTimer() / 1000)
-					) - (min * 60)
+			while GetGameTimer() < (_dbReadyTime + 3000) do
+				local secs = math.ceil(
+					((_dbReadyTime + 3000) - GetGameTimer()) / 1000
 				)
 
-				if min <= 0 then
-					deferrals.update(
-						string.format(Config.Strings.WaitingSeconds, secs, secs > 1 and "Seconds" or "Second")
-					)
-				else
-					deferrals.update(
-						string.format(
-							Config.Strings.Waiting,
-							min,
-							min > 1 and "Minutes" or "Minute",
-							secs,
-							secs > 1 and "Seconds" or "Second"
-						)
-					)
-				end
+				deferrals.update(
+					string.format(Config.Strings.WaitingSeconds, secs, secs > 1 and "Seconds" or "Second")
+				)
 
 				Wait(100)
 			end
