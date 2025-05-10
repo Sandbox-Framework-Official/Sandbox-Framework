@@ -74,4 +74,15 @@ COMPONENTS.Utils = {
             end
         end
     end,
+    CloneDeep = function(self, table)
+        local copy = {}
+        for k, v in pairs(table) do
+            if type(v) == "table" then
+                copy[k] = self:CloneDeep(v)
+            else
+                copy[k] = v
+            end
+        end
+        return copy
+    end,
 }
