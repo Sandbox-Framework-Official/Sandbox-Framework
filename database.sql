@@ -1,8 +1,8 @@
 -- --------------------------------------------------------
 -- Host:                         127.0.0.1
--- Server version:               11.5.2-MariaDB - mariadb.org binary distribution
+-- Server version:               11.7.2-MariaDB - mariadb.org binary distribution
 -- Server OS:                    Win64
--- HeidiSQL Version:             12.6.0.6765
+-- HeidiSQL Version:             12.10.0.7000
 -- --------------------------------------------------------
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -44,7 +44,7 @@ CREATE TABLE IF NOT EXISTS `bank_accounts` (
   KEY `Type` (`type`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
--- Dumping data for table sandbox.bank_accounts: ~89 rows (approximately)
+-- Dumping data for table sandbox.bank_accounts: ~94 rows (approximately)
 INSERT INTO `bank_accounts` (`account`, `type`, `owner`, `balance`, `name`) VALUES
 	(100000, 'organization', 'government', 503333, 'San Andreas State Account'),
 	(105694, 'organization', 'superperformance', 50000, 'Super Performance Account'),
@@ -65,8 +65,10 @@ INSERT INTO `bank_accounts` (`account`, `type`, `owner`, `balance`, `name`) VALU
 	(242293, 'organization', 'dgang', 11427, 'Lua Holdings LLC Account'),
 	(242659, 'organization', 'ferrari_pawn', 0, 'Ferrari Pawn'),
 	(279506, 'organization', 'tequila', 10000, 'Tequil-La-La Account'),
+	(298455, 'personal_savings', '4', 0, '298455'),
 	(308894, 'organization', 'police-bcso', 200000, 'BCSO Account'),
 	(318324, 'personal', '1', 2147333944, '318324'),
+	(331263, 'personal', '5', 5000, '331263'),
 	(338977, 'organization', 'aztecas', 0, 'Aztecas'),
 	(351819, 'organization', 'noircafe', 10000, 'Noir Cafe Account'),
 	(364980, 'organization', 'sagma', 10000, 'Sagma Account'),
@@ -129,6 +131,7 @@ INSERT INTO `bank_accounts` (`account`, `type`, `owner`, `balance`, `name`) VALU
 	(869077, 'organization', 'mba', 0, 'Maze Bank Arena'),
 	(880640, 'organization', 'bandits', 0, 'Bandits'),
 	(895988, 'organization', 'garcon_pawn', 10000, 'Garcon Pawn Account'),
+	(923503, 'personal', '6', 5000, '923503'),
 	(924227, 'organization', 'prego', 10000, 'Cafe Prego Account'),
 	(931952, 'organization', 'oni', 0, 'Oni'),
 	(952664, 'organization', 'golddiggers', 10000, 'Gold Diggers Account'),
@@ -157,7 +160,7 @@ CREATE TABLE IF NOT EXISTS `bank_accounts_permissions` (
   KEY `account` (`account`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=160 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
--- Dumping data for table sandbox.bank_accounts_permissions: ~89 rows (approximately)
+-- Dumping data for table sandbox.bank_accounts_permissions: ~91 rows (approximately)
 INSERT INTO `bank_accounts_permissions` (`id`, `account`, `type`, `jointOwner`, `job`, `workplace`, `jobPermissions`) VALUES
 	(69, 100000, 0, NULL, 'government', 'doj', '{"BILL":"STATE_ACCOUNT_BILL","MANAGE":"STATE_ACCOUNT_MANAGE","DEPOSIT":"STATE_ACCOUNT_DEPOSIT","BALANCE":"STATE_ACCOUNT_BALANCE","WITHDRAW":"STATE_ACCOUNT_WITHDRAW","TRANSACTIONS":"STATE_ACCOUNT_TRANSACTIONS"}'),
 	(70, 100000, 0, NULL, 'government', 'mayoroffice', '{"BILL":"STATE_ACCOUNT_BILL","MANAGE":"STATE_ACCOUNT_MANAGE","DEPOSIT":"STATE_ACCOUNT_DEPOSIT","BALANCE":"STATE_ACCOUNT_BALANCE","WITHDRAW":"STATE_ACCOUNT_WITHDRAW","TRANSACTIONS":"STATE_ACCOUNT_TRANSACTIONS"}'),
@@ -267,6 +270,26 @@ CREATE TABLE IF NOT EXISTS `bank_accounts_transactions` (
 
 -- Dumping data for table sandbox.bank_accounts_transactions: ~0 rows (approximately)
 
+-- Dumping structure for table sandbox.bans
+CREATE TABLE IF NOT EXISTS `bans` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `identifier` varchar(50) DEFAULT NULL,
+  `token` varchar(255) DEFAULT NULL,
+  `account` varchar(50) DEFAULT NULL,
+  `reason` text DEFAULT NULL,
+  `banned_by` varchar(50) DEFAULT NULL,
+  `banned_at` bigint(20) DEFAULT NULL,
+  `expires` bigint(20) DEFAULT -1,
+  `active` tinyint(1) DEFAULT 1,
+  PRIMARY KEY (`id`),
+  KEY `idx_identifier` (`identifier`),
+  KEY `idx_token` (`token`),
+  KEY `idx_account` (`account`),
+  KEY `idx_active_expires` (`active`,`expires`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
+
+-- Dumping data for table sandbox.bans: ~0 rows (approximately)
+
 -- Dumping structure for table sandbox.bench_schematics
 CREATE TABLE IF NOT EXISTS `bench_schematics` (
   `bench` char(64) CHARACTER SET ascii COLLATE ascii_bin NOT NULL,
@@ -373,6 +396,102 @@ INSERT INTO `business_phones` (`id`, `number`, `muted`) VALUES
 	('woods_saloon', '357-547-1307', NULL),
 	('yellowjack', '129-206-7845', NULL);
 
+-- Dumping structure for table sandbox.changelogs
+CREATE TABLE IF NOT EXISTS `changelogs` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `date` longtext DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+-- Dumping data for table sandbox.changelogs: ~0 rows (approximately)
+
+-- Dumping structure for table sandbox.characters
+CREATE TABLE IF NOT EXISTS `characters` (
+  `_id` int(11) NOT NULL AUTO_INCREMENT,
+  `User` int(11) DEFAULT NULL,
+  `SID` int(11) DEFAULT 0,
+  `First` varchar(255) DEFAULT NULL,
+  `Last` varchar(255) DEFAULT NULL,
+  `Gender` int(11) NOT NULL DEFAULT 0,
+  `New` tinyint(1) NOT NULL DEFAULT 1,
+  `Jailed` tinyint(1) NOT NULL DEFAULT 0,
+  `Origin` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
+  `Apps` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
+  `Wardrobe` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
+  `DOB` longtext DEFAULT NULL,
+  `Cash` bigint(20) DEFAULT NULL,
+  `LastPlayed` longtext DEFAULT NULL,
+  `Jobs` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
+  `Apartment` int(11) DEFAULT NULL,
+  `PhoneSettings` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
+  `Phone` varchar(255) DEFAULT NULL,
+  `Crypto` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
+  `Licenses` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
+  `Alias` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
+  `PhonePermissions` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
+  `Addiction` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
+  `Animations` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
+  `Armor` int(11) NOT NULL DEFAULT 0,
+  `BankAccount` int(11) DEFAULT NULL,
+  `CryptoWallet` varchar(255) DEFAULT NULL,
+  `HP` int(11) DEFAULT 200,
+  `InventorySettings` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
+  `States` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
+  `Callsign` varchar(255) DEFAULT NULL,
+  `MDTHistory` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
+  `Qualifications` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
+  `LastClockOn` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
+  `Salary` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
+  `TimeClockedOn` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
+  `Reputations` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
+  `GangChain` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
+  `Bio` varchar(255) DEFAULT NULL,
+  `JailedData` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
+  `ICU` tinyint(1) DEFAULT NULL,
+  `ICUData` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
+  `Deleted` tinyint(1) DEFAULT 0,
+  `Status` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
+  `Parole` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
+  `MDTSystemAdmin` tinyint(1) NOT NULL DEFAULT 0,
+  `LaptopSettings` longtext DEFAULT NULL,
+  `LaptopPermissions` longtext DEFAULT NULL,
+  `LaptopApps` longtext DEFAULT NULL,
+  `HUDConfig` longtext DEFAULT NULL,
+  PRIMARY KEY (`_id`),
+  KEY `SID` (`SID`),
+  CONSTRAINT `Origin` CHECK (json_valid(`Origin`)),
+  CONSTRAINT `Apps` CHECK (json_valid(`Apps`)),
+  CONSTRAINT `Wardrobe` CHECK (json_valid(`Wardrobe`)),
+  CONSTRAINT `Jobs` CHECK (json_valid(`Jobs`)),
+  CONSTRAINT `PhoneSettings` CHECK (json_valid(`PhoneSettings`)),
+  CONSTRAINT `Crypto` CHECK (json_valid(`Crypto`)),
+  CONSTRAINT `Licenses` CHECK (json_valid(`Licenses`)),
+  CONSTRAINT `Alias` CHECK (json_valid(`Alias`)),
+  CONSTRAINT `PhonePermissions` CHECK (json_valid(`PhonePermissions`)),
+  CONSTRAINT `Addiction` CHECK (json_valid(`Addiction`)),
+  CONSTRAINT `Animations` CHECK (json_valid(`Animations`)),
+  CONSTRAINT `InventorySettings` CHECK (json_valid(`InventorySettings`)),
+  CONSTRAINT `States` CHECK (json_valid(`States`)),
+  CONSTRAINT `MDTHistory` CHECK (json_valid(`MDTHistory`)),
+  CONSTRAINT `Qualifications` CHECK (json_valid(`Qualifications`)),
+  CONSTRAINT `LastClockOn` CHECK (json_valid(`LastClockOn`)),
+  CONSTRAINT `Salary` CHECK (json_valid(`Salary`)),
+  CONSTRAINT `TimeClockedOn` CHECK (json_valid(`TimeClockedOn`)),
+  CONSTRAINT `Reputations` CHECK (json_valid(`Reputations`)),
+  CONSTRAINT `GangChain` CHECK (json_valid(`GangChain`)),
+  CONSTRAINT `JailedData` CHECK (json_valid(`JailedData`)),
+  CONSTRAINT `ICUData` CHECK (json_valid(`ICUData`)),
+  CONSTRAINT `Status` CHECK (json_valid(`Status`)),
+  CONSTRAINT `Parole` CHECK (json_valid(`Parole`))
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+-- Dumping data for table sandbox.characters: ~3 rows (approximately)
+INSERT INTO `characters` (`_id`, `User`, `SID`, `First`, `Last`, `Gender`, `New`, `Jailed`, `Origin`, `Apps`, `Wardrobe`, `DOB`, `Cash`, `LastPlayed`, `Jobs`, `Apartment`, `PhoneSettings`, `Phone`, `Crypto`, `Licenses`, `Alias`, `PhonePermissions`, `Addiction`, `Animations`, `Armor`, `BankAccount`, `CryptoWallet`, `HP`, `InventorySettings`, `States`, `Callsign`, `MDTHistory`, `Qualifications`, `LastClockOn`, `Salary`, `TimeClockedOn`, `Reputations`, `GangChain`, `Bio`, `JailedData`, `ICU`, `ICUData`, `Deleted`, `Status`, `Parole`, `MDTSystemAdmin`, `LaptopSettings`, `LaptopPermissions`, `LaptopApps`, `HUDConfig`) VALUES
+	(1, 5, 7, 'ddd', 'dddddddddddddddddddd', 0, 1, 0, '{"label":"Afghanistan","value":"af"}', '{"installed":["settings","contacts","messages","email","phone","store","comanager"],"home":["settings","contacts","messages","email","phone","store","comanager"],"dock":["contacts","phone","messages"]}', '[]', '2007-05-10T16:58:03.643Z', 1000, '-1', '[]', 1, '{"colors":{"accent":"#1a7cc1"},"texttone":"text1.ogg","volume":100,"notifications":true,"wallpaper":"wallpaper","ringtone":"ringtone1.ogg","zoom":75,"appNotifications":[]}', '477-592-8692', '[]', '{"Drivers":{"Points":0,"Active":true,"Suspended":false},"Hunting":{"Suspended":false,"Active":false},"Fishing":{"Suspended":false,"Active":false},"Drift":{"Suspended":false,"Active":false},"Pilot":{"Suspended":false,"Active":false},"Weapons":{"Suspended":false,"Active":false}}', '[]', '{"redline":{"create":false}}', NULL, NULL, 0, NULL, NULL, 200, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, 0, '{"wallpaper":"wallpaper","colors":{"accent":"#1a7cc1"},"volume":100,"notifications":true,"texttone":"notification.ogg","zoom":75,"appNotifications":[]}', '{"redline":{"create":false},"lsunderground":{"admin":false}}', '{"installed":["settings","files","internet","bizwiz","teams","lsunderground"],"home":["settings","files","internet","bizwiz","teams","lsunderground"]}', '{"vehicle":"default","transparentBg":true,"minimapAnchor":true,"statusType":"numbers","showRPM":true,"hideCrossStreet":false,"buffsAnchor":"compass","layout":"default","buffsAnchor2":true,"hideCompassBg":false}'),
+	(2, 5, 8, 'ddddddddd', 'dddddddddddddddddddd', 0, 1, 0, '{"label":"Antigua and Barbuda","value":"ag"}', '{"installed":["settings","contacts","messages","email","phone","store","comanager"],"home":["settings","contacts","messages","email","phone","store","comanager"],"dock":["contacts","phone","messages"]}', '[]', '2007-05-10T17:01:10.908Z', 1000, '-1', '[]', 1, '{"colors":{"accent":"#1a7cc1"},"texttone":"text1.ogg","volume":100,"notifications":true,"wallpaper":"wallpaper","ringtone":"ringtone1.ogg","zoom":75,"appNotifications":[]}', '340-821-8904', '[]', '{"Drivers":{"Points":0,"Active":true,"Suspended":false},"Hunting":{"Suspended":false,"Active":false},"Fishing":{"Suspended":false,"Active":false},"Drift":{"Suspended":false,"Active":false},"Pilot":{"Suspended":false,"Active":false},"Weapons":{"Suspended":false,"Active":false}}', '[]', '{"redline":{"create":false}}', NULL, NULL, 0, NULL, NULL, 200, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, 0, '{"wallpaper":"wallpaper","colors":{"accent":"#1a7cc1"},"volume":100,"notifications":true,"texttone":"notification.ogg","zoom":75,"appNotifications":[]}', '{"redline":{"create":false},"lsunderground":{"admin":false}}', '{"installed":["settings","files","internet","bizwiz","teams","lsunderground"],"home":["settings","files","internet","bizwiz","teams","lsunderground"]}', '{"vehicle":"default","transparentBg":true,"minimapAnchor":true,"statusType":"numbers","showRPM":true,"hideCrossStreet":false,"buffsAnchor":"compass","layout":"default","buffsAnchor2":true,"hideCompassBg":false}'),
+	(3, 5, 9, 'vvvvvv', 'vvvvvvvvvvvvvvv', 0, 1, 0, '{"label":"Bouvet Island","value":"bv"}', '{"installed":["settings","contacts","messages","email","phone","store","comanager"],"home":["settings","contacts","messages","email","phone","store","comanager"],"dock":["contacts","phone","messages"]}', '[]', '2007-05-10T17:10:36.240Z', 1000, '-1', '[]', 1, '{"wallpaper":"wallpaper","ringtone":"ringtone1.ogg","notifications":true,"volume":100,"colors":{"accent":"#1a7cc1"},"texttone":"text1.ogg","appNotifications":[],"zoom":75}', '956-449-7378', '[]', '{"Drift":{"Active":false,"Suspended":false},"Fishing":{"Active":false,"Suspended":false},"Drivers":{"Active":true,"Points":0,"Suspended":false},"Pilot":{"Active":false,"Suspended":false},"Hunting":{"Active":false,"Suspended":false},"Weapons":{"Active":false,"Suspended":false}}', '[]', '{"redline":{"create":false}}', NULL, NULL, 0, NULL, NULL, 200, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, 0, '{"wallpaper":"wallpaper","notifications":true,"volume":100,"colors":{"accent":"#1a7cc1"},"texttone":"notification.ogg","appNotifications":[],"zoom":75}', '{"redline":{"create":false},"lsunderground":{"admin":false}}', '{"home":["settings","files","internet","bizwiz","teams","lsunderground"],"installed":["settings","files","internet","bizwiz","teams","lsunderground"]}', '{"hideCompassBg":false,"hideCrossStreet":false,"statusType":"numbers","minimapAnchor":true,"vehicle":"default","buffsAnchor":"compass","transparentBg":true,"showRPM":true,"layout":"default","buffsAnchor2":true}'),
+	(4, 5, 10, 'dddddddddddddd', 'dddddddddddddddddd', 0, 1, 0, '{"label":"Barbados","value":"bb"}', '{"installed":["settings","contacts","messages","email","phone","store","comanager"],"dock":["contacts","phone","messages"],"home":["settings","contacts","messages","email","phone","store","comanager"]}', '[]', '2007-05-10T17:11:57.936Z', 1000, '-1', '[]', 1, '{"volume":100,"zoom":75,"notifications":true,"colors":{"accent":"#1a7cc1"},"ringtone":"ringtone1.ogg","wallpaper":"wallpaper","appNotifications":[],"texttone":"text1.ogg"}', '323-365-0918', '[]', '{"Drivers":{"Points":0,"Suspended":false,"Active":true},"Weapons":{"Suspended":false,"Active":false},"Pilot":{"Suspended":false,"Active":false},"Drift":{"Suspended":false,"Active":false},"Hunting":{"Suspended":false,"Active":false},"Fishing":{"Suspended":false,"Active":false}}', '[]', '{"redline":{"create":false}}', NULL, NULL, 0, NULL, NULL, 200, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, 0, '{"volume":100,"notifications":true,"colors":{"accent":"#1a7cc1"},"texttone":"notification.ogg","wallpaper":"wallpaper","appNotifications":[],"zoom":75}', '{"lsunderground":{"admin":false},"redline":{"create":false}}', '{"home":["settings","files","internet","bizwiz","teams","lsunderground"],"installed":["settings","files","internet","bizwiz","teams","lsunderground"]}', '{"layout":"default","vehicle":"default","showRPM":true,"buffsAnchor":"compass","hideCompassBg":false,"statusType":"numbers","transparentBg":true,"hideCrossStreet":false,"minimapAnchor":true,"buffsAnchor2":true}');
+
 -- Dumping structure for table sandbox.character_app_profiles
 CREATE TABLE IF NOT EXISTS `character_app_profiles` (
   `sid` bigint(20) unsigned NOT NULL,
@@ -384,7 +503,7 @@ CREATE TABLE IF NOT EXISTS `character_app_profiles` (
   UNIQUE KEY `app` (`app`,`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
--- Dumping data for table sandbox.character_app_profiles: ~9 rows (approximately)
+-- Dumping data for table sandbox.character_app_profiles: ~19 rows (approximately)
 INSERT INTO `character_app_profiles` (`sid`, `app`, `name`, `picture`, `meta`) VALUES
 	(1, 'email', 'fffffffff_ffffffffffffffffff1@mythicmail.net', NULL, '{}'),
 	(1, 'redline', 'gay', '', '[]'),
@@ -393,8 +512,20 @@ INSERT INTO `character_app_profiles` (`sid`, `app`, `name`, `picture`, `meta`) V
 	(2, 'twitter', 'ddddddd2', NULL, '{}'),
 	(3, 'email', 'dddd_dddd3@sandboxrp.gg', NULL, '{}'),
 	(3, 'twitter', 'dddddddd3', NULL, '{}'),
-	(4, 'email', 'dddddddd_ddddddddddddddddddd4@Prizm.gg', NULL, '{}'),
-	(4, 'twitter', 'ddddddddddddddddddddddddddd4', NULL, '{}');
+	(4, 'email', 'ddddd_ddddd4@sandboxrp.gg', NULL, '{}'),
+	(4, 'twitter', 'dddddddddd4', NULL, '{}'),
+	(5, 'email', 'dddddd_ddddddddddddd5@sandboxrp.gg', NULL, '{}'),
+	(5, 'twitter', 'ddddddddddddddddddd5', NULL, '{}'),
+	(6, 'email', 'Dickhead_Dickhead6@sandboxrp.gg', NULL, '{}'),
+	(6, 'twitter', 'DickheadDickhead6', NULL, '{}'),
+	(7, 'email', 'ddd_dddddddddddddddddddd7@sandboxrp.gg', NULL, '{}'),
+	(7, 'twitter', 'ddddddddddddddddddddddd7', NULL, '{}'),
+	(8, 'email', 'ddddddddd_dddddddddddddddddddd8@sandboxrp.gg', NULL, '{}'),
+	(8, 'twitter', 'ddddddddddddddddddddddddddddd8', NULL, '{}'),
+	(9, 'email', 'vvvvvv_vvvvvvvvvvvvvvv9@sandboxrp.gg', NULL, '{}'),
+	(9, 'twitter', 'vvvvvvvvvvvvvvvvvvvvv9', NULL, '{}'),
+	(10, 'email', 'dddddddddddddd_dddddddddddddddddd10@sandboxrp.gg', NULL, '{}'),
+	(10, 'twitter', 'dddddddddddddddddddddddddddddddd10', NULL, '{}');
 
 -- Dumping structure for table sandbox.character_calls
 CREATE TABLE IF NOT EXISTS `character_calls` (
@@ -650,22 +781,24 @@ CREATE TABLE IF NOT EXISTS `inventory` (
   `creationDate` bigint(20) NOT NULL DEFAULT 0,
   `expiryDate` bigint(20) NOT NULL DEFAULT -1,
   `price` int(11) DEFAULT NULL,
+  `trunk` longtext DEFAULT NULL,
+  `glovebox` longtext DEFAULT NULL,
+  `inventory` longtext DEFAULT NULL,
+  `ids` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   KEY `name` (`owner`) USING BTREE,
   KEY `slot` (`slot`,`owner`) USING BTREE,
   KEY `item_id` (`owner`,`item_id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=109 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=140 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
--- Dumping data for table sandbox.inventory: ~8 rows (approximately)
-INSERT INTO `inventory` (`id`, `owner`, `type`, `slot`, `item_id`, `quality`, `information`, `dropped`, `creationDate`, `expiryDate`, `price`) VALUES
-	(101, '1', '1', 1, 'govid', 0, '{"Name":"fffffffff ffffffffffffffffff","DOB":662687999,"Gender":"Male","StateID":1,"PassportID":2}', 0, 1729982254, -1, NULL),
-	(102, '1', '1', 2, 'phone', 0, '[]', 0, 1729982281, -1, NULL),
-	(103, '4', '1', 1, 'govid', 0, '{"DOB":"2006-10-30T22:47:48.571Z","Gender":"Male","Name":"dddddddd ddddddddddddddddddd","StateID":4,"PassportID":2}', 0, 1730328473, -1, NULL),
-	(104, '4', '1', 2, 'phone', 0, '[]', 0, 1730328474, -1, NULL),
-	(105, '4', '1', 3, 'water', 0, '[]', 0, 1730328474, 1730760474, NULL),
-	(106, '4', '1', 4, 'sandwich_blt', 0, '[]', 0, 1730328474, 1730760474, NULL),
-	(107, '4', '1', 5, 'bandage', 0, '[]', 0, 1730328474, 1730760474, NULL),
-	(108, '4', '1', 6, 'coffee', 0, '[]', 0, 1730328474, 1730760474, NULL);
+-- Dumping data for table sandbox.inventory: ~5 rows (approximately)
+INSERT INTO `inventory` (`id`, `owner`, `type`, `slot`, `item_id`, `quality`, `information`, `dropped`, `creationDate`, `expiryDate`, `price`, `trunk`, `glovebox`, `inventory`, `ids`) VALUES
+	(134, '5', '1', 1, 'phone', 0, '[]', 0, 1746740639, -1, NULL, NULL, NULL, NULL, NULL),
+	(135, '6', '1', 1, 'phone', 0, '[]', 0, 1746810396, -1, NULL, NULL, NULL, NULL, NULL),
+	(136, '6', '1', 2, 'water', 0, '[]', 0, 1746810405, 1747242405, NULL, NULL, NULL, NULL, NULL),
+	(137, '6', '1', 2, 'water', 0, '[]', 0, 1746810508, 1747242508, NULL, NULL, NULL, NULL, NULL),
+	(138, '6', '1', 2, 'water', 0, '[]', 0, 1746810531, 1747242531, NULL, NULL, NULL, NULL, NULL),
+	(139, '5', '1', 2, 'water', 0, '[]', 0, 1746810559, 1747242559, NULL, NULL, NULL, NULL, NULL);
 
 -- Dumping structure for table sandbox.inventory_shop_logs
 CREATE TABLE IF NOT EXISTS `inventory_shop_logs` (
@@ -1426,6 +1559,25 @@ INSERT INTO `item_template` (`name`, `label`, `description`, `type`, `rarity`, `
 	('yellow_dongle', 'USB Drive (Yellow)', '<i>Marked For Police Seizure</i>', 3, 4, NULL, 2500, NULL, 'DONGLE_YELLOW', 1, NULL, 0, 0, 1, 259200, 0, 1, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 	('yellow_laptop', 'Laptop (Yellow)', '<i>Marked For Police Seizure</i>', 3, 4, NULL, 2500, NULL, NULL, 1, NULL, 0, 1, 1, 604800, 1, 1, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
+-- Dumping structure for table sandbox.locations
+CREATE TABLE IF NOT EXISTS `locations` (
+  `_id` int(11) NOT NULL AUTO_INCREMENT,
+  `Coords` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
+  `Heading` int(11) DEFAULT NULL,
+  `Type` varchar(255) DEFAULT NULL,
+  `Name` varchar(50) DEFAULT NULL,
+  `default` tinyint(1) DEFAULT 0,
+  PRIMARY KEY (`_id`) USING BTREE,
+  CONSTRAINT `Coords` CHECK (json_valid(`Coords`))
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+-- Dumping data for table sandbox.locations: ~4 rows (approximately)
+INSERT INTO `locations` (`_id`, `Coords`, `Heading`, `Type`, `Name`, `default`) VALUES
+	(1, '{"x":1850.5845947265626,"y":2586.32958984375,"z":45.6578369140625}', 91, 'spawn', 'Bolingbroke Penitentiary', 0),
+	(2, '{"x":436.6681213378906,"y":-974.4263916015624,"z":30.7120361328125}', 88, 'spawn', 'Mission Row PD', 0),
+	(3, '{"x":1866.09228515625,"y":3688.2724609375,"z":34.2674560546875}', 258, 'spawn', 'Sandy PD', 0),
+	(4, '{"x":-448.32525634765627,"y":6026.5712890625,"z":31.4871826171875}', 0, 'spawn', 'Paleto PD', 0);
+
 -- Dumping structure for table sandbox.mdt_charges
 CREATE TABLE IF NOT EXISTS `mdt_charges` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -1770,6 +1922,29 @@ INSERT INTO `moonshine_stills` (`id`, `created`, `tier`, `cooldown`, `active_coo
 	(2, 1721494108, 1, NULL, NULL),
 	(3, 1721494168, 1, NULL, NULL);
 
+-- Dumping structure for table sandbox.ox_inventory
+CREATE TABLE IF NOT EXISTS `ox_inventory` (
+  `owner` varchar(60) DEFAULT NULL,
+  `name` varchar(100) NOT NULL,
+  `data` longtext DEFAULT NULL,
+  `lastupdated` timestamp NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  UNIQUE KEY `owner` (`owner`,`name`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+-- Dumping data for table sandbox.ox_inventory: ~0 rows (approximately)
+
+-- Dumping structure for table sandbox.peds
+CREATE TABLE IF NOT EXISTS `peds` (
+  `_id` int(11) NOT NULL AUTO_INCREMENT,
+  `char` varchar(255) DEFAULT NULL,
+  `ped` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
+  PRIMARY KEY (`_id`) USING BTREE,
+  UNIQUE KEY `UK_peds_char` (`char`) USING BTREE,
+  CONSTRAINT `ped` CHECK (json_valid(`ped`))
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+-- Dumping data for table sandbox.peds: ~0 rows (approximately)
+
 -- Dumping structure for table sandbox.placed_meth_tables
 CREATE TABLE IF NOT EXISTS `placed_meth_tables` (
   `table_id` int(11) NOT NULL,
@@ -1975,8 +2150,8 @@ CREATE TABLE IF NOT EXISTS `sequence` (
 
 -- Dumping data for table sandbox.sequence: ~10 rows (approximately)
 INSERT INTO `sequence` (`id`, `sequence`) VALUES
-	('Account', 1),
-	('Character', 3),
+	('Account', 3),
+	('Character', 8),
 	('WEAPON_FLASHLIGHT', 1),
 	('WEAPON_FM1_GLOCK19', 1),
 	('WEAPON_FM1_M9A3', 1),
@@ -1994,6 +2169,33 @@ CREATE TABLE IF NOT EXISTS `shop_bank_accounts` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 -- Dumping data for table sandbox.shop_bank_accounts: ~0 rows (approximately)
+
+-- Dumping structure for table sandbox.user
+CREATE TABLE IF NOT EXISTS `user` (
+  `user` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+-- Dumping data for table sandbox.user: ~0 rows (approximately)
+
+-- Dumping structure for table sandbox.users
+CREATE TABLE IF NOT EXISTS `users` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) DEFAULT NULL,
+  `account` varchar(255) DEFAULT NULL,
+  `identifier` varchar(255) DEFAULT NULL,
+  `verified` tinyint(1) DEFAULT 1,
+  `joined` bigint(20) DEFAULT NULL,
+  `groups` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL CHECK (json_valid(`groups`)),
+  `avatar` varchar(255) DEFAULT NULL,
+  `priority` int(11) DEFAULT 0,
+  `discord` longtext DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `identifier` (`identifier`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+-- Dumping data for table sandbox.users: ~1 rows (approximately)
+INSERT INTO `users` (`id`, `name`, `account`, `identifier`, `verified`, `joined`, `groups`, `avatar`, `priority`, `discord`) VALUES
+	(2, 'mysticz2024', '5', 'license2:4adc3b954d491a6361b72943fef2ab7cf1a77c67', 1, 1746870662000, '["Whitelisted"]', NULL, 0, 'discord:1270743427172270141');
 
 -- Dumping structure for table sandbox.whitelisted_peds
 CREATE TABLE IF NOT EXISTS `whitelisted_peds` (
