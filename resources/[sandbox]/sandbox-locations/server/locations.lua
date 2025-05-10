@@ -67,44 +67,37 @@ end
 
 LOCATIONS = {
 	Add = function(self, coords, heading, type, name, cb)
-		local doc = {
-			Coords = {
-				x = coords.x,
-				y = coords.y,
-				z = coords.z,
-			},
-			Heading = heading,
-			Type = type,
-			Name = name,
-		}
-		Database.Game:insertOne({
-			collection = "locations",
-			document = doc,
-		}, function(success, results)
-			if not success then
-				return
-			end
+        local doc = {
+            Coords = {
+                x = coords.x,
+                y = coords.y,
+                z = coords.z,
+            },
+            Heading = heading,
+            Type = type,
+            Name = name,
+        }
+        MySQL.insert.await('INSERT INTO `locations` (Coords, Heading, Type, Name) VALUES (?, ?, ?, ?)', 
+        {json.encode(doc.Coords), doc.Heading, doc.Type, doc.Name}, function(affectedRows)
+            if affectedRows == 0 then
+                return
+            end
 
-			TriggerEvent("Locations:Server:Added", type, doc)
-			if cb ~= nil then
-				cb(results > 0)
-			end
-		end)
-	end,
+            TriggerEvent("Locations:Server:Added", type, doc)
+            if cb ~= nil then
+                cb(affectedRows > 0)
+            end
+        end)
+    end,
 	GetAll = function(self, type, cb)
-		Database.Game:find({
-			collection = "locations",
-			query = {
-				Type = type,
-			},
-		}, function(success, results)
-			if not success then
-				return
-			end
-			for k, location in ipairs(results) do
-				results[k].Coords = vector3(location.Coords.x, location.Coords.y, location.Coords.z)
-			end
-			cb(results)
-		end)
-	end,
+        MySQL.query.await('SELECT * FROM `locations` WHERE `Type` = ?', {type}, function(results)
+            if not results then
+                return
+            end
+            for k, location in ipairs(results) do
+                results[k].Coords = vector3(location.Coords.x, location.Coords.y, location.Coords.z)
+            end
+            cb(results)
+        end)
+    end,
 }

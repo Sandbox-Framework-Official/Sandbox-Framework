@@ -7,6 +7,13 @@ Citizen.CreateThread(function()
 	})
 end)
 
+RegisterCommand("test", function()
+	SendNUIMessage({
+		type = "APP_SHOW",
+	})
+	SetNuiFocus(true, true)
+end)
+
 local loadTo = 0
 function loadModel(model)
 	RequestModel(model)
@@ -47,6 +54,7 @@ RegisterNUICallback("GetData", function(data, cb)
 
 		Callbacks:ServerCallback("Characters:GetCharacters", {}, function(characters, characterLimit)
 			local ped = PlayerPedId()
+			TriggerEvent("PAC:IgnoreNextNoclipFlag")
 			SetEntityCoords(ped, 685.865, 576.222, 132.841, 0.0, 0.0, 0.0, false)
 			FreezeEntityPosition(ped, true)
 			SetEntityVisible(ped, false)
@@ -141,7 +149,7 @@ RegisterNUICallback("GetData", function(data, cb)
 					changelog = serverData.changelog,
 					motd = serverData.motd,
 					characters = characters,
-					characterLimit = characterLimit,
+					characterLimit = 5,
 				},
 			})
 			SendNUIMessage({ type = "LOADING_HIDE" })

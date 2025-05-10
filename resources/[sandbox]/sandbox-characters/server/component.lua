@@ -20,6 +20,7 @@ function RetrieveComponents()
 	Damage = exports["sandbox-base"]:FetchComponent("Damage")
 	Punishment = exports["sandbox-base"]:FetchComponent("Punishment")
 	Execute = exports["sandbox-base"]:FetchComponent("Execute")
+	Utils = exports["sandbox-base"]:FetchComponent("Utils")
 	RegisterCommands()
 	_spawnFuncs = {}
 end
@@ -44,6 +45,7 @@ AddEventHandler("Core:Shared:Ready", function()
 		"Damage",
 		"Punishment",
 		"Execute",
+		"Utils",
 	}, function(error)
 		if #error > 0 then
 			return
@@ -54,6 +56,38 @@ AddEventHandler("Core:Shared:Ready", function()
 		Startup()
 	end)
 end)
+
+_tablesToDecode = {
+	"Origin",
+	"Apps",
+	"Wardrobe",
+	"Jobs",
+	"PhoneSettings",
+	"Crypto",
+	"Licenses",
+	"Alias",
+	"PhonePermissions",
+	"Addiction",
+	"Animations",
+	"InventorySettings",
+	"States",
+	"MDTHistory",
+	"Qualifications",
+	"LastClockOn",
+	"Salary",
+	"TimeClockedOn",
+	"Reputations",
+	"GangChain",
+	"JailedData",
+	"ICUData",
+	"Status",
+	"Parole",
+	"HUDConfig",
+	"LaptopPermissions",
+	"LaptopApps",
+	"LaptopSettings", 
+	"PhonePosition"
+  }
 
 CHARACTERS = {
 	GetLastLocation = function(self, source)
