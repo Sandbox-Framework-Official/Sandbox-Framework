@@ -34,8 +34,6 @@ function COMPONENTS.Core.Init(self)
 	LocalPlayer.state.myPos = GetEntityCoords(LocalPlayer.state.ped)
 	LocalPlayer.state.inPauseMenu = IsPauseMenuActive()
 
-	AddTextEntry("FE_THDR_GTAO", "~y~SandboxRP~m~")
-
 	SetScenarioTypeEnabled("WORLD_VEHICLE_STREETRACE", false)
 	SetScenarioTypeEnabled("WORLD_VEHICLE_SALTON_DIRT_BIKE", false)
 	SetScenarioTypeEnabled("WORLD_VEHICLE_SALTON", false)
