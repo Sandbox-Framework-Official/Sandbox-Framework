@@ -70,7 +70,7 @@ const admin = [
   },
   {
     name: "characters",
-    icon: ["fas", "people"],
+    icon: ["fas", "user-group"],
     label: "Find Characters",
     path: "/players-characters",
     exact: true,
