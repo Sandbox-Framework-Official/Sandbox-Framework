@@ -116,6 +116,38 @@ function RegisterCommands()
 			},
 		}
 	)
+
+	Chat:RegisterCommand("unjail", function(source, args, rawCommand)
+		if tonumber(args[1]) then
+			local char = Fetch:SID(tonumber(args[1]))
+			if char ~= nil then
+				Jail:Release(char:GetData("Source"), true)
+				Chat.Send.System:Single(source, string.format("%s Has Been Released from Jail", args[1], args[2]))
+			else
+				Chat.Send.System:Single(source, "State ID Not Logged In")
+			end
+		else
+			Chat.Send.System:Single(source, "State ID Not Logged In")
+		end
+	else
+		Chat.Send.System:Single(source, "Invalid Arguments")
+	end,
+	{
+		help = "UnJail Player",
+		params = {
+			{
+				name = "Target",
+				help = "State ID of target",
+			}
+		},
+	},
+	1,
+	{
+		{
+			Id = "police",
+		},
+	}
+)
 end
 
 _JAIL = {
