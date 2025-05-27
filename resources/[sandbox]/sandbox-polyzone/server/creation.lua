@@ -1,3 +1,15 @@
+--## Thanks to DjBooly ## --
+
+local PolyZoneHook = GetConvar("discord_creator_webhook", "")
+
+local function SendtoDiscord(Hook)
+    PerformHttpRequest(PolyZoneHook, function() end, 'POST', json.encode({ 
+        username = 'PolyZone Creator', 
+        content = '```' .. tostring(Hook) .. '```'
+    }), { ['Content-Type'] = 'application/json' })
+end
+
+
 AddEventHandler("Polyzone:Shared:DependencyUpdate", RetrieveComponents)
 function RetrieveComponents()
 	Logger = exports["sandbox-base"]:FetchComponent("Logger")
@@ -75,45 +87,27 @@ RegisterNetEvent("polyzone:printPoly")
 AddEventHandler("polyzone:printPoly", function(zone)
 	local src = source
 	local player = Fetch:Source(src)
-	if not player.Permissions:IsAdmin() then
-		return
-	end
-
-	file = io.open("polyzone_created_zones.txt", "a")
-	io.output(file)
+	if not player.Permissions:IsAdmin() then return end
 	local output = parsePoly(zone)
-	io.write(output)
-	io.close(file)
+	SendtoDiscord(output)
 end)
 
 RegisterNetEvent("polyzone:printCircle")
 AddEventHandler("polyzone:printCircle", function(zone)
-	local src = source
-	local player = Fetch:Source(src)
-	if not player.Permissions:IsAdmin() then
-		return
-	end
-
-	file = io.open("polyzone_created_zones.txt", "a")
-	io.output(file)
-	local output = parseCircle(zone)
-	io.write(output)
-	io.close(file)
+    local src = source
+    local player = Fetch:Source(src)
+    if not player.Permissions:IsAdmin() then return end
+    local output = parseCircle(zone)
+    SendtoDiscord(output)
 end)
 
 RegisterNetEvent("polyzone:printBox")
 AddEventHandler("polyzone:printBox", function(zone)
-	local src = source
-	local player = Fetch:Source(src)
-	if not player.Permissions:IsAdmin() then
-		return
-	end
-
-	file = io.open("polyzone_created_zones.txt", "a")
-	io.output(file)
-	local output = parseBox(zone)
-	io.write(output)
-	io.close(file)
+    local src = source
+    local player = Fetch:Source(src)
+    if not player.Permissions:IsAdmin() then return end
+    local output = parseBox(zone)
+    SendtoDiscord(output)
 end)
 
 function round(num, numDecimalPlaces)
