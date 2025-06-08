@@ -69,9 +69,7 @@ AddEventHandler("Proxy:Shared:RegisterReady", function()
 end)
 
 function RegisterCommands()
-	Chat:RegisterCommand(
-		"jail",
-		function(source, args, rawCommand)
+	Chat:RegisterCommand("jail", function(source, args, rawCommand)
 			if tonumber(args[1]) and tonumber(args[2]) then
 				local char = Fetch:SID(tonumber(args[1]))
 				if char ~= nil then
@@ -129,9 +127,16 @@ function RegisterCommands()
 		else
 			Chat.Send.System:Single(source, "State ID Not Logged In")
 		end
-	else
-		Chat.Send.System:Single(source, "Invalid Arguments")
 	end,
+		{
+			help = "UnJail Player",
+			params = {
+				{
+					name = "Target",
+					help = "State ID of target",
+				}
+			},
+		},
 	{
 		help = "UnJail Player",
 		params = {
