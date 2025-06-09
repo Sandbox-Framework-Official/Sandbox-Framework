@@ -263,12 +263,6 @@ WEAPON_COMPS = {
 			attachment = "COMPONENT_COMBATMG_MK2_CLIP_01",
 		},
 	},
-	WEAPON_COMBATMG_MK2 = {
-		{
-			type = "magazine",
-			attachment = "COMPONENT_COMBATMG_MK2_CLIP_01",
-		},
-	},
 	WEAPON_ASSAULTRIFLE = {
 		{
 			type = "magazine",
@@ -738,7 +732,7 @@ WEAPON_COMPS = {
 
 CreateThread(function()
 	if IsDuplicityVersion() then
-		for k, v in pairs(WEAPON_COMPS) do
+		for k, _ in pairs(WEAPON_COMPS) do
 			WEAPON_PROPS[k] = true
 			_weaponModels[k] = true
 		end
@@ -747,7 +741,7 @@ end)
 
 CreateThread(function()
 	if not IsDuplicityVersion() then
-		for k, v in pairs(WEAPON_COMPS) do
+		for k, _ in pairs(WEAPON_COMPS) do
 			local wHash = GetHashKey(k)
 			RequestWeaponAsset(wHash, 31, 0)
 			while not HasWeaponAssetLoaded(wHash) do
@@ -759,8 +753,8 @@ end)
 
 CreateThread(function()
 	if not IsDuplicityVersion() then
-		for k, v in pairs(WEAPON_COMPS) do
-			for k2, v2 in ipairs(v) do
+		for _, v in pairs(WEAPON_COMPS) do
+			for _, v2 in ipairs(v) do
 				local componentModel = GetWeaponComponentTypeModel(v2.attachment)
 				RequestModel(componentModel)
 				while not HasModelLoaded(componentModel) do

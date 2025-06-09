@@ -1,13 +1,10 @@
+local _scanDelay = 500
 
-local _scanDelay = 100
-
---[[
 CreateThread(function()
     while true do
-        -- /!\ To do: Find a more reliable way to get the current interior ID
-        Global.currentInteriorId = GetInteriorAtCoords(GetEntityCoords(GetPlayerPed(-1)))
+        Global.currentInteriorId = GetInteriorFromEntity(PlayerPedId())
 
-        if (Global.currentInteriorId == 0) then
+        if Global.currentInteriorId == 0 then
             Global.ResetInteriorVariables()
         else
             -- Setting variables
@@ -43,11 +40,14 @@ CreateThread(function()
             Global.FinanceOffices.isInsideOffice2 = (Global.currentInteriorId == FinanceOffice2.currentInteriorId)
             Global.FinanceOffices.isInsideOffice3 = (Global.currentInteriorId == FinanceOffice3.currentInteriorId)
             Global.FinanceOffices.isInsideOffice4 = (Global.currentInteriorId == FinanceOffice4.currentInteriorId)
+
+            -- DLC: The Contract
+            Global.Security.isInsideOffice1 = (Global.currentInteriorId == MpSecurityOffice1.InteriorId)
+            Global.Security.isInsideOffice2 = (Global.currentInteriorId == MpSecurityOffice2.InteriorId)
+            Global.Security.isInsideOffice3 = (Global.currentInteriorId == MpSecurityOffice3.InteriorId)
+            Global.Security.isInsideOffice4 = (Global.currentInteriorId == MpSecurityOffice4.InteriorId)
         end
 
         Wait(_scanDelay)
-
     end
 end)
-]]
-

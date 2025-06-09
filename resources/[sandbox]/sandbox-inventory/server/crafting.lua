@@ -158,7 +158,7 @@ CRAFTING = {
 			end
 
 			local recipe = nil
-			for k, v in pairs(recipies or {}) do
+			for _, v in pairs(recipies or {}) do
 				if v.id == schemId then
 					recipe = v
 					break
@@ -170,7 +170,7 @@ CRAFTING = {
 			end
 
 			local reagents = {}
-			for k, v in ipairs(recipe.items) do
+			for _, v in ipairs(recipe.items) do
 				if reagents[v.name] ~= nil then
 					reagents[v.name] = reagents[v.name] + (v.count * qty)
 				else
@@ -216,7 +216,7 @@ CRAFTING = {
 				if itemsDatabase[recipe.result.name].type == 2 and not itemsDatabase[recipe.result.name].noSerial then
 					meta.Scratched = true
 				end
-	
+
 				if recipe.cooldown then
 					if _types[bench].isPubSchemTable then
 						InsertCooldown(string.format("%s:%s", bench, crafter), recipe.id, (os.time() * 1000) + recipe.cooldown)
@@ -224,7 +224,7 @@ CRAFTING = {
 						InsertCooldown(bench, recipe.id, (os.time() * 1000) + recipe.cooldown)
 					end
 				end
-	
+
 				if INVENTORY:AddItem(crafter, recipe.result.name, recipe.result.count * qty, meta, 1) then
 					local inv = getInventory(crafterSource, crafter, 1)
 					if _types[bench].isPubSchemTable then
@@ -340,7 +340,7 @@ CRAFTING = {
 			then
 				local recipies = bench.recipes
 				local cooldowns = _cooldowns[benchId]
-	
+
 				if bench.isPubSchemTable then
 					cooldowns = _cooldowns[string.format("%s:%s", benchId, char:GetData("SID"))]
 

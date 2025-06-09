@@ -22,7 +22,6 @@ local weaponCheaters = {
 	[`WEAPON_COMPACTRIFLE`] = "Compact Rifle",
 	[`WEAPON_DBSHOTGUN`] = "Double Barrel Shotgun",
 	[`WEAPON_DOUBLEACTION`] = "Double Action Revolver",
-	[`WEAPON_FLAREGUN`] = "Flare gun",
 	[`WEAPON_GUSENBERG`] = "Gusenberg",
 	[`WEAPON_HEAVYPISTOL`] = "Heavy Pistol",
 	[`WEAPON_HEAVYSHOTGUN`] = "Heavy Shotgun",
@@ -168,7 +167,6 @@ local weaponCheaters = {
 	[`WEAPON_L5`] = "Desert Eagle K8",
 	[`WEAPON_2011`] = "2011 Tactical",
 	[`WEAPON_38SNUBNOSE`] = "PD .38 Snubnose",
-	[`WEAPON_38SNUBNOSE2`] = ".38 Snubnose",
 	[`WEAPON_38SNUBNOSE2`] = ".38 Snubnose",
 	[`WEAPON_38SPECIAL`] = ".38 Special",
 	[`WEAPON_44MAGNUM`] = ".44 Magnum",
@@ -337,7 +335,7 @@ WEAPONS = {
 				item.name,
 				isCompanyOwned.name
 			})
-			
+
 			return sn
 		end
 	end,
@@ -430,7 +428,7 @@ WEAPONS = {
 										else
 											return p:resolve(false)
 										end
-										
+
 									else
 										return p:resolve(false)
 									end
@@ -461,7 +459,7 @@ WEAPONS = {
 					local itemData = Inventory.Items:GetData(slot.MetaData.WeaponComponents[attachment].item)
 					if itemData ~= nil then
 						INVENTORY:AddItem(char:GetData("SID"), itemData.name, 1, {}, 1, false, false, false, false, false, slot.MetaData.WeaponComponents[attachment].created or os.time())
-						slot.MetaData.WeaponComponents[attachment] = nil	
+						slot.MetaData.WeaponComponents[attachment] = nil
 						INVENTORY:SetMetaDataKey(
 							slot.id,
 							"WeaponComponents",
