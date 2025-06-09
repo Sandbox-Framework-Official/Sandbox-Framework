@@ -13,8 +13,6 @@
 -- Interior ID list : 	https://wiki.gt-mp.net/index.php/InteriorIDList
 --
 
-client_script("arp-properties.lua")
-
 fx_version("cerulean")
 games({ "gta5" })
 lua54("yes")
