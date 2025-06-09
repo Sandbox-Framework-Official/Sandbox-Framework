@@ -31,7 +31,7 @@ AddEventHandler("Core:Shared:Ready", function()
 	end)
 end)
 
-Citizen.CreateThread(function()
+CreateThread(function()
 	GlobalState.RadarFlaggedPlates = {}
 end)
 

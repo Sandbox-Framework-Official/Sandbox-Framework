@@ -84,7 +84,7 @@ AddEventHandler("Proxy:Shared:RegisterReady", function()
 	exports["sandbox-base"]:RegisterComponent("Blips", BLIPS)
 end)
 
-Citizen.CreateThread(function()
+CreateThread(function()
 	AddTextEntry("BLIP_PROPCAT", "Garage")
 	AddTextEntry("BLIP_APARTCAT", "Business")
 	AddTextEntry("BLIP_OTHPLYR", "Units")
