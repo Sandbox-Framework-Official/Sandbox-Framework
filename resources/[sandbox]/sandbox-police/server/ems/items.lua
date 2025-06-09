@@ -33,7 +33,7 @@ function EMSItems()
 			else
 				pState.healTicks = { "5", "5", "5", "5", "5" }
 			end
-			Citizen.Wait(100)
+			Wait(100)
 			TriggerClientEvent("Damage:Client:Ticks:Heal", source)
 		end
 	end)
@@ -63,7 +63,7 @@ function EMSItems()
 			else
 				pState.healTicks = { "5", "5" }
 			end
-			Citizen.Wait(100)
+			Wait(100)
 			TriggerClientEvent("Damage:Client:Ticks:Heal", source)
 		end
 	end)
@@ -97,7 +97,7 @@ function EMSItems()
 			else
 				pState.healTicks = { "10", "10", "5" }
 			end
-			Citizen.Wait(100)
+			Wait(100)
 			TriggerClientEvent("Damage:Client:Ticks:Heal", source)
 		end
 	end)
@@ -133,7 +133,7 @@ function EMSItems()
 			else
 				pState.healTicks = { "15", "15", "10", "5", "5" }
 			end
-			Citizen.Wait(100)
+			Wait(100)
 			TriggerClientEvent("Damage:Client:Ticks:Heal", source)
 		end
 	end)

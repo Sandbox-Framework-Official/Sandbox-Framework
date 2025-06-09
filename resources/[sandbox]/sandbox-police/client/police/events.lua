@@ -7,7 +7,7 @@ RegisterNetEvent("Test:Animation", function(dict, anim)
 	loadAnimDict(dict)
 
 	while not HasAnimDictLoaded(dict) do
-		Citizen.Wait(0)
+		Wait(0)
 	end
 
 	TaskPlayAnim(LocalPlayer.state.ped, dict, anim, 8.0, -8, -1, 16, 0, 0, 0, 0)
@@ -66,10 +66,10 @@ end)
 RegisterNetEvent("Police:Client:Search", function(hitting, data)
 	Inventory.Search:Character(hitting.serverId)
 	while not LocalPlayer.state.inventoryOpen do
-		Citizen.Wait(1)
+		Wait(1)
 	end
 
-	Citizen.CreateThread(function()
+	CreateThread(function()
 		while LocalPlayer.state.inventoryOpen do
 			if
 				#(
@@ -79,7 +79,7 @@ RegisterNetEvent("Police:Client:Search", function(hitting, data)
 			then
 				Inventory.Close:All()
 			end
-			Citizen.Wait(2)
+			Wait(2)
 		end
 	end)
 end)
@@ -111,7 +111,7 @@ RegisterNetEvent("Police:Client:RunPlate", function(hitting, data)
 					TriggerServerEvent("Vehicles:Server:RequestGenerateVehicleInfo", VehToNet(veh))
 
 					while not vehEnt.state.VIN do
-						Citizen.Wait(100)
+						Wait(100)
 					end
 				end
 
@@ -262,7 +262,7 @@ RegisterNetEvent("Police:Client:AddDeployedSpike", function(positions, h, owner)
 			and not timeout
 			and not forceDelete[owner]
 		do
-			Citizen.Wait(10)
+			Wait(10)
 		end
 
 		if not timeout and not forceDelete[owner] then
@@ -372,7 +372,7 @@ AddEventHandler("Police:Client:SpikeyBois", function(x, y, z, obj, cunts, owner)
 			end
 		end
 		timer = timer + 1
-		Citizen.Wait(1)
+		Wait(1)
 	end
 
 	DeleteEntity(obj)

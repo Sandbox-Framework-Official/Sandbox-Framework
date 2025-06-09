@@ -122,9 +122,9 @@ function RadioKeyDown()
 		RADIO_TALKING = true
 		VOIP:MicClicks(true)
 		UpdateVOIPIndicatorStatus()
-		Citizen.CreateThread(function()
+		CreateThread(function()
 			while RADIO_TALKING and _characterLoaded do
-				Citizen.Wait(0)
+				Wait(0)
 
 				local aiming = IsPlayerFreeAiming(LocalPlayer.state.PlayerID)
 

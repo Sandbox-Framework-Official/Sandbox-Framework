@@ -39,7 +39,7 @@ local _cokeWeapons = {
 local function SetupPeds(peds)
 	for k, v in ipairs(peds) do
 		while not DoesEntityExist(NetworkGetEntityFromNetworkId(v)) do
-			Citizen.Wait(1)
+			Wait(1)
 		end
 
 		local ped = NetworkGetEntityFromNetworkId(v)

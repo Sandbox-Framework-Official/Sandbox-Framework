@@ -9,22 +9,22 @@ RegisterNetEvent("Jail:Client:EnterJail", function()
 	if not IsScreenFadedOut() then
 		DoScreenFadeOut(1000)
 		while not IsScreenFadedOut() do
-			Citizen.Wait(10)
+			Wait(10)
 		end
 	end
 
 	local cellData = Config.Cells[math.random(#Config.Cells)]
 
 	SetEntityCoords(LocalPlayer.state.ped, cellData.coords.x, cellData.coords.y, cellData.coords.z, 0, 0, 0, false)
-	Citizen.Wait(100)
+	Wait(100)
 	SetEntityHeading(LocalPlayer.state.ped, cellData.heading)
 	_disabled = false
 
-	Citizen.Wait(1000)
+	Wait(1000)
 
 	DoScreenFadeIn(1000)
 	while not IsScreenFadedIn() do
-		Citizen.Wait(10)
+		Wait(10)
 	end
 end)
 
@@ -67,7 +67,7 @@ AddEventHandler("Jail:Client:Released", function()
 			if s then
 				DoScreenFadeOut(1000)
 				while not IsScreenFadedOut() do
-					Citizen.Wait(10)
+					Wait(10)
 				end
 
 				Sounds.Play:One("release.ogg", 0.15)
@@ -81,14 +81,14 @@ AddEventHandler("Jail:Client:Released", function()
 					0,
 					false
 				)
-				Citizen.Wait(100)
+				Wait(100)
 				SetEntityHeading(LocalPlayer.state.ped, Config.Release.heading)
 
-				Citizen.Wait(1000)
+				Wait(1000)
 
 				DoScreenFadeIn(1000)
 				while not IsScreenFadedIn() do
-					Citizen.Wait(10)
+					Wait(10)
 				end
 			end
 		end)
@@ -110,10 +110,10 @@ AddEventHandler("Polyzone:Exit", function(id, testedPoint, insideZones, data)
 			Trunk:GetOut()
 			
 			while LocalPlayer.state.inTrunk do
-				Citizen.Wait(1)
+				Wait(1)
 			end
 
-			Citizen.Wait(2000)
+			Wait(2000)
 
 			Notification:Warn("Stop exploiting or you will be flighted")
 			Callbacks:ServerCallback("Jail:Server:ExploitAttempt", 1)
@@ -123,7 +123,7 @@ AddEventHandler("Polyzone:Exit", function(id, testedPoint, insideZones, data)
 			TriggerServerEvent("Escort:Server:ForceStop")
 			
 			while LocalPlayer.state.myEscorter ~= nil do
-				Citizen.Wait(1)
+				Wait(1)
 			end
 
 			Notification:Warn("Stop exploiting or you will be flighted")

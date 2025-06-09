@@ -43,7 +43,7 @@ local function DoItemLoad(items)
 		type = "ITEMS_UNLOADED",
 		data = {},
 	})
-	Citizen.Wait(100)
+	Wait(100)
 	SendNUIMessage({
 		type = "RESET_ITEMS",
 		data = {},
@@ -236,9 +236,9 @@ RegisterNetEvent("Inventory:Client:ReceiveReload", function(items)
 end)
 
 function startCd()
-	Citizen.CreateThread(function()
+	CreateThread(function()
 		_timedCd = true
-		Citizen.Wait(1000)
+		Wait(1000)
 		_timedCd = false
 	end)
 end
@@ -310,9 +310,9 @@ RegisterNetEvent("Inventory:Client:Open", function(inventory, inventory2)
 			SetNuiFocus(true, true)
 		end
 	
-		Citizen.CreateThread(function()
+		CreateThread(function()
 			while LocalPlayer.state.inventoryOpen do
-				Citizen.Wait(50)
+				Wait(50)
 			end
 			TriggerServerEvent("Inventory:server:closePlayerInventory", LocalPlayer.state.Character:GetData("SID"))
 		end)

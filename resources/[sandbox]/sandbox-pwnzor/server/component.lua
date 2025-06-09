@@ -4,7 +4,7 @@ local _blockedExplosions = {}
 local _tmpIgnores = {}
 
 -- Dunno if global state is actually available right away or have to wait till first gametick
-Citizen.CreateThread(function()
+CreateThread(function()
 	GlobalState["WeaponDrops"] = {
 		`PICKUP_AMMO_BULLET_MP`,
 		`PICKUP_AMMO_FIREWORK`,
@@ -171,7 +171,7 @@ AddEventHandler("Core:Shared:Ready", function()
 		RegisterCallbacks()
 
 		if not _loaded then
-			Citizen.CreateThread(function()
+			CreateThread(function()
 				_loaded = true
 				while _loaded do
 					for k, v in ipairs(GetPlayers()) do
@@ -192,7 +192,7 @@ AddEventHandler("Core:Shared:Ready", function()
 							end
 						end
 					end
-					Citizen.Wait(60000)
+					Wait(60000)
 				end
 			end)
 		end
@@ -318,7 +318,7 @@ RegisterNetEvent("Pwnzor:Server:ResourceStopped", function(resource)
 	end
 end)
 
--- Citizen.CreateThread(function()
+-- CreateThread(function()
 -- 	while true do
 -- 		for k, v in pairs(_blockedExplosions) do
 -- 			for k2, v2 in ipairs(v) do
@@ -327,7 +327,7 @@ end)
 -- 				end
 -- 			end
 -- 		end
--- 		Citizen.Wait(5000)
+-- 		Wait(5000)
 -- 	end
 -- end)
 

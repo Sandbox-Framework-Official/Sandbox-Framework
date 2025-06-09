@@ -189,7 +189,7 @@ end)
 
 RegisterNetEvent("Characters:Client:Spawn")
 AddEventHandler("Characters:Client:Spawn", function()
-    Citizen.Wait(1000)
+    Wait(1000)
     Hud:RegisterStatus("boosting-timer", 0, 100, "timer", "#892020", false, false, {
         hideZero = true,
     })
@@ -241,7 +241,7 @@ RegisterNetEvent("Laptop:Client:LSUnderground:Boosting:UpdateState", function(st
 
         if not trackerThread then
             trackerThread = true
-            Citizen.CreateThread(function()
+            CreateThread(function()
                 while _boosting and _boosting.state == 2 and LocalPlayer.state.loggedIn do
                     if NetworkDoesEntityExistWithNetworkId(_boosting.vehicleNet) then
                         local veh = NetToVeh(_boosting.vehicleNet)
@@ -250,7 +250,7 @@ RegisterNetEvent("Laptop:Client:LSUnderground:Boosting:UpdateState", function(st
                         end
                     end
     
-                    Citizen.Wait(7000 + (_boosting.trackerDelay * 1000))
+                    Wait(7000 + (_boosting.trackerDelay * 1000))
                 end
             end)
         end
@@ -286,7 +286,7 @@ AddEventHandler("Laptop:Client:LSUnderground:Boosting:AttemptExterior", function
                     --numPeds = 0
                     local availableWeapons = _availableWeaponsForClass[_boosting.vehicleData?.class or "D"]
 
-                    Citizen.CreateThread(function()
+                    CreateThread(function()
                         for i = 1, numPeds do
                             local model = _pedModels[math.random(#_pedModels)]
                             local spawn = _boosting.pedSpawns[#_boosting.pedSpawns]
@@ -294,13 +294,13 @@ AddEventHandler("Laptop:Client:LSUnderground:Boosting:AttemptExterior", function
                             -- Requesting model
                             RequestModel(model)
                             while not HasModelLoaded(model) do
-                                Citizen.Wait(5)
+                                Wait(5)
                             end
                             SetModelAsNoLongerNeeded(model)
     
                             local ped = CreatePed(5, model, spawn.x, spawn.y, spawn.z, spawn.w, true, true)
                             while not DoesEntityExist(ped) do
-                                Citizen.Wait(1)
+                                Wait(1)
                             end
     
                             Entity(ped).state:set('crimePed', true, true)
@@ -345,9 +345,9 @@ AddEventHandler("Laptop:Client:LSUnderground:Boosting:AttemptExterior", function
                             SetPedDropsWeaponsWhenDead(ped, false)
 
                             if i <= (numPeds / 2) then
-                                Citizen.Wait(3000)
+                                Wait(3000)
                             else
-                                Citizen.Wait(math.random(10, 35) * 1000)
+                                Wait(math.random(10, 35) * 1000)
                             end
                         end
                     end)
@@ -394,14 +394,14 @@ end)
 function BoostingTrackerCooldown()
     trackerTimer = GetGameTimer() + 30000
 
-    Citizen.CreateThread(function()
+    CreateThread(function()
         while _boosting and trackerTimer > GetGameTimer() do
 
             local time = math.floor((trackerTimer - GetGameTimer()) / 1000)
             local percent = math.floor((time / 30) * 100)
 
             TriggerEvent("Status:Client:Update", "boosting-timer", percent)
-            Citizen.Wait(500)
+            Wait(500)
         end
 
         TriggerEvent("Status:Client:Update", "boosting-timer", 0)

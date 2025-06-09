@@ -127,9 +127,9 @@ function EnableRadar()
 		RADAR_ENABLED = true
 		SendNUIMessage({ type = "RADAR_SHOW" })
 
-		Citizen.CreateThread(function()
+		CreateThread(function()
 			while RADAR_ENABLED do
-				Citizen.Wait(200)
+				Wait(200)
 				local data = {}
 				if RADAR_SETTINGS.frontRadar.transmit or RADAR_SETTINGS.rearRadar.transmit then
 					local vehCoords = GetEntityCoords(GLOBAL_VEH)

@@ -461,9 +461,9 @@ AddEventHandler("Prison:Client:JailAlarm", function(toggle)
 		RefreshInterior(alarmIpl)
 		EnableInteriorProp(alarmIpl, "prison_alarm")
 
-		Citizen.CreateThread(function()
+		CreateThread(function()
 			while not PrepareAlarm("PRISON_ALARMS") do
-				Citizen.Wait(100)
+				Wait(100)
 			end
 			StartAlarm("PRISON_ALARMS", true)
 		end)
@@ -473,9 +473,9 @@ AddEventHandler("Prison:Client:JailAlarm", function(toggle)
 		RefreshInterior(alarmIpl)
 		DisableInteriorProp(alarmIpl, "prison_alarm")
 
-		Citizen.CreateThread(function()
+		CreateThread(function()
 			while not PrepareAlarm("PRISON_ALARMS") do
-				Citizen.Wait(100)
+				Wait(100)
 			end
 			StopAllAlarms(true)
 		end)

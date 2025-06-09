@@ -56,10 +56,10 @@ local locations = {
 }
 
 AddEventHandler("Laptop:Server:RegisterCallbacks", function()
-	Citizen.CreateThread(function()
+	CreateThread(function()
 		local wait = 60 * math.random(120, 240)
 		while true do
-			Citizen.Wait(wait * 1000)
+			Wait(wait * 1000)
 			marketItems = table.copy(_defMarket)
 			Logger:Info("Laptop - LSU", "Market Place Items Restocked")
 		end
@@ -258,9 +258,9 @@ AddEventHandler("Laptop:Server:RegisterCallbacks", function()
 			local pendingPickup = _pendingMarketPickups[char:GetData("SID")]
 			if pendingPickup then
 				for _, list in ipairs(pendingPickup) do
-					Citizen.Wait(1)
+					Wait(1)
 					for k, v in ipairs(list) do
-						Citizen.Wait(1)
+						Wait(1)
 						Inventory:AddItem(char:GetData("SID"), v.item, v.quantity, {}, 1)
 					end
 				end

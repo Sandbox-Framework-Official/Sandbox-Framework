@@ -8,7 +8,7 @@
 RegisterNetEvent("Characters:Client:Spawn")
 AddEventHandler("Characters:Client:Spawn", function()
 	while not GlobalState.JailStashLocations do
-		Citizen.Wait(100)
+		Wait(100)
 	end
 
 	if GlobalState.JailStashLocations ~= nil then

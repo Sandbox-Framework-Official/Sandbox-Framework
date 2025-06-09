@@ -17,12 +17,12 @@ local function RunSkillChecks(total)
         Minigame.Play:RoundSkillbar(1.15, 3, {
             onSuccess = function()
                 success += 1
-                Citizen.Wait(50)
+                Wait(50)
                 p:resolve(true)
             end,
             onFail = function()
                 failed += 1
-                Citizen.Wait(50)
+                Wait(50)
                 p:resolve(true)
             end,
         }, {
@@ -143,7 +143,7 @@ AddEventHandler("Drugs:Client:Startup", function()
     end)
 
     Callbacks:RegisterClientCallback("Drugs:Moonshine:Use", function(data, cb)
-        Citizen.Wait(400)
+        Wait(400)
         Minigame.Play:RoundSkillbar(0.8, 8, {
             onSuccess = function()
                 cb(true)
@@ -176,75 +176,75 @@ AddEventHandler("Drugs:Client:Startup", function()
 end)
 
 RegisterNetEvent("Drugs:Client:Moonshine:SetupStills", function(stills)
-    Citizen.CreateThread(function()
+    CreateThread(function()
         loadModel(`prop_still`)
         for k, v in pairs(stills) do
             _stills[k] = v
             local obj = CreateObject(`prop_still`, v.coords.x, v.coords.y, v.coords.z, false, true, false)
             SetEntityHeading(obj, v.heading)
             while not DoesEntityExist(obj) do
-                Citizen.Wait(1)
+                Wait(1)
             end
             PlaceObjectOnGroundProperly(obj)
             _stills[k].entity = obj
             Entity(obj).state.isMoonshineStill = true
             Entity(obj).state.stillId = v.id
-            Citizen.Wait(1)
+            Wait(1)
         end
     end)
 end)
 
 RegisterNetEvent("Drugs:Client:Moonshine:SetupBarrels", function(barrels)
-    Citizen.CreateThread(function()
+    CreateThread(function()
         loadModel(`prop_wooden_barrel`)
         for k, v in pairs(barrels) do
             _barrels[k] = v
             local obj = CreateObject(`prop_wooden_barrel`, v.coords.x, v.coords.y, v.coords.z, false, true, false)
             SetEntityHeading(obj, v.heading)
             while not DoesEntityExist(obj) do
-                Citizen.Wait(1)
+                Wait(1)
             end
             PlaceObjectOnGroundProperly(obj)
             _barrels[k].entity = obj
             Entity(obj).state.isMoonshineBarrel = true
             Entity(obj).state.barrelId = v.id
-            Citizen.Wait(1)
+            Wait(1)
         end
     end)
 end)
 
 RegisterNetEvent("Characters:Client:Logout", function()
-    Citizen.CreateThread(function()
+    CreateThread(function()
         for k, v in pairs(_stills) do
             if v?.entity ~= nil and DoesEntityExist(v?.entity) then
                 DeleteEntity(v?.entity)
                 _stills[k] = nil
             end
-            Citizen.Wait(1)
+            Wait(1)
         end
     end)
 end)
 
 RegisterNetEvent("Characters:Client:Logout", function()
-    Citizen.CreateThread(function()
+    CreateThread(function()
         for k, v in pairs(_barrels) do
             if v?.entity ~= nil and DoesEntityExist(v?.entity) then
                 DeleteEntity(v?.entity)
                 _barrels[k] = nil
             end 
-            Citizen.Wait(1)
+            Wait(1)
         end
     end)
 end)
 
 RegisterNetEvent("Drugs:Client:Moonshine:CreateStill", function(still)
-    Citizen.CreateThread(function()
+    CreateThread(function()
         loadModel(`prop_still`)
         _stills[still.id] = still
         local obj = CreateObject(`prop_still`, still.coords.x, still.coords.y, still.coords.z, false, true, false)
         SetEntityHeading(obj, still.heading)
         while not DoesEntityExist(obj) do
-            Citizen.Wait(1)
+            Wait(1)
         end
 
         _stills[still.id].entity = obj
@@ -255,7 +255,7 @@ RegisterNetEvent("Drugs:Client:Moonshine:CreateStill", function(still)
 end)
 
 RegisterNetEvent("Drugs:Client:Moonshine:RemoveStill", function(stillId)
-    Citizen.CreateThread(function()
+    CreateThread(function()
         local objs = GetGamePool("CObject")
         for k, v in ipairs(objs) do
             local entState = Entity(v).state
@@ -273,7 +273,7 @@ end)
 
 AddEventHandler("Drugs:Client:Moonshine:FinishPlacement", function(data, endCoords)
     TaskTurnPedToFaceCoord(LocalPlayer.state.ped, endCoords.coords.x, endCoords.coords.y, endCoords.coords.z, 0.0)
-    Citizen.Wait(1000)
+    Wait(1000)
     Progress:Progress({
         name = "meth_pickup",
         duration = (math.random(5) + 10) * 1000,
@@ -304,7 +304,7 @@ end)
 
 AddEventHandler("Drugs:Client:Moonshine:FinishPlacementBarrel", function(data, endCoords)
     TaskTurnPedToFaceCoord(LocalPlayer.state.ped, endCoords.coords.x, endCoords.coords.y, endCoords.coords.z, 0.0)
-    Citizen.Wait(1000)
+    Wait(1000)
     Progress:Progress({
         name = "meth_pickup",
         duration = 3 * 1000,
@@ -503,14 +503,14 @@ RegisterNetEvent("Drugs:Client:Moonshine:UpdateBarrelData", function(barrelId, d
 end)
 
 RegisterNetEvent("Drugs:Client:Moonshine:CreateBarrel", function(barrel)
-    Citizen.CreateThread(function()
+    CreateThread(function()
         loadModel(`prop_wooden_barrel`)
         _barrels[barrel.id] = barrel
         local obj = CreateObject(`prop_wooden_barrel`, barrel.coords.x, barrel.coords.y, barrel.coords.z, false, true, false)
         SetEntityHeading(obj, barrel.heading)
         PlaceObjectOnGroundProperly(obj)
         while not DoesEntityExist(obj) do
-            Citizen.Wait(1)
+            Wait(1)
         end
 
         _barrels[barrel.id].entity = obj
@@ -521,7 +521,7 @@ RegisterNetEvent("Drugs:Client:Moonshine:CreateBarrel", function(barrel)
 end)
 
 RegisterNetEvent("Drugs:Client:Moonshine:RemoveBarrel", function(barrelId)
-    Citizen.CreateThread(function()
+    CreateThread(function()
         local objs = GetGamePool("CObject")
         for k, v in ipairs(objs) do
             local entState = Entity(v).state

@@ -11,7 +11,7 @@ AddEventHandler("Player:Server:Connected", function(source)
 end)
 
 function RegisterCallbacks()
-	Citizen.CreateThread(function()
+	CreateThread(function()
 		while true do
 			if not (GlobalState["DisableAFK"] or false) then
 				for k, v in pairs(_fuckingBozos) do
@@ -29,13 +29,13 @@ function RegisterCallbacks()
 					end
 				end
 			end
-			Citizen.Wait(60000)
+			Wait(60000)
 		end
 	end)
 	
 	Callbacks:RegisterServerCallback("Characters:GetServerData", function(source, data, cb)
 		while Fetch:Source(source) == nil do
-			Citizen.Wait(1000)
+			Wait(1000)
 		end
 
 		local motd = GetConvar("motd", "Welcome to SandboxRP")

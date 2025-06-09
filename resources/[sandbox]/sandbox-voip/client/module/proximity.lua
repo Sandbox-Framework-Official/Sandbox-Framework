@@ -6,7 +6,7 @@ function DoProximityCheck(myCoords, player, proximity)
 end
 
 function StartVOIPGridThreads()
-    Citizen.CreateThread(function()
+    CreateThread(function()
         while _characterLoaded do
             local coords = GetEntityCoords(LocalPlayer.state.ped)
             local proximity = MumbleGetTalkerProximity()
@@ -44,7 +44,7 @@ function StartVOIPGridThreads()
                 SetSpectatorVoiceMode(false)
             end
 
-            Citizen.Wait(200)
+            Wait(200)
         end
     end)
 end

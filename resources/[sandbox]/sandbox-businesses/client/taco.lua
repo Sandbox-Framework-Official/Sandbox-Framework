@@ -268,7 +268,7 @@ function FetchDropOffLocation()
 		if not _durationThread then
 			_durationThread = true
 			_durationCheck = _durationTimer
-			Citizen.CreateThread(function()
+			CreateThread(function()
 				while _activeDropoffState == 1 and _durationCheck > 0 do
 					_durationCheck = _durationCheck - 5
 					DrawMarker(
@@ -303,7 +303,7 @@ function FetchDropOffLocation()
 						RunCleanUp()
 						return
 					end
-					Citizen.Wait(5)
+					Wait(5)
 				end
 			end)
 		end

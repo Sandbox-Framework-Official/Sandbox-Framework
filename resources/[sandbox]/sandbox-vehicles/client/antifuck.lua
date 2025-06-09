@@ -28,7 +28,7 @@ local function DoTheThing(veh)
 	_checkingVehs = {}
 	_ghostedVehs = {}
 
-	Citizen.CreateThread(function()
+	CreateThread(function()
 		while _vehZone do
 			local vehicles = GetGamePool("CVehicle")
 			for _, v in ipairs(vehicles) do
@@ -39,11 +39,11 @@ local function DoTheThing(veh)
 					end
 				end
 			end
-			Citizen.Wait(_isSpeeding and 0 or 50)
+			Wait(_isSpeeding and 0 or 50)
 		end
 	end)
 
-	Citizen.CreateThread(function()
+	CreateThread(function()
 		local prevCoords = {}
 		while _vehZone do
 			for k, v in pairs(_checkingVehs) do
@@ -87,7 +87,7 @@ local function DoTheThing(veh)
 				::continue::
 			end
 
-			Citizen.Wait(500)
+			Wait(500)
 		end
 	end)
 end
@@ -113,7 +113,7 @@ AddEventHandler("Vehicles:Client:Speeding", function(isSpeeding)
 
 	_ghostedVehs = {}
 
-	Citizen.CreateThread(function()
+	CreateThread(function()
 		while _isSpeeding and _vehZone do
 			for k, v in pairs(_checkingVehs) do
 				if not v then
@@ -137,7 +137,7 @@ AddEventHandler("Vehicles:Client:Speeding", function(isSpeeding)
 				::continue::
 			end
 
-			Citizen.Wait(_isSpeeding and 0 or 50)
+			Wait(_isSpeeding and 0 or 50)
 		end
 
 		for k, _ in pairs(_ghostedVehs) do

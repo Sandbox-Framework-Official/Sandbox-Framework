@@ -169,7 +169,7 @@ local _pdStationPolys = {
 function loadModel(model)
 	RequestModel(model)
 	while not HasModelLoaded(model) do
-		Citizen.Wait(1)
+		Wait(1)
 	end
 end
 
@@ -527,7 +527,7 @@ AddEventHandler("Core:Shared:Ready", function()
 		Callbacks:RegisterClientCallback("Police:DoDetCord", function(data, cb)
 			local cDoorId, cDoorEnt, cDoorCoords = Doors:GetCurrentDoor()
 			if cDoorId and Doors:IsLocked(cDoorId) then
-				Citizen.CreateThread(function()
+				CreateThread(function()
 					local playerPed = PlayerPedId()
 					local playerPos = GetEntityCoords(playerPed, false)
 					local doorPosition = playerPos + GetEntityForwardVector(playerPed)
@@ -543,10 +543,10 @@ AddEventHandler("Core:Shared:Ready", function()
 					RequestAnimDict("anim@heists@ornate_bank@thermal_charge")
 					RequestModel("hei_p_m_bag_var22_arm_s")
 					while not HasAnimDictLoaded("anim@heists@ornate_bank@thermal_charge") and not HasModelLoaded("hei_p_m_bag_var22_arm_s") do
-					  Citizen.Wait(0)
+					  Wait(0)
 					end
 					local ped = PlayerPedId()
-					Citizen.Wait(100)
+					Wait(100)
 					local rotx, roty, rotz = table.unpack(vec3(GetEntityRotation(ped)))
 					local bagscene = NetworkCreateSynchronisedScene(endCoords.x, endCoords.y, endCoords.z, rotx, roty, rotz, 2, false, false, 1065353216, 0, 1.3)
 					NetworkAddPedToSynchronisedScene(ped, bagscene, "anim@heists@ornate_bank@thermal_charge", "thermal_charge", 1.5, -4.0, 1, 16, 1148846080, 0)
@@ -556,13 +556,13 @@ AddEventHandler("Core:Shared:Ready", function()
 					  SetPedComponentVariation(ped, 5, 0, 0, 0)
 					end
 					NetworkStartSynchronisedScene(bagscene)
-					Citizen.Wait(1500)
+					Wait(1500)
 					local x, y, z = table.unpack(GetEntityCoords(ped))
 					local bomba = CreateObject(GetHashKey("hei_prop_heist_thermite"), x, y, z + 0.2,  true,  true, true)
 					SetNetworkIdCanMigrate(NetworkGetNetworkIdFromEntity(bomba), false)
 					SetEntityCollision(bomba, false, true)
 					AttachEntityToEntity(bomba, ped, GetPedBoneIndex(ped, 28422), 0, 0, 0, 0, 0, 200.0, true, true, false, true, 1, true)
-					Citizen.Wait(4000)
+					Wait(4000)
 					if curVar > 0 then
 					  SetPedComponentVariation(ped, 5, curVar, 0, 0)
 					end
@@ -575,7 +575,7 @@ AddEventHandler("Core:Shared:Ready", function()
 						delay = 7000,
 						netId = ObjToNet(bomba)
 					}, function() end)
-					Citizen.Wait(7000)
+					Wait(7000)
 					
 					Callbacks:ServerCallback("Robbery:DoDetCordFx", {
 						x = endCoords.x,
@@ -621,8 +621,8 @@ AddEventHandler("Core:Shared:Ready", function()
 		-- 		if not _cuffCd then
 		-- 			TriggerServerEvent("Police:Server:ToggleCuff")
 		-- 			_cuffCd = true
-		-- 			Citizen.CreateThread(function()
-		-- 				Citizen.Wait(2000)
+		-- 			CreateThread(function()
+		-- 				Wait(2000)
 		-- 				_cuffCd = false
 		-- 			end)
 		-- 		end
@@ -669,7 +669,7 @@ AddEventHandler("Core:Shared:Ready", function()
 								-- 	0,
 								-- 	0
 								-- )
-								-- Citizen.Wait(350)
+								-- Wait(350)
 								StupidRagdoll(true)
 								-- ClearPedSecondaryTask(LocalPlayer.state.ped)
 								-- SetPedToRagdoll(LocalPlayer.state.ped, 500, 500, 0, 0, 0, 0)
@@ -920,7 +920,7 @@ function StupidRagdoll(tackleAnim)
 		)
 		-- time = 1000
 	end
-	Citizen.Wait(350)
+	Wait(350)
 	ClearPedSecondaryTask(LocalPlayer.state.ped)
 	SetPedToRagdoll(LocalPlayer.state.ped, time, time, 0, 0, 0, 0)
 end

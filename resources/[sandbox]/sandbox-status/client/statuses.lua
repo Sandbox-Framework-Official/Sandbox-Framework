@@ -2,7 +2,7 @@ local _hungerTicks = 0
 local _stressTicks = 0
 
 AddEventHandler("Characters:Client:Spawn", function()
-	Citizen.CreateThread(function()
+	CreateThread(function()
 		local effectCount = 0
 		while LocalPlayer.state.loggedIn do
 			local player = PlayerPedId()
@@ -27,18 +27,18 @@ AddEventHandler("Characters:Client:Spawn", function()
 				else
 					SetPlayerSprint(PlayerId(), true)
 					if val - 25 > 0 then
-						Citizen.Wait(60000)
+						Wait(60000)
 						effectCount = 0
 					end
 				end
-				Citizen.Wait(100)
+				Wait(100)
 			else
-				Citizen.Wait(1000)
+				Wait(1000)
 			end
 		end
 	end)
 
-	Citizen.CreateThread(function()
+	CreateThread(function()
 		local effectCount = 0
 		while LocalPlayer.state.loggedIn do
 			local player = PlayerPedId()
@@ -50,22 +50,22 @@ AddEventHandler("Characters:Client:Spawn", function()
 					TriggerScreenblurFadeIn(200.0 * level)
 
 					if level == 1 then
-						Citizen.Wait(600)
+						Wait(600)
 					elseif level == 2 then
-						Citizen.Wait(1200)
+						Wait(1200)
 					elseif level == 3 then
-						Citizen.Wait(1800)
+						Wait(1800)
 					else
-						Citizen.Wait(2500)
+						Wait(2500)
 					end
 
 					TriggerScreenblurFadeOut(200.0 * level)
-					Citizen.Wait(30000 - (1000 * (15 - (level * 2))))
+					Wait(30000 - (1000 * (15 - (level * 2))))
 				else
-					Citizen.Wait(10000)
+					Wait(10000)
 				end
 			else
-				Citizen.Wait(1000)
+				Wait(1000)
 			end
 		end
 	end)
@@ -109,7 +109,7 @@ RegisterNetEvent("Status:Client:Ticks:Stress", function()
 end)
 
 AddEventHandler("Characters:Client:Spawn", function()
-	Citizen.CreateThread(function()
+	CreateThread(function()
 		if _strTickRunning then
 			Logger:Trace("Status", "Stress Thread Running, Skipping Creation")
 			return
@@ -145,9 +145,9 @@ AddEventHandler("Characters:Client:Spawn", function()
 						LocalPlayer.state:set("stressTicks", nil, true)
 					end
 				end
-				Citizen.Wait(10000)
+				Wait(10000)
 			else
-				Citizen.Wait(1000)
+				Wait(1000)
 			end
 		end
 		_strTickRunning = false
@@ -337,7 +337,7 @@ function LoadAnimSet(animSet)
 	if not HasAnimSetLoaded(animSet) then
 		RequestAnimSet(animSet)
 		while not HasAnimSetLoaded(animSet) do
-			Citizen.Wait(50)
+			Wait(50)
 		end
 	end
 end

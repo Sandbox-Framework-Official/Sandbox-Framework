@@ -170,8 +170,8 @@ function ToggleMDT()
 			_openCd = true
 			MDT:Open()
 
-			Citizen.CreateThread(function()
-				Citizen.Wait(2000)
+			CreateThread(function()
+				Wait(2000)
 				_openCd = false
 			end)
 		else
@@ -181,6 +181,6 @@ function ToggleMDT()
 end
 
 AddEventHandler("Government:Client:AccessPublicRecords", function()
-	Citizen.Wait(250)
+	Wait(250)
 	TriggerServerEvent("MDT:Server:OpenPublicRecords")
 end)

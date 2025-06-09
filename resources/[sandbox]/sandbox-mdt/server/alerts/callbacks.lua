@@ -95,7 +95,7 @@ function RegisterEACallbacks()
 			local job = Player(source).state.onDuty
 
 			Jobs.Duty:Off(source, false, true)
-			Citizen.Wait(250)
+			Wait(250)
 			Jobs.Duty:On(source, job, true)
 
 			cb(true)

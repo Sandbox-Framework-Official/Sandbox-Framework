@@ -67,7 +67,7 @@ function OpenVehicleCustoms(canInstallPerformance, costMultiplier, settings)
 	customsMenu = Menu:Create("vehicle_customs", "Vehicle Customs", function()
 		CUSTOMS_OPEN = true
 	end, function()
-		Citizen.Wait(100)
+		Wait(100)
 		customsMenu = false
 		customsMenuSubs = nil
 		collectgarbage()

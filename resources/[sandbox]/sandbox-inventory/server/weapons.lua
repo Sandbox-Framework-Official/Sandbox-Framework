@@ -421,7 +421,7 @@ WEAPONS = {
 												source
 											)
 
-											Citizen.Wait(400)
+											Wait(400)
 
 											SetGunPropData(source, char:GetData("SID"), getInventory(source, char:GetData("SID"), 1, false), true)
 											TriggerClientEvent("Weapons:Client:UpdateAttachments", source, comps)

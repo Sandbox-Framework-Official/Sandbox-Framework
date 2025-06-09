@@ -171,9 +171,9 @@ function ClearBrokenItems()
 	Logger:Info("Inventory", string.format("Cleaned Up ^2%s^7 Degraded Items", d.affectedRows))
 	d = nil
 	
-	Citizen.CreateThread(function()
+	CreateThread(function()
 		while _started do
-			Citizen.Wait((1000 * 60) * 30)
+			Wait((1000 * 60) * 30)
 			MySQL.query("DELETE FROM inventory WHERE expiryDate < ? AND expiryDate >= 0", { os.time() }, function(d)
 				Logger:Info("Inventory", string.format("Cleaned Up ^2%s^7 Degraded Items", d.affectedRows))
 			end)
@@ -278,11 +278,11 @@ function SetupItemUses(itemData)
 			if itemData.gangChain ~= nil then
 				if itemData.gangChain ~= char:GetData("GangChain") then
 					TriggerClientEvent("Ped:Client:ChainAnim", source)
-					Citizen.Wait(3000)
+					Wait(3000)
 					char:SetData("GangChain", itemData.gangChain)
 				else
 					TriggerClientEvent("Ped:Client:ChainAnim", source)
-					Citizen.Wait(3000)
+					Wait(3000)
 					char:SetData("GangChain", "NONE")
 				end
 			end
@@ -349,8 +349,8 @@ storeBankAccounts = {}
 pendingShopDeposits = {}
 local _startingPendingDepositThread = false
 function LoadShops()
-	Citizen.CreateThread(function()
-		Citizen.Wait(10000)
+	CreateThread(function()
+		Wait(10000)
 
 		local f = Banking.Accounts:GetOrganization("dgang")
 
@@ -380,9 +380,9 @@ function LoadShops()
 
 	if not _startingPendingDepositThread then
 		_startingPendingDepositThread = true
-		Citizen.CreateThread(function()
+		CreateThread(function()
 			while true do
-				Citizen.Wait(1000 * 60 * 60)
+				Wait(1000 * 60 * 60)
 
 				for k, v in pairs(pendingShopDeposits) do
 					if v.tax then

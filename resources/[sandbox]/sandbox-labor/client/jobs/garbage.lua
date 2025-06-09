@@ -56,7 +56,7 @@ local trashBins = {
 loadAnimDict = function(dict)
 	RequestAnimDict(dict)
 	while not HasAnimDictLoaded(dict) do
-		Citizen.Wait(10)
+		Wait(10)
 	end
 end
 AddEventHandler("Labor:Client:Setup", function()
@@ -142,7 +142,7 @@ RegisterNetEvent("Garbage:Client:OnDuty", function(joiner, time)
 			}, 3.0)
 		end
 
-		Citizen.CreateThread(function()
+		CreateThread(function()
 			while _working do
 				if _route ~= nil then
 					local dist = #(
@@ -155,7 +155,7 @@ RegisterNetEvent("Garbage:Client:OnDuty", function(joiner, time)
 						LocalPlayer.state.inGarbagbeZone = false
 					end
 				end
-				Citizen.Wait(1000)
+				Wait(1000)
 			end
 		end)
 	end)

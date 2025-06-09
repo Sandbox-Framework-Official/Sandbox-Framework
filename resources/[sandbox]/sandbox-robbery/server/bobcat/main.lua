@@ -24,8 +24,8 @@ function StartCooldown()
 		return
 	end
 	_threading = timestamp
-	Citizen.CreateThread(function()
-		Citizen.Wait(BC_RESET_TIME)
+	CreateThread(function()
+		Wait(BC_RESET_TIME)
 
 		if _threading == timestamp then
 			ResetBobcat()
@@ -65,10 +65,10 @@ local function SpawnPeds(source)
 		--TaskCombatPed(p, GetPlayerPed(source), 0, 16)
 
 		table.insert(peds, NetworkGetNetworkIdFromEntity(p))
-		Citizen.Wait(3)
+		Wait(3)
 	end
 
-	Citizen.Wait(1000)
+	Wait(1000)
 
 	return peds
 end
@@ -409,13 +409,13 @@ AddEventHandler("Robbery:Server:Setup", function()
 												SetPedArmour(p, type == 2 and 1000 or 500)
 
 												while not DoesEntityExist(p) do
-													Citizen.Wait(1)
+													Wait(1)
 												end
 
 												table.insert(peds, NetworkGetNetworkIdFromEntity(p))
 											end
 
-											Citizen.Wait(300)
+											Wait(300)
 
 											Entity(ent).state.wasThermited = true
 

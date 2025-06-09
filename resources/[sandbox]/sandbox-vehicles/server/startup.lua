@@ -26,9 +26,9 @@ function Startup()
         end
     end)
 
-    -- Citizen.CreateThread(function()
+    -- CreateThread(function()
     --     -- Let the server startup, no vehicles need to be saved in the first 2 mins
-    --     Citizen.Wait(120000)
+    --     Wait(120000)
     --     while true do
     --         local savingVINs = {}
     --         for k, v in pairs(ACTIVE_OWNED_VEHICLES) do
@@ -54,20 +54,20 @@ function Startup()
     
     --             for k, v in ipairs(savingVINs) do
     --                 SaveVehicle(v)
-    --                 Citizen.Wait(timeSpread)
+    --                 Wait(timeSpread)
     --             end
     --         else
-    --             Citizen.Wait(180000)
+    --             Wait(180000)
     --         end
     --     end
     -- end)
 
     local deleteTime = 120 -- Minutes
 
-    Citizen.CreateThread(function()
+    CreateThread(function()
         -- Let the server startup, no vehicles need to be saved in the first 2 mins
         while true do
-            Citizen.Wait(1000 * 60 * 30)
+            Wait(1000 * 60 * 30)
             local vehs = GetAllVehicles()
             local timeBefore = os.time() - 60 * deleteTime
 

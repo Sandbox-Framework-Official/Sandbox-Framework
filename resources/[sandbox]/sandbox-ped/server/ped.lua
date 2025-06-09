@@ -322,7 +322,7 @@ AddEventHandler("Core:Shared:Ready", function()
 				local ped = char:GetData("Ped")
 				if ped.customization.components.mask.drawableId ~= 0 then
 					TriggerClientEvent("Ped:Client:MaskAnim", source)
-					Citizen.Wait(300)
+					Wait(300)
 					Ped.Mask:Unequip(source)
 				end
 			end
@@ -336,7 +336,7 @@ AddEventHandler("Core:Shared:Ready", function()
 				local ped = char:GetData("Ped")
 				if not ped.customization.props.hat.disabled then
 					TriggerClientEvent("Ped:Client:HatGlassAnim", source)
-					Citizen.Wait(300)
+					Wait(300)
 					Ped.Hat:Unequip(source)
 				end
 			end
@@ -350,7 +350,7 @@ AddEventHandler("Core:Shared:Ready", function()
 				local ped = char:GetData("Ped")
 				if not ped.customization.props.hat.disabled then
 					TriggerClientEvent("Ped:Client:HatGlassAnim", source)
-					Citizen.Wait(300)
+					Wait(300)
 					TriggerClientEvent("Ped:Client:Hat", source)
 				end
 			end
@@ -364,7 +364,7 @@ AddEventHandler("Core:Shared:Ready", function()
 				local ped = char:GetData("Ped")
 				if not ped.customization.props.glass.disabled then
 					TriggerClientEvent("Ped:Client:HatGlassAnim", source)
-					Citizen.Wait(300)
+					Wait(300)
 					TriggerClientEvent("Ped:Client:Glasses", source)
 				end
 			end
@@ -767,7 +767,7 @@ function RegisterCallbacks()
 			local ped = char:GetData("Ped")
 			if ped.customization.components.mask.drawableId ~= 0 then
 				TriggerClientEvent("Ped:Client:MaskAnim", source)
-				Citizen.Wait(500)
+				Wait(500)
 				Ped.Mask:Unequip(source)
 			end
 		end
@@ -779,7 +779,7 @@ function RegisterCallbacks()
 			local ped = char:GetData("Ped")
 			if not ped.customization.props.hat.disabled then
 				TriggerClientEvent("Ped:Client:HatGlassAnim", source)
-				Citizen.Wait(500)
+				Wait(500)
 				Ped.Hat:Unequip(source)
 			end
 		end
@@ -791,7 +791,7 @@ function RegisterCallbacks()
 			local ped = char:GetData("Ped")
 			if ped.customization.components.accessory.drawableId ~= 0 then
 				TriggerClientEvent("Ped:Client:HatGlassAnim", source)
-				Citizen.Wait(500)
+				Wait(500)
 				Ped.Necklace:Unequip(source)
 			end
 		end

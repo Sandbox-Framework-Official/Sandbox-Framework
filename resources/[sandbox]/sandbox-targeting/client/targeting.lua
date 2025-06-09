@@ -17,7 +17,7 @@ function StartTargeting()
 		holdingTargeting = true
 		hittingTargetData = false
 		TriggerEvent("Targeting:Client:UpdateState", true, false)
-		Citizen.CreateThread(function()
+		CreateThread(function()
 			while holdingTargeting do
 				if
 					IsPauseMenuActive()
@@ -118,15 +118,15 @@ function StartTargeting()
 					end
 				end
 
-				Citizen.Wait(250)
+				Wait(250)
 			end
 		end)
 
-		Citizen.CreateThread(function()
+		CreateThread(function()
 			while holdingTargeting do
 				DisablePlayerFiring(GLOBAL_PED, true)
 				DisableControlAction(0, 25, true)
-				Citizen.Wait(0)
+				Wait(0)
 			end
 		end)
 

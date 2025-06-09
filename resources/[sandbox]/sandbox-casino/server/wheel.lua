@@ -65,7 +65,7 @@ AddEventHandler("Casino:Server:Startup", function()
 
                     GiveWheelPrize(source, randomPrize)
 
-                    Citizen.Wait(1000)
+                    Wait(1000)
 
                     if randomPrize.bigWin then
                         GlobalState["Casino:WheelLocked"] = true
@@ -109,7 +109,7 @@ AddEventHandler("Casino:Server:Startup", function()
     end)
 
     while not _casinoConfigLoaded do
-        Citizen.Wait(250)
+        Wait(250)
     end
 
     _wheelAccumulator = Casino.Config:Get("wheel-accumulator") or 0
@@ -163,7 +163,7 @@ function SpinTheFuckingWheel(slice)
         GlobalState["Casino:WheelLastRotation"] = finalRotation
         TriggerClientEvent("Casino:Client:WheelLastRotation", -1, finalRotation)
 
-        Citizen.Wait(250)
+        Wait(250)
 
         p:resolve(true)
     end)

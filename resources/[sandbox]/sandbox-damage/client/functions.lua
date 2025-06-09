@@ -10,7 +10,7 @@ local vehAnim = "sit"
 local drownDict = "dam_ko"
 local drownAnim = "drown"
 
-Citizen.CreateThread(function()
+CreateThread(function()
 	loadAnimDict(koDict)
 	loadAnimDict(deadDict)
 	loadAnimDict(vehDict)
@@ -96,7 +96,7 @@ local aDict = deadDict
 local aAnim = deadAnim
 
 function DeadAnimLoop()
-	Citizen.CreateThread(function()
+	CreateThread(function()
 		local ped = PlayerPedId()
 
 		aDict = deadDict
@@ -115,7 +115,7 @@ function DeadAnimLoop()
 
 		DoScreenFadeOut(1000)
 		while not IsScreenFadedOut() do
-			Citizen.Wait(10)
+			Wait(10)
 		end
 
 		AnimpostfxPlay("DeathFailMPIn", 100.0, true)
@@ -127,7 +127,7 @@ function DeadAnimLoop()
 			ClearPedTasksImmediately(ped)
 		else
 			TaskWarpPedIntoVehicle(ped, veh, seat)
-			Citizen.Wait(300)
+			Wait(300)
 		end
 	
 		if (type(LocalPlayer.state.deadData) == "table") and LocalPlayer.state?.deadData?.isMinor then
@@ -160,7 +160,7 @@ function DeadAnimLoop()
 				else
 					TaskPlayAnim(ped, aDict, aAnim, 1.0, 1.0, -1, 1, 0, 0, 0, 0)
 				end
-				Citizen.Wait(100)
+				Wait(100)
 			end
 	
 			AnimpostfxStop("DeathFailMPIn")
@@ -178,7 +178,7 @@ local disabling = false
 function DisableControls()
 	if disabling then return end
 	disabling = true
-	Citizen.CreateThread(function()
+	CreateThread(function()
 		while LocalPlayer.state.loggedIn and LocalPlayer.state.isDead do
 			DisableControlAction(0, 30, true) -- disable left/right
 			DisableControlAction(0, 31, true) -- disable forward/back
@@ -203,7 +203,7 @@ function DisableControls()
 			DisableControlAction(0, 263, true) -- disable melee
 			DisableControlAction(0, 264, true) -- disable melee
 			DisableControlAction(0, 257, true) -- disable melee
-			Citizen.Wait(1)
+			Wait(1)
 		end
 		disabling = false
 	end)

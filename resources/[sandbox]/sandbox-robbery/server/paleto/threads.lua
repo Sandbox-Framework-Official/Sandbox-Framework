@@ -6,7 +6,7 @@ function StartPaletoThreads()
 	end
 	_threading = true
 
-	Citizen.CreateThread(function()
+	CreateThread(function()
 		while _threading do
 			if _pbGlobalReset ~= nil then
 				if os.time() > _pbGlobalReset then
@@ -14,7 +14,7 @@ function StartPaletoThreads()
 					ResetPaleto()
 				end
 			end
-			Citizen.Wait(30000)
+			Wait(30000)
 		end
 	end)
 end
@@ -27,10 +27,10 @@ function RestorePowerThread()
 		end
 		_powerThreading = true
 
-		Citizen.CreateThread(function()
+		CreateThread(function()
 			Logger:Info("Robbery", "Paleto Blackout Started")
 			GlobalState["Sync:PaletoBlackout"] = true
-			Citizen.Wait(1000 * (60 * 30))
+			Wait(1000 * (60 * 30))
 			GlobalState["Sync:PaletoBlackout"] = false
 			_powerThreading = false
 			Logger:Info("Robbery", "Paleto Blackout Ended")

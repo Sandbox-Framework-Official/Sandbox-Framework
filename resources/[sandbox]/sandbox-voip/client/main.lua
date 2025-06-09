@@ -123,9 +123,9 @@ AddEventHandler("Characters:Client:Spawn", function()
 		UpdateVOIPIndicatorStatus()
 	end)
 
-	Citizen.CreateThread(function()
+	CreateThread(function()
 		while _characterLoaded do
-			Citizen.Wait(100)
+			Wait(100)
 			local isTalking = NetworkIsPlayerTalking(PlayerId())
 			if isTalking and not PLAYER_TALKING then
 				PLAYER_TALKING = true
@@ -156,7 +156,7 @@ AddEventHandler("VOIP:Client:ConnectionState", function(state)
 
 		while not LocalPlayer.state.voiceChannel do
 			print("Waiting to Be Assigned Voice Channel")
-			Citizen.Wait(100)
+			Wait(100)
 		end
 	
 		MumbleClearVoiceTarget(1)
@@ -166,7 +166,7 @@ AddEventHandler("VOIP:Client:ConnectionState", function(state)
 		MumbleSetVoiceChannel(LocalPlayer.state.voiceChannel)
 	
 		while MumbleGetVoiceChannelFromServerId(PLAYER_SERVER_ID) ~= LocalPlayer.state.voiceChannel do
-			Citizen.Wait(250)
+			Wait(250)
 			MumbleSetVoiceChannel(LocalPlayer.state.voiceChannel)
 		end
 	

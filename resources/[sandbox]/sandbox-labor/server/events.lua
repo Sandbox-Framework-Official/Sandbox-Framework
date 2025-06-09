@@ -21,7 +21,7 @@ local _locations = {
 
 AddEventHandler("onResourceStart", function(resource)
 	if resource == GetCurrentResourceName() then
-		Citizen.Wait(20)
+		Wait(20)
 		TriggerClientEvent("Labor:Client:GetLocs", -1, _locations)
 	end
 end)

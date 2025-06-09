@@ -1,6 +1,6 @@
 function StartUsingMicrophone(withRange)
 	if PLAYER_CONNECTED and (not CALL_CHANNEL or CALL_CHANNEL <= 0) and not RADIO_TALKING and not USING_MEGAPHONE then
-		Citizen.CreateThread(function()
+		CreateThread(function()
 			Logger:Info("VOIP", "Microphone On")
 			USING_MICROPHONE = true
 
@@ -17,7 +17,7 @@ function StartUsingMicrophone(withRange)
 				--TriggerServerEvent('VOIP:Server:Microphone:SetPlayerState', true)
 
 				MumbleSetTalkerProximity(withRange + 0.0)
-				Citizen.Wait(7500)
+				Wait(7500)
 			end
 
 			StopUsingMicrophone()

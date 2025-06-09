@@ -115,18 +115,18 @@ AddEventHandler("Characters:Client:Spawn", function()
 		end
 	)
 
-	Citizen.CreateThread(function()
+	CreateThread(function()
 		while LocalPlayer.state.loggedIn do
-			Citizen.Wait(5000)
+			Wait(5000)
 			if not _isCrouched and not LocalPlayer.state.drunkMovement then
 				Animations.PedFeatures:RequestFeaturesUpdate()
 			end
 		end
 	end)
 
-	Citizen.CreateThread(function()
+	CreateThread(function()
 		while LocalPlayer.state.loggedIn do
-			Citizen.Wait(5)
+			Wait(5)
 			DisableControlAction(0, 36, true)
 			if IsDisabledControlJustPressed(0, 36) then
 				Animations.PedFeatures:ToggleCrouch()
@@ -151,7 +151,7 @@ end)
 
 RegisterNetEvent("Characters:Client:Logout", function()
 	Animations.Emotes:ForceCancel()
-	Citizen.Wait(20)
+	Wait(20)
 
 	RemoveStateBagChangeHandler(pauseListener)
 	if LocalPlayer.state.anim then
@@ -178,7 +178,7 @@ function RegisterKeybinds()
 
 	Keybinds:Add("ragdoll", Config.RagdollKeybind, "keyboard", "Ragdoll - Toggle", function()
 		local time = 3500
-		Citizen.Wait(350)
+		Wait(350)
 		ClearPedSecondaryTask(LocalPlayer.state.ped)
 		SetPedToRagdoll(LocalPlayer.state.ped, time, time, 0, 0, 0, 0)
 	end)

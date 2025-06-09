@@ -174,7 +174,7 @@ AddEventHandler('Robbery:Client:ATM:StartHack', function(entity)
             onSuccess = function(data)
 
                 while LocalPlayer.state.doingAction do -- Apparently this is dumb
-                    Citizen.Wait(100)
+                    Wait(100)
                 end
 
                 DoATMProgress("Executing", (math.random(10) + 10) * 1000, false, function(status)
@@ -198,7 +198,7 @@ AddEventHandler('Robbery:Client:ATM:StartHack', function(entity)
                 Sounds.Play:Location(coords, 20.0, "house_alarm.ogg", 0.05)
 
                 while LocalPlayer.state.doingAction do -- Apparently this is dumb
-                    Citizen.Wait(100)
+                    Wait(100)
                 end
 
                 Callbacks:ServerCallback("Robbery:ATM:FailHackATM", {

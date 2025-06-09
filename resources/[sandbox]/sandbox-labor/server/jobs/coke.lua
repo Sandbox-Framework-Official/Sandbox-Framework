@@ -49,10 +49,10 @@ local function SpawnPeds(source, coords)
 		--TaskCombatPed(p, GetPlayerPed(source), 0, 16)
 
 		table.insert(peds, NetworkGetNetworkIdFromEntity(p))
-		Citizen.Wait(3)
+		Wait(3)
 	end
 
-	Citizen.Wait(1000)
+	Wait(1000)
 
 	return peds
 end

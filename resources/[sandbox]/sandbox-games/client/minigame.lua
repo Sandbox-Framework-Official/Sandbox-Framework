@@ -103,7 +103,7 @@ end
 function loadAnimDict(dict)
 	while not HasAnimDictLoaded(dict) do
 		RequestAnimDict(dict)
-		Citizen.Wait(5)
+		Wait(5)
 	end
 end
 
@@ -811,11 +811,11 @@ function _playGame(params, action)
 				},
 			})
 
-			Citizen.CreateThread(function()
+			CreateThread(function()
 				while isPlayingGame do
 					SetNuiFocus(true, params.needsMouse)
 					SetNuiFocusKeepInput(not params.needsMouse)
-					Citizen.Wait(1)
+					Wait(1)
 					if IsEntityDead(player) and not action.useWhileDead then
 						Minigame:Cancel()
 					end
@@ -833,14 +833,14 @@ function _doGameStart(player, action)
 	_runGameThread = true
 	LocalPlayer.state.doingAction = true
 
-	Citizen.CreateThread(function()
+	CreateThread(function()
 		while isPlayingGame do
 			_disableInput(player, action.controlDisables)
-			Citizen.Wait(1)
+			Wait(1)
 		end
 	end)
 
-	Citizen.CreateThread(function()
+	CreateThread(function()
 		while _runGameThread do
 			if isPlayingGame and action ~= nil then
 				if not isAnim then
@@ -888,7 +888,7 @@ function _doGameStart(player, action)
 					RequestModel(action.prop.model)
 
 					while not HasModelLoaded(GetHashKey(action.prop.model)) do
-						Citizen.Wait(0)
+						Wait(0)
 					end
 
 					local pCoords = GetOffsetFromEntityInWorldCoords(player, 0.0, 0.0, 0.0)
@@ -936,7 +936,7 @@ function _doGameStart(player, action)
 						RequestModel(action.propTwo.model)
 
 						while not HasModelLoaded(GetHashKey(action.propTwo.model)) do
-							Citizen.Wait(0)
+							Wait(0)
 						end
 
 						local pCoords = GetEntityCoords(player)
@@ -993,7 +993,7 @@ function _doGameStart(player, action)
 					Minigame:Cancel()
 				end
 			end
-			Citizen.Wait(0)
+			Wait(0)
 		end
 		_gameCleanup(action)
 	end)

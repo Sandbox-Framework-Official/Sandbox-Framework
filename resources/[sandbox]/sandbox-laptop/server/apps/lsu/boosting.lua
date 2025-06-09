@@ -459,7 +459,7 @@ AddEventHandler("Laptop:Server:RegisterCallbacks", function()
                         {}
                     )
 
-                    Citizen.CreateThread(function()
+                    CreateThread(function()
                         local team = team.ID
                         local location = data.location
 
@@ -469,7 +469,7 @@ AddEventHandler("Laptop:Server:RegisterCallbacks", function()
                                 TriggerClientEvent("EmergencyAlerts:Client:TrackerBlip", -1, "police", string.format("boosting-%s", team), string.format("[Police]: Class %s Boost (From %s)", _boosting[team].vehicleData.class, location), coords, 523, 6, 1.0, true, 155)
                             end
 
-                            Citizen.Wait(7000 + (_boosting[team].trackerDelay * 1000))
+                            Wait(7000 + (_boosting[team].trackerDelay * 1000))
                         end
                     end)
                 else
@@ -1194,8 +1194,8 @@ function SetupBoostingQueue()
     if _queueStarted then return; end
     _queueStarted = true
 
-    Citizen.CreateThread(function()
-        Citizen.Wait(BOOSTING_SERVER_START_WAIT)
+    CreateThread(function()
+        Wait(BOOSTING_SERVER_START_WAIT)
         Logger:Info("Boosting", "Boosting Contracts Can Now Be Rewarded")
 
         while true do
@@ -1236,7 +1236,7 @@ function SetupBoostingQueue()
                 end
             end
 
-            Citizen.Wait((1000 * 60) * math.random(BOOSTING_TIME_BETWEEN_MIN, BOOSTING_TIME_BETWEEN_MAX))
+            Wait((1000 * 60) * math.random(BOOSTING_TIME_BETWEEN_MIN, BOOSTING_TIME_BETWEEN_MAX))
         end
     end)
 end

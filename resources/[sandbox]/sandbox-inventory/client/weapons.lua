@@ -329,7 +329,7 @@ end)
 function loadAnimDict(dict)
 	while not HasAnimDictLoaded(dict) do
 		RequestAnimDict(dict)
-		Citizen.Wait(5)
+		Wait(5)
 	end
 end
 
@@ -342,7 +342,7 @@ local anims = {
 			local anim = "intro"
 			loadAnimDict(dict)
 			TaskPlayAnim(ped, dict, anim, 10.0, 2.3, -1, 49, 1, 0, 0, 0)
-			Citizen.Wait(600)
+			Wait(600)
 			SetCurrentPedWeapon(ped, GetHashKey("WEAPON_UNARMED"), true)
 			RemoveAllPedWeapons(ped)
 			ClearPedTasks(ped)
@@ -359,7 +359,7 @@ local anims = {
 			if hash ~= -538741184 then
 				loadAnimDict(dict)
 				TaskPlayAnim(ped, dict, anim, 10.0, 2.3, -1, 49, 1, 0, 0, 0)
-				Citizen.Wait(600)
+				Wait(600)
 
 				SetPedAmmoToDrop(ped, 0)
 				GiveWeaponToPed(ped, hash, 0, true, true)
@@ -413,12 +413,12 @@ local anims = {
 			local animLength = GetAnimDuration(dict, anim) * 1000
 			loadAnimDict(dict)
 			TaskPlayAnim(ped, dict, anim, 1.0, 1.0, -1, 50, 0, 0, 0, 0)
-			Citizen.Wait(animLength - 2200)
+			Wait(animLength - 2200)
 			SetCurrentPedWeapon(ped, GetHashKey("WEAPON_UNARMED"), true)
-			Citizen.Wait(300)
+			Wait(300)
 			RemoveAllPedWeapons(ped)
 			ClearPedTasks(ped)
-			Citizen.Wait(800)
+			Wait(800)
 			LocalPlayer.state.holstering = false
 		end,
 		TH = function(self, ped)
@@ -430,11 +430,11 @@ local anims = {
 
 			loadAnimDict(dict)
 			TaskPlayAnim(ped, dict, anim, 1.5, 1.5, -1, 49, 10, 0, 0, 0)
-			Citizen.Wait(900)
+			Wait(900)
 			SetCurrentPedWeapon(ped, GetHashKey("WEAPON_UNARMED"), true)
 			RemoveAllPedWeapons(ped)
 			StopAnimTask(ped, dict, anim, 1.0)
-			Citizen.Wait(500)
+			Wait(500)
 
 			LocalPlayer.state.holstering = false
 		end,
@@ -450,7 +450,7 @@ local anims = {
 				local animLength = GetAnimDuration(dict, anim) * 1000
 				loadAnimDict(dict)
 				TaskPlayAnim(ped, dict, anim, 1.0, 1.0, -1, 50, 0, 0, 0, 0)
-				Citizen.Wait(900)
+				Wait(900)
 
 				SetPedAmmoToDrop(ped, 0)
 				GiveWeaponToPed(ped, hash, 0, true, true)
@@ -491,10 +491,10 @@ local anims = {
 				SetCurrentPedWeapon(ped, hash, 0)
 			end
 
-			Citizen.Wait(500)
+			Wait(500)
 
 			ClearPedTasks(ped)
-			Citizen.Wait(1200)
+			Wait(1200)
 			LocalPlayer.state.holstering = false
 		end,
 		TH = function(self, ped, hash, ammoHash, ammo, clip, item, itemData)
@@ -507,7 +507,7 @@ local anims = {
 			RemoveAllPedWeapons(ped)
 			loadAnimDict(dict)
 			TaskPlayAnim(ped, dict, anim, 1.5, 1.5, -1, 49, 1.5, 0, 0, 0)
-			Citizen.Wait(1000)
+			Wait(1000)
 
 			SetPedAmmoToDrop(ped, 0)
 			GiveWeaponToPed(ped, hash, 0, true, true)
@@ -532,9 +532,9 @@ local anims = {
 			
 			SetCurrentPedWeapon(ped, hash, 1)
 
-			Citizen.Wait(200)
+			Wait(200)
 			StopAnimTask(ped, dict, anim, 1.0)
-			Citizen.Wait(600)
+			Wait(600)
 
 			LocalPlayer.state.holstering = false
 		end,
@@ -678,12 +678,12 @@ AddEventHandler("Proxy:Shared:RegisterReady", function()
 end)
 
 function WeaponsThread()
-	Citizen.CreateThread(function()
+	CreateThread(function()
 		while LocalPlayer.state.loggedIn do
 			if not _interacting then
 				UpdateAmmo(_equipped)
 			end
-			Citizen.Wait(20000)
+			Wait(20000)
 		end
 	end)
 
@@ -695,7 +695,7 @@ function WeaponsThread()
 		[-646649097] = true
 	}
 
-	Citizen.CreateThread(function()
+	CreateThread(function()
 		while LocalPlayer.state.loggedIn do
 			if IsPedArmed(LocalPlayer.state.ped, 6) then
 				local hasWeapon, hasHash = GetCurrentPedWeapon(LocalPlayer.state.ped, 1)
@@ -719,11 +719,11 @@ function WeaponsThread()
 				end
 			end
 
-			Citizen.Wait(500)
+			Wait(500)
 		end
 	end)
 
-	Citizen.CreateThread(function()
+	CreateThread(function()
 		while LocalPlayer.state.loggedIn do
 			if _equipped ~= nil then
 				if IsPedShooting(LocalPlayer.state.ped) and _equippedData.isThrowable then
@@ -753,7 +753,7 @@ function WeaponsThread()
 					end
 				end
 			end
-			Citizen.Wait(1)
+			Wait(1)
 		end
 	end)
 end
@@ -788,19 +788,19 @@ function UpdateAmmo(item, isDiff)
 end
 
 function RunDegenThread()
-	Citizen.CreateThread(function()
+	CreateThread(function()
 		while _equipped ~= nil do
 			local itemData = _items[_equipped.Name]
 			if itemData.durability ~= nil and (GetCloudTimeAsInt() - (_equipped?.MetaData?.CreateDate or GetCloudTimeAsInt()) >= itemData.durability) then
 				Weapons:UnequipIfEquippedNoAnim()
 			end
-			Citizen.Wait(10000)
+			Wait(10000)
 		end
 	end)
 end
 
 function DoHolsterBlockers()
-	Citizen.CreateThread(function()
+	CreateThread(function()
 		while LocalPlayer.state.holstering do
 			DisablePlayerFiring(PlayerPedId(), true)
 			DisableControlAction(0, 14, true)
@@ -817,7 +817,7 @@ function DoHolsterBlockers()
 			DisableControlAction(0, 142, true)
 			DisableControlAction(0, 261, true)
 			DisableControlAction(0, 262, true)
-			Citizen.Wait(1)
+			Wait(1)
 		end
 	end)
 end
@@ -853,12 +853,12 @@ end
 function StartParachuteThread()
 	if not _parachuteThread then
 		_parachuteThread = true
-		Citizen.CreateThread(function()
+		CreateThread(function()
 			while _parachuteThread and LocalPlayer.state.loggedIn do
-				Citizen.Wait(500)
+				Wait(500)
 
 				if GetPedParachuteState(LocalPlayer.state.ped) >= 2 then
-					Citizen.Wait(2500)
+					Wait(2500)
 					Callbacks:ServerCallback("Inventory:UsedParachute", {})
 					break
 				end
@@ -868,7 +868,7 @@ function StartParachuteThread()
 end
 
 RegisterNetEvent("Characters:Client:SetData", function()
-	Citizen.Wait(1000)
+	Wait(1000)
 	RunParachuteUpdate()
 end)
 
@@ -881,13 +881,13 @@ RegisterNetEvent("Characters:Client:Logout", function()
 end)
 
 RegisterNetEvent("Characters:Client:Spawn", function()
-	Citizen.Wait(1000)
+	Wait(1000)
 	Buffs:RegisterBuff("parachute", "parachute-box", "#A72929", -1, "permanent")
 end)
 
 local prevCoords = 0
 AddEventHandler("Weapons:Client:SmokeGrenade", function()
-	Citizen.CreateThread(function()
+	CreateThread(function()
 		local finalizingPosition = true
 		while finalizingPosition do
 			local outCoords = vector3(0, 0, 0)
@@ -923,10 +923,10 @@ local totalAfterShakeAmp = 0
 
 function DisableFiring(duration)
 	local finished = GetGameTimer() + duration
-	Citizen.CreateThread(function()
+	CreateThread(function()
 		while GetGameTimer() < finished do
 			DisablePlayerFiring(LocalPlayer.state.PlayerID, true)
-			Citizen.Wait(1)
+			Wait(1)
 		end
 	end)
 end
@@ -943,7 +943,7 @@ function DoFlashFx(shakeAmp, time)
 	Hud.Flashbang:Do(time, totalFlashShakeAmp)
 	Sounds.Loop:One("flashbang.ogg", 0.1 * totalFlashShakeAmp)
 
-	Citizen.Wait(time)
+	Wait(time)
 
 	flashTimersRunning -= 1
 	totalFlashShakeAmp -= shakeAmp
@@ -995,7 +995,7 @@ RegisterNetEvent("Weapons:Client:DoFlashFx", function(x, y, z, stunTime, afterTi
 
 		while result == 1 do
 			result, hit, endCoords, surfNorm, entityHit = GetShapeTestResult(handle)
-			Citizen.Wait(1)
+			Wait(1)
 		end
 
 

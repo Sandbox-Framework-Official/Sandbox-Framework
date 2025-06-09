@@ -254,14 +254,14 @@ RegisterNetEvent("Inventory:Client:DumpsterHideThread", function()
 	end
 	_dumpsterHideThreading = true
 
-	Citizen.CreateThread(function()
+	CreateThread(function()
 		-- Wait till this is synced from server
 		while not LocalPlayer.state.inDumpster do
-			Citizen.Wait(10)
+			Wait(10)
 		end
 
 		while LocalPlayer.state.inDumpster do
-			Citizen.Wait(5)
+			Wait(5)
 
 			Weapons:UnequipIfEquipped()
 

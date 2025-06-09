@@ -466,7 +466,7 @@ function RegisterCallbacks()
                         Vehicles.Owned:Seize(v.VIN, false)
                         v.Seized = false
                     end
-                    Citizen.Wait(100)
+                    Wait(100)
                 end
             end
             cb(vehicles, os.time())

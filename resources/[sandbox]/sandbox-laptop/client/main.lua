@@ -105,7 +105,7 @@ RegisterNetEvent("Laptop:Client:Open", OpenLaptop)
 
 AddEventHandler("Inventory:Client:ItemsLoaded", function()
 	while Laptop == nil do
-		Citizen.Wait(10)
+		Wait(10)
 	end
 	Laptop.Data:Set("items", Inventory.Items:GetData())
 end)
@@ -172,13 +172,13 @@ end)
 AddEventHandler("Characters:Client:Spawn", function()
 	_loggedIn = true
 
-	Citizen.CreateThread(function()
+	CreateThread(function()
 		while _loggedIn do
 			SendNUIMessage({
 				type = "SET_TIME",
 				data = GlobalState["Sync:Time"],
 			})
-			Citizen.Wait(15000)
+			Wait(15000)
 		end
 	end)
 end)

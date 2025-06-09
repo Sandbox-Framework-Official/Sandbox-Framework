@@ -108,17 +108,17 @@ function StartThreads()
 		{ console = true }
 	)
 
-	Citizen.CreateThread(function()
+	CreateThread(function()
 		while true do
 			local waitTime = math.random(15, 30)
-			Citizen.Wait(waitTime * 60000)
+			Wait(waitTime * 60000)
 			if not _weatherFrozen then
 				Sync:NextWeatherStage()
 			end
 		end
 	end)
 
-	Citizen.CreateThread(function()
+	CreateThread(function()
 		while true do
 			if not _timeFrozen then
 				_timeMinute = _timeMinute + 1
@@ -143,17 +143,17 @@ function StartThreads()
 
 				--print(string.format('Time: %02d:%02d', _timeHour, _timeMinute))
 			end
-			Citizen.Wait(8500) -- At this rate of 8500, an IN GAME DAY takes 3.4 hours to complete (mult by 0.0004 to calculate)
+			Wait(8500) -- At this rate of 8500, an IN GAME DAY takes 3.4 hours to complete (mult by 0.0004 to calculate)
 		end
 	end)
 
-	Citizen.CreateThread(function()
+	CreateThread(function()
 		while true do
 			GlobalState["Sync:Time"] = {
 				hour = _timeHour,
 				minute = _timeMinute,
 			}
-			Citizen.Wait(20000)
+			Wait(20000)
 		end
 	end)
 end

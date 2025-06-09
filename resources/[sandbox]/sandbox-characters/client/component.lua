@@ -43,7 +43,7 @@ CHARACTERS = {
 	Logout = function(self)
 		DoScreenFadeOut(500)
 		while IsScreenFadingOut() do
-			Citizen.Wait(1)
+			Wait(1)
 		end
 		Callbacks:ServerCallback("Characters:Logout", {}, function()
 			LocalPlayer.state.Char = nil
@@ -55,7 +55,7 @@ CHARACTERS = {
 			SendNUIMessage({
 				type = "APP_RESET",
 			})
-			Citizen.Wait(500)
+			Wait(500)
 			exports["sandbox-base"]:FetchComponent("Spawn"):Init()
 		end)
 	end,

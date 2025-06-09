@@ -235,21 +235,21 @@ LAPTOP.LSUnderground.Chopping = {
 function DoChoppingThings(veh)
 	local bones = GetValidBones(veh, _vehBones)
 
-	Citizen.CreateThread(function()
+	CreateThread(function()
 		while LocalPlayer.state.chopping ~= nil and DoesEntityExist(NetToVeh(LocalPlayer.state.chopping)) do
-			Citizen.Wait(100)
+			Wait(100)
 		end
 		LocalPlayer.state:set("chopping", nil, true)
 	end)
 
-	Citizen.CreateThread(function()
+	CreateThread(function()
 		while LocalPlayer.state.inChopZone ~= nil and LocalPlayer.state.chopping ~= nil do
 			bones = GetValidBones(veh, _vehBones)
-			Citizen.Wait(100)
+			Wait(100)
 		end
 	end)
 
-	Citizen.CreateThread(function()
+	CreateThread(function()
 		local keyBind = Keybinds:GetKey("primary_action")
 		local chopMessage = string.format("Press ~w~~r~[%s]~w~ to Chop Vehicle Part", keyBind)
 		local chopMessage = string.format("Press ~w~~r~[%s]~w~ to Scrap Vehicle", keyBind)
@@ -279,20 +279,20 @@ function DoChoppingThings(veh)
 						distance = distance,
 					}
 					_validVeh = veh
-					Citizen.Wait(1)
+					Wait(1)
 				else
 					_validBone = nil
 					if not _delay then
 						_validVeh = nil
 					end
-					Citizen.Wait(10)
+					Wait(10)
 				end
 			else
 				_validBone = nil
 				if not _delay then
 					_validVeh = nil
 				end
-				Citizen.Wait(250)
+				Wait(250)
 			end
 		end
 
@@ -450,7 +450,7 @@ AddEventHandler("Laptop:Client:LSUnderground:Chopping:StartChop", function(entit
 			if res then
 				while not NetworkHasControlOfEntity(entity.entity) do
 					NetworkRequestControlOfEntity(entity.entity)
-					Citizen.Wait(1)
+					Wait(1)
 				end
 				LocalPlayer.state:set("chopping", vNet, true)
 				DoChoppingThings(entity.entity)

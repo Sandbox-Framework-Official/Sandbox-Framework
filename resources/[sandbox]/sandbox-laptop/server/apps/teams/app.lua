@@ -507,9 +507,9 @@ function StartTeamsThread()
     if started then return; end
     started = true
 
-    Citizen.CreateThread(function()
+    CreateThread(function()
         while true do
-            Citizen.Wait(60 * 1000 * 0.5)
+            Wait(60 * 1000 * 0.5)
 
             for k, v in ipairs(_teamRequests) do
                 if v.expires <= os.time() then

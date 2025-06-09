@@ -13,7 +13,7 @@ function DoLockpick(data, base, cb)
 
 	Minigame.Play:RoundSkillbar(base + (0.2 * stageComplete), size, {
 		onSuccess = function()
-			Citizen.Wait(400)
+			Wait(400)
 
 			if stageComplete >= (data.stages or 3) then
 				stageComplete = 0
@@ -107,7 +107,7 @@ function DoCaptcha(passes, config, data, cb)
 			onSuccess = function(data)
 				if _capPass < passes then
 					_capPass += 1
-					Citizen.Wait(1500)
+					Wait(1500)
 					DoCaptcha(passes, config, data, cb)
 				else
 					cb(true, data)

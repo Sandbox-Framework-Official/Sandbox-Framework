@@ -97,7 +97,7 @@ AddEventHandler("Core:Shared:Ready", function()
 							end
 
 							TaskTurnPedToFaceEntity(LocalPlayer.state.ped, target.entity, 1.0)
-							Citizen.Wait(750)
+							Wait(750)
 
 							local repairLength = (installingPartData.time or 15) * quantity
 
@@ -216,7 +216,7 @@ AddEventHandler("Core:Shared:Ready", function()
 						end
 
 						TaskTurnPedToFaceEntity(LocalPlayer.state.ped, target.entity, 1.0)
-						Citizen.Wait(750)
+						Wait(750)
 
 						local repairLength = part.time or 25
 
@@ -314,7 +314,7 @@ AddEventHandler("Core:Shared:Ready", function()
 						end
 
 						TaskTurnPedToFaceEntity(LocalPlayer.state.ped, target.entity, 1.0)
-						Citizen.Wait(750)
+						Wait(750)
 
 						local repairLength = part.time or 25
 
@@ -413,7 +413,7 @@ AddEventHandler("Mechanic:Client:StartRegularRepair", function(entityData)
 		end
 
 		TaskTurnPedToFaceEntity(LocalPlayer.state.ped, entityData.entity, 1.0)
-		Citizen.Wait(750)
+		Wait(750)
 
 		local repairLength = 20
 		Animations.Emotes:Play("mechanic", false, repairLength * 1000, true)
@@ -456,7 +456,7 @@ AddEventHandler("Mechanic:Client:StartRegularRepair", function(entityData)
 	end
 end)
 
--- Citizen.CreateThread(function()
+-- CreateThread(function()
 --     local fridge = `v_res_fridgemoda`
 
 --     loadModel(fridge)
@@ -469,7 +469,7 @@ function loadModel(model)
 	if IsModelInCdimage(model) then
 		while not HasModelLoaded(model) do
 			RequestModel(model)
-			Citizen.Wait(5)
+			Wait(5)
 		end
 	end
 end
