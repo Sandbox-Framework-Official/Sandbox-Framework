@@ -12,7 +12,32 @@ local trunkOpen = false
 local _itemDefs = nil
 local _schems = {}
 
-function dropAnim(drop)
+local function PlayTrunkOpenAnim()
+    local playerPed = PlayerPedId()
+    RequestAnimDict('anim@heists@prison_heiststation@cop_reactions')
+
+    while not HasAnimDictLoaded('anim@heists@prison_heiststation@cop_reactions') do
+        Wait(100)
+    end
+
+    TaskPlayAnim(playerPed, 'anim@heists@prison_heiststation@cop_reactions', 'cop_b_idle', 3.0, 3.0, -1, 49, 0.0, 0, 0, 0)
+
+    RemoveAnimDict('anim@heists@prison_heiststation@cop_reactions')
+end
+
+local function PlayTrunkCloseAnim()
+	local playerPed = PlayerPedId()
+    RequestAnimDict('anim@heists@fleeca_bank@scope_out@return_case')
+
+    while not HasAnimDictLoaded('anim@heists@fleeca_bank@scope_out@return_case') do
+        Wait(100)
+    end
+
+    TaskPlayAnim( playerPed, 'anim@heists@fleeca_bank@scope_out@return_case', 'trevor_action', 2.0, 2.0, -1, 49, 0.25, 0.0, 0.0, GetEntityHeading(playerPed))
+    RemoveAnimDict('anim@heists@fleeca_bank@scope_out@return_case')
+end
+
+local function dropAnim(drop)
 	if LocalPlayer.state.doingAction then
 		return
 	end
@@ -384,8 +409,11 @@ INVENTORY = {
 			Inventory.Set.Player.Data.Open = false
 
 			if trunkOpen and trunkOpen > 0 then
+				PlayTrunkCloseAnim()
+				Wait(900)
 				Vehicles.Sync.Doors:Shut(trunkOpen, 5, false)
 				trunkOpen = false
+				ClearPedTasks(PlayerPedId())
 			end
 
 			if Inventory.Set.Secondary.Data.Open then
@@ -394,8 +422,11 @@ INVENTORY = {
 		end,
 		Secondary = function(self)
 			if trunkOpen and trunkOpen > 0 then
+				PlayTrunkCloseAnim()
+				Wait(900)
 				Vehicles.Sync.Doors:Shut(trunkOpen, 5, false)
 				trunkOpen = false
+				ClearPedTasks(PlayerPedId())
 			end
 
 			if Inventory.Set.Secondary.Data.Open then
@@ -816,6 +847,7 @@ AddEventHandler("Inventory:Client:Trunk", function(entity, data)
 			SetEntityAsMissionEntity(entity.entity, true, true)
 			--SetVehicleDoorOpen(entity.entity, 5, true, false)
 			Vehicles.Sync.Doors:Open(entity.entity, 5, false, false)
+			PlayTrunkOpenAnim()
 		end
 	end)
 end)
