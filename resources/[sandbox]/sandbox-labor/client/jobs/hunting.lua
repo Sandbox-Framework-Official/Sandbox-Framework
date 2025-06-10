@@ -189,9 +189,9 @@ RegisterNetEvent("Hunting:Client:Polys", function(c)
 	end
 
 	for k, v in pairs(_localConfig.Animals) do
-		Targeting:AddPedModel(v.Model, "knife-kitchen", {
+		Targeting:AddPedModel(v.Model, "utensils", {
 			{
-				icon = "rabbit-running",
+				icon = "paw",
 				text = string.format("Harvest %s", v.Name),
 				event = "Hunting:Client:Harvest",
 				minDist = 2.0,
@@ -215,7 +215,7 @@ RegisterNetEvent("Hunting:Client:Polys", function(c)
 				text = "Inspect Corpse",
 				event = "Hunting:Client:Inspect",
 				minDist = 2.0,
-				jobs = { "tow", "police" },
+				jobs = { "police" },
 				jobDuty = true,
 				data = v.ID,
 				isEnabled = function(data, entity)
@@ -304,7 +304,7 @@ AddEventHandler("Labor:Client:Setup", function()
 			event = "Hunting:Client:OpenShop",
 		},
 		{
-			icon = "ballot-check",
+			icon = "list",
 			text = "Check In",
 			event = "Hunting:Client:StartJob",
 			tempjob = "Hunting",
@@ -313,7 +313,7 @@ AddEventHandler("Labor:Client:Setup", function()
 			end,
 		},
 		{
-			icon = "ballot-check",
+			icon = "list",
 			text = "Finish Job",
 			event = "Hunting:Client:FinishJob",
 			tempjob = "Hunting",

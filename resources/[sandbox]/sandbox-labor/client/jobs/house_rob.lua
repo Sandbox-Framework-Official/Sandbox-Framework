@@ -7,12 +7,12 @@ local _isEntering = false
 
 
 local actionSpecifics = {
-    ['big_tv'] = { 'Unplugging TV', 45 },
+    big_tv = { 'Unplugging TV', 45 },
     tv = { 'Unplugging TV', 45 },
     microwave = { 'Unplugging Microwave', 30 },
     boombox = { 'Stealing Boombox', 15 },
     golfclubs = { 'Stealing Golf Clubs', 10 },
-    ['house_art'] = { 'Removing Painting', 25 },
+    house_art = { 'Removing Painting', 25 },
 }
 
 
@@ -52,7 +52,7 @@ AddEventHandler("Labor:Client:Setup", function()
                 return not hasValue(LocalPlayer.state.Character:GetData("States") or {}, "SCRIPT_HOUSE_ROBBERY") and LocalPlayer.state.onDuty ~= "police"
             end,
 		},
-	}, 'seal-question', 'WORLD_HUMAN_SMOKING')
+	}, 'circle-question', 'WORLD_HUMAN_SMOKING')
 
 	Callbacks:RegisterClientCallback("HouseRobbery:Lockpick", function(data, cb)
 		_lpStage = 0

@@ -134,14 +134,14 @@ AddEventHandler("Labor:Client:Setup", function()
 			end,
 		},
 		{
-			icon = "list-radio",
+			icon = "radio",
 			text = "View Offers",
 			event = "Vendor:Client:GetItems",
 			data = {
 				id = "CornerDealer",
 			}
 		},
-	}, "seal-question", "WORLD_HUMAN_SMOKING")
+	}, "circle-question", "WORLD_HUMAN_SMOKING")
 end)
 
 RegisterNetEvent("CornerDealing:Client:DoSequence", function(seqType, netId, arg2)

@@ -24,7 +24,7 @@ AddEventHandler("Labor:Client:Setup", function()
     if _queueLoc.coords == nil then return end
 	PedInteraction:Add("OxyRunner", `s_m_m_movspace_01`,  _queueLoc.coords, _queueLoc.heading, 25.0, {
 		{
-			icon = "tablets",
+			icon = "tablet",
 			text = "Want a Job to do?",
 			event = "OxyRun:Client:Enable",
             data = {},

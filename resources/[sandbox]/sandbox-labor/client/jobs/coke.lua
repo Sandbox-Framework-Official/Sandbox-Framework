@@ -118,7 +118,7 @@ AddEventHandler("Labor:Client:Setup", function()
 		100.0,
 		{
 			{
-				icon = "face-tongue-money",
+				icon = "money-bill",
 				text = "Let's Have Some Fun ($100,000)",
 				event = "Coke:Client:StartWork",
 				isEnabled = function()
@@ -145,7 +145,7 @@ AddEventHandler("Labor:Client:Setup", function()
 				end,
 			},
 		},
-		"block-question",
+		"circle-question",
 		false,
 		true,
 		{
