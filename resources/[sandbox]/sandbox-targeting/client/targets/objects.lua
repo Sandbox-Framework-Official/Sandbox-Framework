@@ -2,7 +2,7 @@ TARGETING.AddObject = function(self, modelHash, icon, menuArray, proximity)
     if not modelHash then return end
     if not proximity then proximity = 3 end
     if type(menuArray) ~= 'table' then menuArray = {} end
-    
+
     if targetableObjectModels[modelHash] then -- The object has already been added, so add these new menu items to the current menu
         local currentMenu = targetableObjectModels[modelHash].menu
         for k, v in ipairs(menuArray) do
@@ -19,7 +19,7 @@ TARGETING.AddObject = function(self, modelHash, icon, menuArray, proximity)
             proximity = proximity,
         }
     end
-    
+
 end
 
 TARGETING.RemoveObject = function(self, modelHash)
