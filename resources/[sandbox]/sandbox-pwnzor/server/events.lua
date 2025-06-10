@@ -233,7 +233,7 @@ local _blacklistedEvents = {
 }
 
 CreateThread(function()
-	GlobalState["BlacklistedVars"] = {
+	GlobalState.BlacklistedVars = {
 		"ESX",
 		"fESX",
 		"TiagoMenu",
@@ -253,7 +253,7 @@ CreateThread(function()
 	}
 end)
 
-for k, v in ipairs(_blacklistedEvents) do
+for _, v in ipairs(_blacklistedEvents) do
 	RegisterNetEvent(v)
 	AddEventHandler(v, function()
 		local src = source

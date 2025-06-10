@@ -1,6 +1,6 @@
-local Enabled = false -- Change this to enable client mod menu checks!
+local Enabled = true -- Change this to disable client mod menu checks!
 function CheckVariables()
-	for i, v in ipairs(GlobalState["BlacklistedVars"]) do
+	for _, v in ipairs(GlobalState.BlacklistedVars) do
 		if _G[v] ~= nil then
 			local reason = Config.Messages.ProhibitedVariables:gsub("{VARIABLE}", v)
 			Callbacks:ServerCallback("Pwnzor:Trigger", {
@@ -16,7 +16,7 @@ end
 
 if Enabled then
 	CreateThread(function()
-		while GlobalState["BlacklistedVars"] == nil do
+		while GlobalState.BlacklistedVars == nil do
 			Wait(1000)
 		end
 

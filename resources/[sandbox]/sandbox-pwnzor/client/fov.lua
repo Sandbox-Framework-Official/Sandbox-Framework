@@ -15,7 +15,7 @@ CreateThread(function()
 		if LocalPlayer.state.loggedIn and not LocalPlayer.state.inCCTVCam and not LocalPlayer.state.inHeliCam then
 			local ped = PlayerPedId()
 			local weapon = GetSelectedPedWeapon(ped)
-			
+
 			if (IsPedArmed(ped, 1) or IsPedArmed(ped, 2) or IsPedArmed(ped, 4)) and not WhitelistedWep[weapon] then
 				local CamFov = GetGameplayCamFov()
 				local CamFovCar = GetFinalRenderedCamFov()

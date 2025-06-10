@@ -24,28 +24,6 @@ AddEventHandler("Core:Shared:Ready", function()
 			RegisterEvents()
 			RegisterCommands()
 
-			-- Callbacks:ServerCallback("Commands:ValidateAdmin", {}, function(isAdmin)
-			-- 	if not isAdmin then
-			-- 		CreateThread(function()
-			-- 			while _r do
-			-- 				Wait(1)
-			-- 				local ped = PlayerPedId()
-			-- 				SetPedInfiniteAmmoClip(ped, false)
-			-- 				SetEntityInvincible(ped, false)
-			-- 				SetEntityCanBeDamaged(ped, true)
-			-- 				ResetEntityAlpha(ped)
-			-- 				local fallin = IsPedFalling(ped)
-			-- 				local ragg = IsPedRagdoll(ped)
-			-- 				local parac = GetPedParachuteState(ped)
-			-- 				if parac >= 0 or ragg or fallin then
-			-- 					SetEntityMaxSpeed(ped, 80.0)
-			-- 				else
-			-- 					SetEntityMaxSpeed(ped, 7.1)
-			-- 				end
-			-- 			end
-			-- 		end)
-			-- 	end
-			-- end)
 		end
 	end)
 end)
