@@ -1,18 +1,21 @@
 COMPONENTS.Fetch = {
-	_required = { "Source", "PlayerData", "All" },
+    _required = { "Source", "PlayerData", "CharacterSource", "All" },
 	_name = "base",
-	Source = function(self, source)
-		return COMPONENTS.Players[source]
-	end,
-	PlayerData = function(self, key, value)
-		for k, v in pairs(COMPONENTS.Players) do
-			if v:GetData(key) == value then
-				return v
-			end
-		end
+    Source = function(self, source)
+        return COMPONENTS.Players[source]
+    end,
+    CharacterSource = function(self, source)
+        return COMPONENTS.Players[source]:GetData("Character")
+    end,
+    PlayerData = function(self, key, value)
+        for k, v in pairs(COMPONENTS.Players) do
+            if v:GetData(key) == value then
+                return v
+            end
+        end
 
-		return nil
-	end,
+        return nil
+    end,
 	Website = function(self, type, id)
 		if type == "account" then
 			local data = COMPONENTS.WebAPI.GetMember:AccountID(id)
