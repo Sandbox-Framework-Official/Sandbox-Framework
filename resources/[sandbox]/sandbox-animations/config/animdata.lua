@@ -2357,7 +2357,6 @@ AnimData.Emotes = {
 		AdditionalOptions = {
 			AvailableToChar = true,
 			EmoteLoop = true,
-			EmoteLoop = true,
 		},
 	},
 	["warmth"] = {
@@ -3299,16 +3298,6 @@ AnimData.Emotes = {
 			AvailableToChar = true,
 			EmoteLoop = true,
 			EmoteMoving = false,
-		},
-	},
-
-	["jazzhands"] = {
-		AnDictionary = "anim@mp_player_intcelebrationfemale@jazz_hands",
-		AnAnim = "jazz_hands",
-		AdditionalOptions = {
-			AvailableToChar = true,
-			EmoteMoving = false,
-			EmoteDuration = 6000,
 		},
 	},
 
@@ -5125,18 +5114,6 @@ AnimData.PropEmotes = {
 			EmoteLoop = true,
 		},
 	},
-	["map"] = {
-		AnDictionary = "amb@world_human_tourist_map@male@base",
-		AnAnim = "base",
-		AdditionalOptions = {
-			AvailableToChar = true,
-			Prop = "prop_tourist_map_01",
-			PropBone = 28422,
-			PropPlacement = { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 },
-			EmoteMoving = true,
-			EmoteLoop = true,
-		},
-	},
 	["beg"] = {
 		AnDictionary = "amb@world_human_bum_freeway@male@base",
 		AnAnim = "base",
@@ -6925,9 +6902,10 @@ AnimData.DogEmotes = {
 			EmoteMoving = false,
 		},
 	},
-	-- ["dogjump"] = { "creatures@rottweiler@amb@sleep_in_kennel@", "sleep_in_kennel", "(dog) Jump over something",
-	-- AdditionalOptions = {
-	--     EmoteLoop     = true,
-	--     EmoteMoving   = false,
-	-- } },
+	["dogjump"] = { "creatures@rottweiler@amb@sleep_in_kennel@", "sleep_in_kennel", "(dog) Jump over something",
+	AdditionalOptions = {
+	    EmoteLoop     = true,
+	    EmoteMoving   = false,
+		},
+	},
 }

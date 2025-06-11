@@ -77,7 +77,7 @@ AddEventHandler("Core:Shared:Ready", function()
 		Startup()
 		TriggerEvent("MDT:Server:RegisterCallbacks")
 
-		Citizen.Wait(2500)
+		Wait(2500)
 		UpdateMDTJobsData()
 	end)
 end)

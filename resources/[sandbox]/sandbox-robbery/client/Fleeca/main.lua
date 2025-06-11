@@ -9,7 +9,7 @@ AddEventHandler("Robbery:Client:Setup", function()
 	_polys = {}
 
 	while GlobalState["FleecaRobberies"] == nil do
-		Citizen.Wait(10)
+		Wait(10)
 	end
 
 	for k, v in ipairs(GlobalState["FleecaRobberies"]) do
@@ -166,7 +166,7 @@ function OpenDoor(checkOrigin, door)
 		repeat
 			SetEntityHeading(obj, GetEntityHeading(obj) + door.step)
 			count = count + 1
-			Citizen.Wait(10)
+			Wait(10)
 		until count == 150
 	end
 end
@@ -180,7 +180,7 @@ function CloseDoor(checkOrigin, door)
 		repeat
 			SetEntityHeading(obj, GetEntityHeading(obj) - door.step)
 			count = count + 1
-			Citizen.Wait(10)
+			Wait(10)
 		until count == 150
 	end
 end

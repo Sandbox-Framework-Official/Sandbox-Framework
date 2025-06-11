@@ -149,7 +149,7 @@ function RegisterCallbacks()
 				)
 
 				if Config.Components.FOV.Options.KickPlayer then
-					Citizen.Wait(5000) -- need time to process screenshot
+					Wait(5000) -- need time to process screenshot
 
 					Punishment:Kick(src, string.format("Detected Modified FOV: %s", fov), "Pwnzor", true)
 				end

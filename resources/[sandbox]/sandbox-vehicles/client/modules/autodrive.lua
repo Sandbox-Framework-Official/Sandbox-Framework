@@ -23,7 +23,7 @@ AddEventHandler('Vehicles:Client:StartUp', function()
 
 	Interaction:RegisterMenu("veh_autodrive_danger", false, "skull-crossbones", function()
 		StopAutoPilot()
-		Citizen.Wait(1000)
+		Wait(1000)
 		StartAutoPilot(true)
 	end, function()
 		if VEHICLE_INSIDE and autopilotActive then
@@ -70,7 +70,7 @@ function StartAutoPilot(crazyMode)
 			)
 		end
 
-		Citizen.CreateThread(function()
+		CreateThread(function()
 			while autopilotActive do
 				if not VEHICLE_INSIDE then
 					autopilotActive = false
@@ -83,7 +83,7 @@ function StartAutoPilot(crazyMode)
 						break
 					end
 				end
-				Citizen.Wait(0)
+				Wait(0)
 			end
 
 			ClearPedTasks(LocalPlayer.state.ped)

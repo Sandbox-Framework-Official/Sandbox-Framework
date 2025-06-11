@@ -9,13 +9,13 @@ WhitelistedWep = {
 	[`weapon_taser`] = true,
 }
 
-Citizen.CreateThread(function()
-	Citizen.Wait(30000)
+CreateThread(function()
+	Wait(30000)
 	while true do
 		if LocalPlayer.state.loggedIn and not LocalPlayer.state.inCCTVCam and not LocalPlayer.state.inHeliCam then
 			local ped = PlayerPedId()
 			local weapon = GetSelectedPedWeapon(ped)
-			
+
 			if (IsPedArmed(ped, 1) or IsPedArmed(ped, 2) or IsPedArmed(ped, 4)) and not WhitelistedWep[weapon] then
 				local CamFov = GetGameplayCamFov()
 				local CamFovCar = GetFinalRenderedCamFov()
@@ -55,6 +55,6 @@ Citizen.CreateThread(function()
 				end
 			end
 		end
-		Citizen.Wait(15000)
+		Wait(15000)
 	end
 end)

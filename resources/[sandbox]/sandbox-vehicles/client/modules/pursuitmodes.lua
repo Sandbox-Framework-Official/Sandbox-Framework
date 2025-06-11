@@ -4,7 +4,7 @@ _inPursuitVehicleMode = 1
 _inPursuitVehicleMegaphone = false
 
 AddEventHandler("Characters:Client:Spawn", function()
-    Citizen.Wait(500)
+    Wait(500)
     Buffs:RegisterBuff("pursuit-modes", "gauge-circle-bolt", "#892020", -1, "permanent")
 end)
 

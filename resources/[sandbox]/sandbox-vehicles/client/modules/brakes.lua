@@ -9,13 +9,13 @@
 -- -- This event handler just sets the spawned variable to true, as it is used further down to allow
 -- -- the player checks thread to run.
 -- AddEventHandler("Characters:Client:Spawn", function()
--- 	Citizen.Wait(500)
+-- 	Wait(500)
 -- 	if not spawned then
 -- 		spawned = true
 -- 	end
 -- end)
 
--- Citizen.CreateThread(function()
+-- CreateThread(function()
 -- 	Wait(500)
 -- 	if debug then
 -- 		spawned = true
@@ -85,11 +85,11 @@
 
 -- -- This thread is responsible for running the check function, it also only runs 2 times
 -- -- a second to reduce native invocation.
--- Citizen.CreateThread(function()
+-- CreateThread(function()
 -- 	-- Here we wait until the player has actually spawned, if we don't then the decorator
 -- 	-- bugs out and doesn't register.
 -- 	while not spawned do
--- 		Citizen.Wait(100)
+-- 		Wait(100)
 -- 	end
 
 -- 	-- Register the custom decorator for the brake lights
@@ -98,16 +98,16 @@
 -- 	while true do
 -- 		ManagePlayerChecks()
 
--- 		Citizen.Wait(500)
+-- 		Wait(500)
 -- 	end
 -- end)
 
 -- -- This thread is responsible for displaying the brake lights
--- Citizen.CreateThread(function()
+-- CreateThread(function()
 -- 	while true do
 -- 		DisplayBrakeLights()
 
--- 		Citizen.Wait(0)
+-- 		Wait(0)
 -- 	end
 -- end)
 -- pepega

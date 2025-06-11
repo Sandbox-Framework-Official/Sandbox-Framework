@@ -1,7 +1,7 @@
 local enteringVehicle = false
 
 AddEventHandler("Vehicles:Client:CharacterLogin", function()
-	Citizen.CreateThread(function() -- Vehicle Events Thread
+	CreateThread(function() -- Vehicle Events Thread
 		while _characterLoaded do
 			GLOBAL_PED = PlayerPedId()
 			if VEHICLE_INSIDE then
@@ -97,7 +97,7 @@ AddEventHandler("Vehicles:Client:CharacterLogin", function()
 				end
 			end
 
-			Citizen.Wait(250)
+			Wait(250)
 		end
 	end)
 end)
@@ -109,7 +109,7 @@ AddEventHandler("Vehicles:Client:ExitVehicle", function(VEHICLE_INSIDE)
 end)
 
 AddEventHandler("Vehicles:Client:EnterVehicle", function(CurrentVehicle, CurrentSeat)
-	Citizen.CreateThread(function()
+	CreateThread(function()
 		local isSpeeding = false
 		_watchingSpeed = true
 		while _watchingSpeed do
@@ -123,7 +123,7 @@ AddEventHandler("Vehicles:Client:EnterVehicle", function(CurrentVehicle, Current
                 TriggerEvent('Vehicles:Client:Speeding', false, CurrentVehicle, CurrentSeat, CurrentSpeed)
             end
 
-			Citizen.Wait(100)
+			Wait(100)
 		end
 	end)
 end)

@@ -169,7 +169,7 @@ DAMAGE = {
         if LocalPlayer.state.isDead then
             DoScreenFadeOut(1000)
             while not IsScreenFadedOut() do
-                Citizen.Wait(10)
+                Wait(10)
             end
         end
 
@@ -208,9 +208,9 @@ DAMAGE = {
 		if veh == 0 then
 			--ClearPedTasksImmediately(player)
 		else
-			Citizen.Wait(300)
+			Wait(300)
 			TaskWarpPedIntoVehicle(player, veh, seat)
-			Citizen.Wait(300)
+			Wait(300)
 		end
 
         TriggerServerEvent("Damage:Server:Revived", wasMinor, fieldTreat)

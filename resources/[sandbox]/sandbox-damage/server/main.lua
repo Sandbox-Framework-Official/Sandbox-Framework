@@ -52,7 +52,7 @@ AddEventHandler("Core:Shared:Ready", function()
 					pState.isDeadTime = _deadCunts[sid].isDeadTime
 					pState.releaseTime = _deadCunts[sid].releaseTime
 
-					Citizen.Wait(100)
+					Wait(100)
 				end
 
 				if char:GetData("Damage") ~= nil then

@@ -17,7 +17,7 @@ function OpenControllerMenu()
     wheelMenu = Menu:Create('vehicle_wheels', 'Vehicle Wheels', function()
         wheelMenuOpen = true
 
-        Citizen.CreateThread(function()
+        CreateThread(function()
             while wheelMenuOpen do
                 if editedFrontCamber then
                     SetVehicleFrontCamber(EDITING_VEHICLE, editedFrontCamber)
@@ -26,11 +26,11 @@ function OpenControllerMenu()
                 if editedRearCamber then
                     SetVehicleRearCamber(EDITING_VEHICLE, editedRearCamber)
                 end
-                Citizen.Wait(0)
+                Wait(0)
             end
         end)
     end, function()
-        Citizen.Wait(100)
+        Wait(100)
         wheelMenu = false
         collectgarbage()
         wheelMenuOpen = false

@@ -48,7 +48,7 @@ function LoadModel(model)
 	RequestModel(model)
 	local attempts = 0
 	while not HasModelLoaded(model) and attempts < 10 do
-		Citizen.Wait(100)
+		Wait(100)
 		attempts += 1
 	end
 end
@@ -57,7 +57,7 @@ function LoadWeaponModel(weapon)
 	RequestWeaponAsset(weapon, 31, 0)
 	local attempts = 0
 	while not HasWeaponAssetLoaded(weapon) and attempts < 10 do
-		Citizen.Wait(100)
+		Wait(100)
 		attempts += 1
 	end
 end
@@ -67,7 +67,7 @@ function LoadComponentModel(attachment)
 	RequestModel(componentModel)
 	local attempts = 0
 	while not HasModelLoaded(componentModel) and attempts < 10 do
-		Citizen.Wait(100)
+		Wait(100)
 		attempts += 1
 	end
 end
@@ -139,7 +139,7 @@ end
 local _processing = {}
 function CreateBackObjects(tPed, id, props)
 	while Weapons == nil do
-		Citizen.Wait(1)
+		Wait(1)
 	end
 
 	if not LocalPlayer.state.loggedIn then
@@ -173,7 +173,7 @@ function CreateBackObjects(tPed, id, props)
 						local obj = CreateWeaponObject(wHash, 0, coords.x, coords.y, coords.z, false, 1.0, false)
 
 						while not DoesEntityExist(obj) do
-							Citizen.Wait(1)
+							Wait(1)
 						end
 
 						RequestWeaponHighDetailModel(obj)

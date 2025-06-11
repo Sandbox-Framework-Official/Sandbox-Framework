@@ -22,7 +22,7 @@ local _characterLoaded = true
 -- AddEventHandler("Characters:Client:Spawn", function()
 -- 	_characterLoaded = true
 
--- 	Citizen.CreateThread(function()
+-- 	CreateThread(function()
 -- 		while _characterLoaded do
 -- 			for obj in EnumerateObjects() do
 -- 				if _ghostedObjects[GetEntityModel(obj)] then
@@ -31,7 +31,7 @@ local _characterLoaded = true
 -- 					end
 -- 				end
 -- 			end
--- 			Citizen.Wait(500)
+-- 			Wait(500)
 -- 		end
 -- 	end)
 -- end)

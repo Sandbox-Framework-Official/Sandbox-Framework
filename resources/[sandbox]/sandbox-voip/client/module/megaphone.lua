@@ -1,6 +1,6 @@
 function StartUsingMegaphone(vehAnim)
 	if PLAYER_CONNECTED and (not CALL_CHANNEL or CALL_CHANNEL <= 0) and not RADIO_TALKING and not USING_MICROPHONE then
-		Citizen.CreateThread(function()
+		CreateThread(function()
 			Logger:Info("VOIP", "Megaphone On")
 			USING_MEGAPHONE = true
 			if vehAnim then
@@ -19,7 +19,7 @@ function StartUsingMegaphone(vehAnim)
 				TriggerServerEvent("VOIP:Server:Megaphone:SetPlayerState", true)
 
 				MumbleSetTalkerProximity(VOIP_CONFIG.MegaphoneRange + 0.0)
-				Citizen.Wait(7500)
+				Wait(7500)
 			end
 
 			StopUsingMegaphone()
@@ -55,7 +55,7 @@ RegisterNetEvent("VOIP:Client:Megaphone:Use", function(vehAnim)
 end)
 
 RegisterNetEvent("Characters:Client:SetData", function()
-	Citizen.Wait(1000)
+	Wait(1000)
 	if LocalPlayer.state.loggedIn and USING_MEGAPHONE then
 		if not CheckCharacterHasMegaphone() then
 			StopUsingMegaphone()

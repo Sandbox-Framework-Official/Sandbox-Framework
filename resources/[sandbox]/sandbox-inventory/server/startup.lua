@@ -67,8 +67,8 @@ function UpdateDatabaseItems()
 
 	-- MySQL.transaction.await(queries)
 
-	for k, v in pairs(_itemsSource) do
-		for k2, v2 in ipairs(v) do
+	for _, v in pairs(_itemsSource) do
+		for _, v2 in ipairs(v) do
 			itemsDatabase[v2.name] = v2
 		end
 	end
@@ -77,7 +77,7 @@ end
 function LoadItemsFromDb()
 	local iDb = MySQL.query.await("SELECT * FROM item_template WHERE name IS NOT NULL", {})
 
-	for k, v in ipairs(iDb) do
+	for _, v in ipairs(iDb) do
 		if v.isStackable == 0 then
 			v.isStackable = false
 		end
@@ -114,7 +114,7 @@ function LoadItemsFromDb()
 		_dbItems[v.name] = v
 	end
 
-	for k, v in pairs(itemsDatabase) do
+	for _, v in pairs(itemsDatabase) do
 		SetupItemUses(v)
 	end
 
@@ -155,7 +155,7 @@ end
 
 function countTable(t)
 	local c = 0
-	for k, v in pairs(t) do
+	for _, _ in pairs(t) do
 		c += 1
 	end
 	return c
@@ -166,14 +166,14 @@ function ClearBrokenItems()
 		return
 	end
 	_started = true
-	
+
 	local d = MySQL.query.await("DELETE FROM inventory WHERE expiryDate < ? AND expiryDate >= 0", { os.time() })
 	Logger:Info("Inventory", string.format("Cleaned Up ^2%s^7 Degraded Items", d.affectedRows))
 	d = nil
-	
-	Citizen.CreateThread(function()
+
+	CreateThread(function()
 		while _started do
-			Citizen.Wait((1000 * 60) * 30)
+			Wait((1000 * 60) * 30)
 			MySQL.query("DELETE FROM inventory WHERE expiryDate < ? AND expiryDate >= 0", { os.time() }, function(d)
 				Logger:Info("Inventory", string.format("Cleaned Up ^2%s^7 Degraded Items", d.affectedRows))
 			end)
@@ -183,7 +183,7 @@ end
 
 function SetupGarbage()
 	if _trashCans then
-		for storageId, storage in ipairs(_trashCans) do
+		for _, storage in ipairs(_trashCans) do
 			INVENTORY.Poly:Create(storage)
 		end
 	end
@@ -278,11 +278,11 @@ function SetupItemUses(itemData)
 			if itemData.gangChain ~= nil then
 				if itemData.gangChain ~= char:GetData("GangChain") then
 					TriggerClientEvent("Ped:Client:ChainAnim", source)
-					Citizen.Wait(3000)
+					Wait(3000)
 					char:SetData("GangChain", itemData.gangChain)
 				else
 					TriggerClientEvent("Ped:Client:ChainAnim", source)
-					Citizen.Wait(3000)
+					Wait(3000)
 					char:SetData("GangChain", "NONE")
 				end
 			end
@@ -321,7 +321,7 @@ end
 function LoadItems()
 	local c = 0
 	for _, its in pairs(_itemsSource) do
-		for k, v in ipairs(its) do
+		for _, v in ipairs(its) do
 			c = c + 1
 			itemClasses[v.type] = itemClasses[v.type] or {}
 			table.insert(itemClasses[v.type], v.name)
@@ -338,7 +338,7 @@ function LoadItems()
 end
 
 function LoadEntityTypes()
-	for k, v in ipairs(_entityTypes) do
+	for _, v in ipairs(_entityTypes) do
 		LoadedEntitys[tonumber(v.id)] = v
 	end
 	Logger:Trace("Inventory", string.format("Loaded ^2%s^7 Inventory Entity Types", #_entityTypes))
@@ -349,8 +349,8 @@ storeBankAccounts = {}
 pendingShopDeposits = {}
 local _startingPendingDepositThread = false
 function LoadShops()
-	Citizen.CreateThread(function()
-		Citizen.Wait(10000)
+	CreateThread(function()
+		Wait(10000)
 
 		local f = Banking.Accounts:GetOrganization("dgang")
 
@@ -366,12 +366,12 @@ function LoadShops()
 			shopLocations[string.format("shop:%s", id)] = v
 		end
 
-		for k, v in pairs(_entityTypes) do
+		for _, v in pairs(_entityTypes) do
 			storeBankAccounts[v.id] = f.Account
 		end
 
 		local t = MySQL.rawExecute.await("SELECT shop, bank FROM shop_bank_accounts")
-		for k, v in ipairs(t) do
+		for _, v in ipairs(t) do
 			storeBankAccounts[v.shop] = v.bank
 		end
 
@@ -380,9 +380,9 @@ function LoadShops()
 
 	if not _startingPendingDepositThread then
 		_startingPendingDepositThread = true
-		Citizen.CreateThread(function()
+		CreateThread(function()
 			while true do
-				Citizen.Wait(1000 * 60 * 60)
+				Wait(1000 * 60 * 60)
 
 				for k, v in pairs(pendingShopDeposits) do
 					if v.tax then

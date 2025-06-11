@@ -26,7 +26,7 @@ local function SpawnOres()
 		for k, v in ipairs(_nodes) do
 			RequestModel(v.ore.object)
 			while not HasModelLoaded(v.ore.object) do
-				Citizen.Wait(5)
+				Wait(5)
 			end
 
 			local o = CreateObject(v.ore.object, v.location.x, v.location.y, v.location.z - 1.4, false, true, false)
@@ -164,7 +164,7 @@ AddEventHandler("Labor:Client:Setup", function()
 
 	PedInteraction:Add("MiningJob", `s_m_y_construct_02`, vector3(2741.874, 2791.691, 34.214), 155.045, 25.0, {
 		{
-			icon = "face-tongue-money",
+			icon = "money-bill",
 			text = "Sell Crushed Stone ($3/per)",
 			event = "Mining:Client:SellStone",
 		},
@@ -201,13 +201,13 @@ RegisterNetEvent("Mining:Client:OnDuty", function(joiner, time)
 	eventHandlers["actions"] = RegisterNetEvent(string.format("Mining:Client:%s:Action", joiner), function(ent, data)
 		attempt = 0
 		if data.luck <= 10 then
-			Citizen.CreateThread(function()
+			CreateThread(function()
 				local p = promise.new()
 				while attempt < 3 do
 					local p2 = promise.new()
 					Minigame.Play:RoundSkillbar((data?.ore?.factor or 0.75) * (data?.ore?.scale or 1.15), (data?.ore?.size or 6) - attempt, {
 						onSuccess = function()
-							Citizen.Wait(400)
+							Wait(400)
 							attempt += 1
 							p2:resolve(true)
 

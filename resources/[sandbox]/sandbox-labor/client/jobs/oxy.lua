@@ -18,13 +18,13 @@ end)
 
 AddEventHandler("Labor:Client:Setup", function()
     while _queueLoc == nil do
-        Citizen.Wait(10)
+        Wait(10)
     end
 
     if _queueLoc.coords == nil then return end
 	PedInteraction:Add("OxyRunner", `s_m_m_movspace_01`,  _queueLoc.coords, _queueLoc.heading, 25.0, {
 		{
-			icon = "tablets",
+			icon = "tablet",
 			text = "Want a Job to do?",
 			event = "OxyRun:Client:Enable",
             data = {},
@@ -50,7 +50,7 @@ AddEventHandler("Labor:Client:Setup", function()
                 print('failed to load ped model, please report this: ' .. data.ped)
                 return cb(false)
             end
-            Citizen.Wait(10)
+            Wait(10)
             timeout += 10
         end
 
@@ -77,7 +77,7 @@ AddEventHandler("Labor:Client:Setup", function()
                     true
                 )
     
-                Citizen.CreateThread(function()
+                CreateThread(function()
                     local dist = #(_l.coords - GetEntityCoords(vehicle))
                     
                     local arrived = false
@@ -90,14 +90,14 @@ AddEventHandler("Labor:Client:Setup", function()
                     end)
 
                     while dist > 15.0 and _l ~= nil and vehicle and DoesEntityExist(vehicle) and not forceEnd do
-                        Citizen.Wait(100)
+                        Wait(100)
                         if _l ~= nil then
                             dist = #(_l.coords - GetEntityCoords(vehicle))
                         end
                     end
                     arrived = true
     
-                    Citizen.Wait(25000)
+                    Wait(25000)
                     if forceEnd or _psychoShit ~= nil and _psychoShit.veh == VehToNet(vehicle) and not _fuckedOff then
                         _fuckedOff = true
                         TaskVehicleDriveWander(NetToPed(_psychoShit.ped), NetToVeh(_psychoShit.veh), 20.0, 786603)
@@ -226,7 +226,7 @@ RegisterNetEvent("OxyRun:Client:OnDuty", function(joiner, time)
         _blip = Blips:Add("OxyRun", "Oxy Pickup", { x = pu.coords.x, y = pu.coords.y, z = pu.coords.z }, 51, 64, 0.9)
         Polyzone.Create:Box("OxyPickup", pu.coords, pu.length, pu.width, pu.options)
 
-        Citizen.CreateThread(function()
+        CreateThread(function()
             local ending = false
             while _working and _v ~= nil do
                 if not ending then
@@ -238,7 +238,7 @@ RegisterNetEvent("OxyRun:Client:OnDuty", function(joiner, time)
                         end
                     end
                 end
-                Citizen.Wait(10)
+                Wait(10)
             end
         end)
 	end)
@@ -269,13 +269,13 @@ RegisterNetEvent("OxyRun:Client:OnDuty", function(joiner, time)
 
 		Polyzone.Create:Circle("OxySale", _l.coords, _l.radius, _l.options)
 
-        Citizen.CreateThread(function()
+        CreateThread(function()
             while _working and _state == 4 do
                 local dist = #(vector3(LocalPlayer.state.myPos.x, LocalPlayer.state.myPos.y, LocalPlayer.state.myPos.z) - _l.coords)
                 if dist <= 10.0 then
                     Callbacks:ServerCallback("OxyRun:EnteredArea")
                 end
-                Citizen.Wait(10 * dist)
+                Wait(10 * dist)
             end
         end)
 	end)
@@ -307,7 +307,7 @@ RegisterNetEvent("OxyRun:Client:OnDuty", function(joiner, time)
                 TaskPlayAnim( LocalPlayer.state.ped, "mp_safehouselost@", "package_dropoff", 8.0, 1.0, -1, 16, 0, 0, 0, 0 )  
             end
 
-            Citizen.Wait(8000)
+            Wait(8000)
 
             _fuckedOff = true
             TaskVehicleDriveWander(NetToPed(_psychoShit.ped), NetToVeh(_psychoShit.veh), 20.0, 786603)

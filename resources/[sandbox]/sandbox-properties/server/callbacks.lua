@@ -47,7 +47,7 @@ function RegisterCallbacks()
 						)
 					end
 
-					Citizen.Wait(10)
+					Wait(10)
 				end
 			end
 			cb(true)

@@ -53,7 +53,7 @@ RegisterNetEvent("UI:Client:Reset", function(manual)
 	TriggerEvent("UI:Client:ResetFinished", manual)
 
 	if manual then
-		Citizen.Wait(2500)
+		Wait(2500)
 		Hud:Show()
 		if Phone:IsOpen() or hasValue(LocalPlayer.state.Character:GetData("States"), "GPS") then
 			DisplayRadar(true)

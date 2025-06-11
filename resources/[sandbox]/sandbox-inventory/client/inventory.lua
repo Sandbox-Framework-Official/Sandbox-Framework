@@ -12,7 +12,32 @@ local trunkOpen = false
 local _itemDefs = nil
 local _schems = {}
 
-function dropAnim(drop)
+local function PlayTrunkOpenAnim()
+    local playerPed = PlayerPedId()
+    RequestAnimDict('anim@heists@prison_heiststation@cop_reactions')
+
+    while not HasAnimDictLoaded('anim@heists@prison_heiststation@cop_reactions') do
+        Wait(100)
+    end
+
+    TaskPlayAnim(playerPed, 'anim@heists@prison_heiststation@cop_reactions', 'cop_b_idle', 3.0, 3.0, -1, 49, 0.0, 0, 0, 0)
+
+    RemoveAnimDict('anim@heists@prison_heiststation@cop_reactions')
+end
+
+local function PlayTrunkCloseAnim()
+	local playerPed = PlayerPedId()
+    RequestAnimDict('anim@heists@fleeca_bank@scope_out@return_case')
+
+    while not HasAnimDictLoaded('anim@heists@fleeca_bank@scope_out@return_case') do
+        Wait(100)
+    end
+
+    TaskPlayAnim( playerPed, 'anim@heists@fleeca_bank@scope_out@return_case', 'trevor_action', 2.0, 2.0, -1, 49, 0.25, 0.0, 0.0, GetEntityHeading(playerPed))
+    RemoveAnimDict('anim@heists@fleeca_bank@scope_out@return_case')
+end
+
+local function dropAnim(drop)
 	if LocalPlayer.state.doingAction then
 		return
 	end
@@ -43,20 +68,20 @@ local function DoItemLoad(items)
 		type = "ITEMS_UNLOADED",
 		data = {},
 	})
-	Citizen.Wait(100)
+	Wait(100)
 	SendNUIMessage({
 		type = "RESET_ITEMS",
 		data = {},
 	})
 
-	for k, v in pairs(_itemsSource) do
-		for k2, v2 in ipairs(v) do
+	for _, v in pairs(_itemsSource) do
+		for _, v2 in ipairs(v) do
 			_items[v2.name] = v2
 		end
 	end
 
 	if items ~= nil then
-		for k, v in pairs(items) do
+		for _, v in pairs(items) do
 			_items[v.name] = v
 		end
 	end
@@ -236,9 +261,9 @@ RegisterNetEvent("Inventory:Client:ReceiveReload", function(items)
 end)
 
 function startCd()
-	Citizen.CreateThread(function()
+	CreateThread(function()
 		_timedCd = true
-		Citizen.Wait(1000)
+		Wait(1000)
 		_timedCd = false
 	end)
 end
@@ -290,14 +315,14 @@ RegisterNetEvent("Inventory:Client:Open", function(inventory, inventory2)
 
 			if inventory2 ~= nil then
 				Inventory.Set.Secondary:Inventory(inventory2)
-			
+
 				SendNUIMessage({
 					type = "SET_MODE",
 					data = {
 						mode = "inventory",
 					},
 				})
-				
+
 				Inventory.Set.Secondary.Data.Open = true
 				Inventory.Open:Secondary()
 			else
@@ -309,10 +334,10 @@ RegisterNetEvent("Inventory:Client:Open", function(inventory, inventory2)
 			})
 			SetNuiFocus(true, true)
 		end
-	
-		Citizen.CreateThread(function()
+
+		CreateThread(function()
 			while LocalPlayer.state.inventoryOpen do
-				Citizen.Wait(50)
+				Wait(50)
 			end
 			TriggerServerEvent("Inventory:server:closePlayerInventory", LocalPlayer.state.Character:GetData("SID"))
 		end)
@@ -384,8 +409,11 @@ INVENTORY = {
 			Inventory.Set.Player.Data.Open = false
 
 			if trunkOpen and trunkOpen > 0 then
+				PlayTrunkCloseAnim()
+				Wait(900)
 				Vehicles.Sync.Doors:Shut(trunkOpen, 5, false)
 				trunkOpen = false
+				ClearPedTasks(PlayerPedId())
 			end
 
 			if Inventory.Set.Secondary.Data.Open then
@@ -394,8 +422,11 @@ INVENTORY = {
 		end,
 		Secondary = function(self)
 			if trunkOpen and trunkOpen > 0 then
+				PlayTrunkCloseAnim()
+				Wait(900)
 				Vehicles.Sync.Doors:Shut(trunkOpen, 5, false)
 				trunkOpen = false
+				ClearPedTasks(PlayerPedId())
 			end
 
 			if Inventory.Set.Secondary.Data.Open then
@@ -497,7 +528,7 @@ INVENTORY = {
 						_items[v.Name].durability == nil
 						or not _items[v.Name].isDestroyed
 						or (((v.CreateDate or 0) + _items[v.Name].durability) >= GetCloudTimeAsInt())
-							
+
 					) then
 						return v
 					end
@@ -517,7 +548,7 @@ INVENTORY = {
 				return counts
 			end
 
-			for k, v in ipairs(_cachedInventory.inventory) do
+			for _, v in ipairs(_cachedInventory.inventory) do
 				if _items[v.Name] then
 					if
 						_items[v.Name].durability == nil
@@ -525,7 +556,7 @@ INVENTORY = {
 						or (((v.CreateDate or 0) + _items[v.Name].durability) >= GetCloudTimeAsInt())
 					then
 						local itemData = Inventory.Items:GetData(v.Name)
-	
+
 						if bundleWeapons and itemData?.weapon then
 							counts[itemData?.weapon] = (counts[itemData?.weapon] or 0) + v.Count
 						end
@@ -543,7 +574,7 @@ INVENTORY = {
 				return counts
 			end
 
-			for k, v in ipairs(_cachedInventory.inventory) do
+			for _, v in ipairs(_cachedInventory.inventory) do
 				if _items[v.Name] ~= nil then
 					if
 						_items[v.Name].durability == nil
@@ -592,7 +623,7 @@ INVENTORY = {
 				return Inventory.Items:Has(item, count)
 			end,
 			HasItems = function(self, items)
-				for k, v in ipairs(items) do
+				for _, v in ipairs(items) do
 					if not Inventory.Items:Has(v.item, v.count, true) then
 						return false
 					end
@@ -600,7 +631,7 @@ INVENTORY = {
 				return true
 			end,
 			HasAnyItems = function(self, items)
-				for k, v in ipairs(items) do
+				for _, v in ipairs(items) do
 					if Inventory.Items:Has(v.item, v.count) then
 						return true
 					end
@@ -690,13 +721,13 @@ INVENTORY = {
 	},
 	UpdateCachedMD = function(self, slot, md, triggeredKey)
 		if _cachedInventory and _cachedInventory.inventory then
-			for k, v in ipairs(_cachedInventory.inventory) do
+			for _, v in ipairs(_cachedInventory.inventory) do
 				if v.Slot == slot then
 					v.MetaData = md
 
 					local itemData = _items[v.Name]
 					if WEAPON_PROPS[itemData?.weapon or v.name] and triggeredKey == "WeaponComponents" then
-						
+
 					end
 
 					return
@@ -816,6 +847,7 @@ AddEventHandler("Inventory:Client:Trunk", function(entity, data)
 			SetEntityAsMissionEntity(entity.entity, true, true)
 			--SetVehicleDoorOpen(entity.entity, 5, true, false)
 			Vehicles.Sync.Doors:Open(entity.entity, 5, false, false)
+			PlayTrunkOpenAnim()
 		end
 	end)
 end)
@@ -1069,7 +1101,7 @@ RegisterNetEvent("Inventory:Client:BasicShop:Set", function(shops)
 				end,
 			}
 		}
-	
+
 		if v.job == nil and LocalPlayer.state.Character ~= nil and v.owner == LocalPlayer.state.Character:GetData("SID") then
 			table.insert(menus, {
 				icon = "sack-dollar",
@@ -1123,7 +1155,7 @@ RegisterNetEvent("Inventory:Client:BasicShop:Set", function(shops)
 				})
 			end
 		end
-		
+
 		PedInteraction:Add(
 			"player-shop-" .. v.id,
 			GetHashKey(v.ped_model or 'S_F_Y_SweatShop_01'),

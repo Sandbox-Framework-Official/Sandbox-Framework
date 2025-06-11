@@ -170,7 +170,7 @@ end)
 
 RegisterNetEvent("Apartment:Client:InnerStuff", function(aptId, unit, wakeUp)
 	while GlobalState[string.format("%s:Apartment", LocalPlayer.state.ID)] == nil do
-		Citizen.Wait(10)
+		Wait(10)
 		print("Interior Stuff Waiting, This Shouldn't Spam")
 	end
 	
@@ -266,7 +266,7 @@ RegisterNetEvent("Apartment:Client:InnerStuff", function(aptId, unit, wakeUp)
 	)
 
 	Targeting.Zones:Refresh()
-	Citizen.Wait(1000)
+	Wait(1000)
 	Sync:Stop(1)
 end)
 
@@ -357,13 +357,13 @@ _APTS = {
 
 				DoScreenFadeOut(1000)
 				while not IsScreenFadedOut() do
-					Citizen.Wait(10)
+					Wait(10)
 				end
 
 				local p = GlobalState[string.format("Apartment:%s", s)]
 
 				FreezeEntityPosition(PlayerPedId(), true)
-				Citizen.Wait(50)
+				Wait(50)
 				SetEntityCoords(
 					PlayerPedId(),
 					p.interior.spawn.x,
@@ -374,19 +374,19 @@ _APTS = {
 					0,
 					false
 				)
-				Citizen.Wait(100)
+				Wait(100)
 				SetEntityHeading(PlayerPedId(), p.interior.spawn.h)
 
 				local time = GetGameTimer()
 				while (not HasCollisionLoadedAroundEntity(PlayerPedId()) and (GetGameTimer() - time) < 10000) do
-					Citizen.Wait(100)
+					Wait(100)
 				end
 
 				FreezeEntityPosition(PlayerPedId(), false)
 
 				DoScreenFadeIn(1000)
 				while not IsScreenFadedIn() do
-					Citizen.Wait(10)
+					Wait(10)
 				end
 			end
 		end)
@@ -401,17 +401,17 @@ _APTS = {
 		Callbacks:ServerCallback("Apartment:Exit", {}, function()
 			DoScreenFadeOut(1000)
 			while not IsScreenFadedOut() do
-				Citizen.Wait(10)
+				Wait(10)
 			end
 
 			TriggerEvent("Interiors:Exit")
 			Sync:Start()
 
 			Sounds.Play:One("door_close.ogg", 0.3)
-			Citizen.Wait(200)
+			Wait(200)
 
 			SetEntityCoords(PlayerPedId(), p.coords.x, p.coords.y, p.coords.z, 0, 0, 0, false)
-			Citizen.Wait(100)
+			Wait(100)
 			SetEntityHeading(PlayerPedId(), p.heading)
 
 			for k, v in pairs(p.interior.locations) do
@@ -422,7 +422,7 @@ _APTS = {
 
 			DoScreenFadeIn(1000)
 			while not IsScreenFadedIn() do
-				Citizen.Wait(10)
+				Wait(10)
 			end
 		end)
 	end,

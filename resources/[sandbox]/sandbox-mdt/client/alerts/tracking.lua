@@ -11,7 +11,7 @@ _emergencyMembersLocations = {}
 
 RegisterNetEvent("Job:Client:DutyChanged", function(state)
 	if state and _trackedJobs[state] then
-		Citizen.CreateThread(function()
+		CreateThread(function()
 			local mySID = LocalPlayer.state.Character:GetData("SID")
 			Logger:Trace("Tracking", "Start Emergency Tracking")
 			while
@@ -20,7 +20,7 @@ RegisterNetEvent("Job:Client:DutyChanged", function(state)
 				and _trackedJobs[LocalPlayer.state.onDuty]
 				and not LocalPlayer.state.trackerDisabled
 			do
-				Citizen.Wait(1000)
+				Wait(1000)
 				for k, v in pairs(_emergencyMembersData) do
 					if v.SID ~= mySID and v.Job and _trackedJobs[v.Job] and _emergencyMembersLocations[k] then
 						local tCoords = _emergencyMembersLocations[k]

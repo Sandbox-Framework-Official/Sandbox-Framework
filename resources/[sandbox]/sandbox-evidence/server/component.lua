@@ -72,9 +72,9 @@ function StartDeletionThread()
 	if not _deletionThead then
 		_deletionThead = true
 
-		Citizen.CreateThread(function()
+		CreateThread(function()
 			while true do
-				Citizen.Wait((60 * 1000) * 30)
+				Wait((60 * 1000) * 30)
 
 				if #EVIDENCE_CACHE > 0 then
 					local removed = 0

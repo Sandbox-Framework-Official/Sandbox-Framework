@@ -1,9 +1,9 @@
 local memberCoords = {}
 
 function StartAETrackingThreads()
-    Citizen.CreateThread(function()
+    CreateThread(function()
         while true do
-            Citizen.Wait(3000)
+            Wait(3000)
             for k, v in pairs(emergencyAlertsData) do
                 if v ~= nil and v.Source and GetPlayerEndpoint(v.Source) then
                     if not v.TrackerDisabled then

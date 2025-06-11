@@ -117,7 +117,7 @@ AddEventHandler("Casino:Server:Startup", function()
                         if not canHaveTriple or slotValues[reel3] == "7" then
                             while slotValues[reel3] == slotValues[reel2] do
                                 reel3 = Utils:WeightedRandom(slotRandom)
-                                Citizen.Wait(5)
+                                Wait(5)
                             end
                         end
 

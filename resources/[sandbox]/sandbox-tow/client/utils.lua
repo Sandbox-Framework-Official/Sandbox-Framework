@@ -53,7 +53,7 @@ function RequestControlWithTimeout(veh, timeout)
 
 		while not NetworkHasControlOfEntity(veh) and not requestTimeout do
 			NetworkRequestControlOfEntity(veh)
-			Citizen.Wait(200)
+			Wait(200)
 		end
 	end
 

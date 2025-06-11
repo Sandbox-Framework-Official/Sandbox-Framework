@@ -65,7 +65,7 @@ function EnterTVZone(id)
 
     for k, v in ipairs(zoneData.tvs) do
         createdDUIs[k] = createTVScaleform(k)
-        Citizen.Wait(500)
+        Wait(500)
     
         PushScaleformMovieFunction(createdDUIs[k].sf, 'SET_TEXTURE')
     
@@ -81,7 +81,7 @@ function EnterTVZone(id)
     end
 
 
-    Citizen.CreateThread(function()
+    CreateThread(function()
         while insideTV do
             for k, v in ipairs(zoneData.tvs) do
                 DrawScaleformMovie_3dSolid(
@@ -97,11 +97,11 @@ function EnterTVZone(id)
                     2
                 )
             end
-            Citizen.Wait(0)
+            Wait(0)
         end
     end)
 
-    Citizen.Wait(1500)
+    Wait(1500)
 
     if createdDUIs and #createdDUIs > 0 then
         for k, v in pairs(createdDUIs) do
@@ -129,7 +129,7 @@ end)
 
 RegisterNetEvent('TVs:Client:Update', function(id)
     if insideTV == id then
-        Citizen.Wait(1500)
+        Wait(1500)
         if createdDUIs and #createdDUIs > 0 then
             for k, v in pairs(createdDUIs) do
                 SendDUIMessage(v.dui, {

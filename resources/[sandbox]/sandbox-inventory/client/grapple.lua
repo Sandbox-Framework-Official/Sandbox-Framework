@@ -8,7 +8,7 @@ CAN_GRAPPLE_HERE = true
 
 Grapple = {}
 
-Citizen.CreateThread(function()
+CreateThread(function()
 	RopeLoadTextures()
 end)
 
@@ -117,7 +117,7 @@ function Grapple.new(dest, options)
 	end
 
 	function self._handleRope(rope, ped, boneIndex, dest)
-		Citizen.CreateThread(function()
+		CreateThread(function()
 			while not finished do
 				PinRope(rope, ped, boneIndex, dest)
 				Wait(0)
@@ -173,8 +173,8 @@ function Grapple.new(dest, options)
 		self.destroy()
 		_waitForFall(pid, ped, 3.0)
 
-		Citizen.CreateThread(function()
-			Citizen.Wait(200)
+		CreateThread(function()
+			Wait(200)
 			local objs = GetGamePool("CObject")
 			for k, v in ipairs(objs) do
 				if Entity(v).state.backWeapon and IsEntityAttachedToEntity(v, oldPedRef) then
@@ -192,7 +192,7 @@ function Grapple.new(dest, options)
 		finished = true
 		if shouldTriggerDestroyEvent or shouldTriggerDestroyEvent == nil then
 			if pid ~= -1 then
-				Citizen.CreateThread(function()
+				CreateThread(function()
 					if notMyPed then
 						loopCount = 0
 						while #(GetEntityCoords(ped) - GetEntityCoords(oldPedRef)) > 2 and (loopCount < 20) do
@@ -228,7 +228,7 @@ local shownGrappleButton = false
 local function GrappleThreads()
 	local ply = PlayerId()
 
-	Citizen.CreateThread(function()
+	CreateThread(function()
 		while _grappleEquipped and _equippedHash == GRAPPLEHASH do
 			local freeAiming = IsPlayerFreeAiming(ply)
 			local hit, pos, _, _ = GrappleCurrentAimPoint(40)
@@ -243,7 +243,7 @@ local function GrappleThreads()
 		end
 	end)
 
-	Citizen.CreateThread(function()
+	CreateThread(function()
 		while _grappleEquipped and _equippedHash == GRAPPLEHASH do
 			local freeAiming = IsPlayerFreeAiming(ply)
 			if IsControlJustReleased(0, 257) and freeAiming and _grappleEquipped and CAN_GRAPPLE_HERE then
@@ -255,11 +255,11 @@ local function GrappleThreads()
 					local grapple = Grapple.new(pos)
 					grapple.activate()
 					TriggerServerEvent("Inventory:Server:DegradeLastUsed", 25)
-					Citizen.Wait(1000)
+					Wait(1000)
 					Weapons:UnequipIfEquippedNoAnim()
 				end
 			end
-			Citizen.Wait(0)
+			Wait(0)
 		end
 	end)
 end

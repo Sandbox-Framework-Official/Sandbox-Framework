@@ -52,7 +52,7 @@ function RegisterDjZones()
 			if v.prop then
 				RequestModel(v.prop)
 				while not HasModelLoaded(v.prop) do
-					Citizen.Wait(1)
+					Wait(1)
 				end
 				local obj = CreateObject(v.prop, v.coords, false, false, false)
 				local heading = v.heading or math.random(1, 359) + 0.0

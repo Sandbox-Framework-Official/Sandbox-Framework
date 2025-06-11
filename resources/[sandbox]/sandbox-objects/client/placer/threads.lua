@@ -56,7 +56,7 @@ function InstructionScaleform(scaleform, showFurnitureButtons, showGizmoButtons)
 	if createdCamera ~= 0 then
 		local scaleform = RequestScaleformMovie(scaleform)
 		while not HasScaleformMovieLoaded(scaleform) do
-			Citizen.Wait(0)
+			Wait(0)
 		end
 		PushScaleformMovieFunction(scaleform, "CLEAR_ALL")
 		PopScaleformMovieFunctionVoid()
@@ -177,7 +177,7 @@ function RunPlacementThread(
 	end
 
 	if not useGizmo then
-		Citizen.CreateThread(function()
+		CreateThread(function()
 			while _placeData ~= nil and _placing do
 				if IsPedInAnyVehicle(myPed) then
 					ObjectPlacer:Cancel()
@@ -237,7 +237,7 @@ function RunPlacementThread(
 					placementCoords = nil
 				end
 
-				Citizen.Wait(1)
+				Wait(1)
 			end
 
 			DeleteObject(obj)
@@ -246,7 +246,7 @@ function RunPlacementThread(
 		EnterCursorMode()
 		exports["sandbox-objects"]:prepareGizmo(obj)
 
-		Citizen.CreateThread(function()
+		CreateThread(function()
 			while _placeData ~= nil and _placing do
 				if IsPedInAnyVehicle(myPed) then
 					ObjectPlacer:Cancel()
@@ -289,12 +289,12 @@ function RunPlacementThread(
 					placementCoords = nil
 				end
 
-				Citizen.Wait(1)
+				Wait(1)
 			end
 
 			if _gizmoCam then
 				EnterCursorMode()
-				Citizen.Wait(100)
+				Wait(100)
 			end
 			LeaveCursorMode()
 			DeleteObject(obj)

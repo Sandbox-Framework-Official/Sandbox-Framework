@@ -4,8 +4,8 @@ function StartRestockThread()
 		return
 	end
 	thread = true
-	Citizen.CreateThread(function()
-		Citizen.Wait(300000)
+	CreateThread(function()
+		Wait(300000)
 		while true do
 			for k, v in pairs(_created) do
 				if v.restock ~= false and os.time() > v.restockTime then
@@ -18,7 +18,7 @@ function StartRestockThread()
 				end
 			end
 
-			Citizen.Wait(30000)
+			Wait(30000)
 		end
 	end)
 end

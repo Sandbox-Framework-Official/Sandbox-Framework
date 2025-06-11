@@ -68,7 +68,7 @@ AddEventHandler("Core:Shared:Ready", function()
 
 		CreateGaragePolyZones()
 		CreateElevators()
-		Citizen.Wait(1000)
+		Wait(1000)
 		InitDoors()
 	end)
 end)
@@ -298,17 +298,17 @@ function StartCharacterThreads()
 	ResetLockpickAttempts()
 	GLOBAL_PED = PlayerPedId()
 
-	Citizen.CreateThread(function()
+	CreateThread(function()
 		while LocalPlayer.state.loggedIn do
 			GLOBAL_PED = PlayerPedId()
-			Citizen.Wait(5000)
+			Wait(5000)
 		end
 	end)
 end
 
 function UselessWrapper()
 	local p = promise.new()
-	Citizen.CreateThread(function()
+	CreateThread(function()
 		p:resolve(DoorSystemGetActive())
 	end)
 	return Citizen.Await(p)
@@ -332,7 +332,7 @@ AddEventHandler("Targeting:Client:TargetChanged", function(entity)
 					_lookingAtDoorSpecial = DOORS_STATE[doorId].special
 
 					if not _lookingAtDoorSpecial then
-						Citizen.CreateThread(function()
+						CreateThread(function()
 							while _lookingAtDoor == doorId do
 								local dist = #(_lookingAtDoorCoords - GetEntityCoords(GLOBAL_PED))
 								local canSee = dist <= _lookingAtDoorRadius and CheckDoorAuth(_lookingAtDoor)
@@ -341,7 +341,7 @@ AddEventHandler("Targeting:Client:TargetChanged", function(entity)
 								elseif _showingDoorInfo and not canSee then
 									StopShowingDoorInfo()
 								end
-								Citizen.Wait(500)
+								Wait(500)
 							end
 							StopShowingDoorInfo()
 						end)
@@ -391,7 +391,7 @@ RegisterNetEvent("Doors:Client:UpdateState", function(door, state)
 
 		if DOORS_STATE[door].forcedOpen then
 			DoorSystemSetDoorState(door, 0)
-			Citizen.Wait(250)
+			Wait(250)
 			DoorSystemSetOpenRatio(door, 0.0)
 			DOORS_STATE[door].forcedOpen = false
 		end
@@ -432,14 +432,14 @@ RegisterNetEvent("Doors:Client:UpdateElevatorState", function(elevator, floor, s
 end)
 
 function DoorAnim()
-	Citizen.CreateThread(function()
+	CreateThread(function()
 		while not HasAnimDictLoaded("anim@heists@keycard@") do
 			RequestAnimDict("anim@heists@keycard@")
 			Wait(10)
 		end
 
 		TaskPlayAnim(LocalPlayer.state.ped, "anim@heists@keycard@", "exit", 8.0, 1.0, -1, 48, 0, 0, 0, 0)
-		Citizen.Wait(750)
+		Wait(750)
 		StopAnimTask(LocalPlayer.state.ped, "anim@heists@keycard@", "exit", 1.0)
 	end)
 end

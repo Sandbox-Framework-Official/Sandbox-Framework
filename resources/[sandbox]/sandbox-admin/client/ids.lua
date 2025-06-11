@@ -99,7 +99,7 @@ function ToggleAdminPlayerIDs()
         CreateThread(function()
             while isPlayerIDActive do
                 showGamerTags()
-                Citizen.Wait(50)
+                Wait(50)
             end
         end)
     end

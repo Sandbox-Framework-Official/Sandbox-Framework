@@ -172,9 +172,6 @@ Config.VehicleMenu = {
 	},
 	{
 		icon = "trash",
-		isEnabled = function(data, entityData)
-			return isNearTrunk(entityData.entity, 4.0, true)
-		end,
 		text = "Toss Garbage",
 		event = "Garbage:Client:TossBag",
 		model = `trash2`,
@@ -182,7 +179,7 @@ Config.VehicleMenu = {
 		data = {},
 		minDist = 10.0,
 		isEnabled = function(data, entityData)
-			return LocalPlayer.state.carryingGarbabge and LocalPlayer.state.inGarbagbeZone
+			return LocalPlayer.state.carryingGarbabge and LocalPlayer.state.inGarbagbeZone and isNearTrunk(entityData.entity, 4.0, true)
 		end,
 	},
 	{
@@ -637,9 +634,6 @@ Config.VehicleMenu = {
 	},
 	{
 		icon = "hand",
-		isEnabled = function(data, entityData)
-			return isNearTrunk(entityData.entity, 4.0, true)
-		end,
 		text = "Grab Loot",
 		event = "Robbery:Client:MoneyTruck:GrabLoot",
 		model = `stockade`,
@@ -651,13 +645,11 @@ Config.VehicleMenu = {
 				and entState.wasThermited
 				and not entState.wasLooted
 				and GetEntityHealth(entity.entity) > 0
+				and isNearTrunk(entity.entity, 4.0, true)
 		end,
 	},
 	{
 		icon = "hand",
-		isEnabled = function(data, entityData)
-			return isNearTrunk(entityData.entity, 4.0, true)
-		end,
 		text = "Grab Loot",
 		event = "Robbery:Client:MoneyTruck:GrabLoot",
 		model = `stockade2`,
@@ -669,6 +661,7 @@ Config.VehicleMenu = {
 				and entState.wasThermited
 				and not entState.wasLooted
 				and GetEntityHealth(entity.entity) > 0
+				and isNearTrunk(entity.entity, 4.0, true)
 		end,
 	},
 	{
@@ -1011,14 +1004,14 @@ Config.PlayerMenu = {
 			end
 			return false
 		end,
-		-- action = function(entity)
-		-- 	if not IsPedAPlayer(entity) then return false end
-		-- 	local targetPlayerSrc = GetPlayerServerId(NetworkGetPlayerIndexFromPed(entity))
-		-- 	local playerId = GetPlayerServerId(entity)
-		-- 	if playerId == nil then return end
-		-- 	TriggerServerEvent('animations:pickupk9', targetPlayerSrc)
-		-- 	TriggerEvent('animations:client:EmoteCommandStart', {"carry"})
-		-- 	return true
-		-- end,
+		action = function(entity)
+			if not IsPedAPlayer(entity) then return false end
+			local targetPlayerSrc = GetPlayerServerId(NetworkGetPlayerIndexFromPed(entity))
+			local playerId = GetPlayerServerId(entity)
+			if playerId == nil then return end
+			TriggerServerEvent('animations:pickupk9', targetPlayerSrc)
+			TriggerEvent('animations:client:EmoteCommandStart', {"carry"})
+			return true
+		end,
 	},
 }

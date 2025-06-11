@@ -129,7 +129,7 @@ AddEventHandler('Vehicles:Client:EnterVehicle', function(v, seat)
         SetPedConfigFlag(LocalPlayer.state.ped, 32, true)
         SetFlyThroughWindscreenParams(MIN_FLY_NO_SB, 1.0, 17.0, 1.0)
 
-        Citizen.CreateThread(function()
+        CreateThread(function()
             local speedBuffers = {}
             local velBuffers = {}
             local minSpeed = 80 / 3.6
@@ -154,7 +154,7 @@ AddEventHandler('Vehicles:Client:EnterVehicle', function(v, seat)
                     --     local fw = GetEntityForwardVector(GLOBAL_PED)
                     --     SetEntityCoords(GLOBAL_PED, pedCoords.x + fw.x, pedCoords.y + fw.y, pedCoords.z - 0.2, true, true, true)
                     --     SetEntityVelocity(GLOBAL_PED, velBuffers[2].x, velBuffers[2].y, velBuffers[2].z)
-                    --     Citizen.Wait(1)
+                    --     Wait(1)
                     --     SetPedToRagdoll(GLOBAL_PED, 1000, 1000, 0, 0, 0, 0)
     
                     --     local model = GetEntityModel(VEHICLE_INSIDE)
@@ -198,7 +198,7 @@ AddEventHandler('Vehicles:Client:EnterVehicle', function(v, seat)
                 velBuffers[2] = velBuffers[1]
                 velBuffers[1] = GetEntityVelocity(VEHICLE_INSIDE)
 
-                Citizen.Wait(100)
+                Wait(100)
             end
         end)
     end

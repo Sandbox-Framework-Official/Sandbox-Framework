@@ -21,7 +21,7 @@ function SetupTargetting()
 		Targeting:RemoveObject(v)
 		Targeting:AddObject(v, "car", {
 			{
-				icon = "engine",
+				icon = "car",
 				text = "Scrap",
 				event = "Salvaging:Client:ScrapCar",
 				tempjob = "Salvaging",
@@ -66,7 +66,7 @@ AddEventHandler("Labor:Client:Setup", function()
 			end,
 		},
 		{
-			icon = "ballot-check",
+			icon = "list-check",
 			text = "I've Finished",
 			event = "Salvaging:Client:TriggerDelivery",
 			tempjob = "Salvaging",
@@ -75,7 +75,7 @@ AddEventHandler("Labor:Client:Setup", function()
 			end,
 		},
 		{
-			icon = "box-open-full",
+			icon = "box-open",
 			text = "Here For My Pickup",
 			event = "Laptop:Client:LSUnderground:Chopping:Pickup",
 			isEnabled = function()
@@ -83,7 +83,7 @@ AddEventHandler("Labor:Client:Setup", function()
 			end,
 		},
 		{
-			icon = "list-timeline",
+			icon = "list",
 			text = "View Current Requests",
 			event = "Laptop:Client:LSUnderground:Chopping:GetPublicList",
 			rep = { id = "Salvaging", level = 7 },
@@ -147,7 +147,7 @@ RegisterNetEvent("Salvaging:Client:OnDuty", function(joiner, time)
 
 		PedInteraction:Add("SalvagingDelivery", `mp_m_waremech_01`, point.coords, point.heading, 25.0, {
 			{
-				icon = "box-circle-check",
+				icon = "box-archive",
 				text = "Deliver Goods",
 				event = "Salvaging:Client:EndDelivery",
 				tempjob = "Salvaging",
@@ -155,7 +155,7 @@ RegisterNetEvent("Salvaging:Client:OnDuty", function(joiner, time)
 					return _working and _state == 3
 				end,
 			},
-		}, 'box-circle-check')
+		}, 'box-archive')
 	end)
 
 	eventHandlers["actions"] = RegisterNetEvent(string.format("Salvaging:Client:%s:Action", joiner), function(netid)

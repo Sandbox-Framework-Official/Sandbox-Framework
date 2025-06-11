@@ -20,7 +20,7 @@ local _trailerModels = {
 -- local CREATE_AUTOMOBILE = `CREATE_AUTOMOBILE`
 -- function CreateAutomobile(model, coords, heading)
 --     local veh = CreateVehicle(model, coords.x, coords.y, coords.z + 0.2, heading + 0.0, true, true)
---     while not DoesEntityExist(veh) do Citizen.Wait(10) end
+--     while not DoesEntityExist(veh) do Wait(10) end
 --     --TriggerClientEvent("Vehicles:Client:SetDespawnStuff", -1, veh)
 --     return veh
 --     -- if not _trailerModels[model] then
@@ -32,7 +32,7 @@ local _trailerModels = {
 --     --     return nil
 --     -- else
 --     --     local veh = CreateVehicle(model, coords.x, coords.y, coords.z + 0.2, heading + 0.0, true, true)
---     --     while not DoesEntityExist(veh) do Citizen.Wait(10) end
+--     --     while not DoesEntityExist(veh) do Wait(10) end
 --     --     TriggerClientEvent("Vehicles:Client:SetDespawnStuff", -1, veh)
 --     --     return veh
 --     -- end
@@ -50,7 +50,7 @@ function CreateFuckingVehicle(type, model, coords, heading, useShitWay)
         return nil
     else
         local veh = CreateVehicle(model, coords.x, coords.y, coords.z, heading + 0.0, true, true)
-        while not DoesEntityExist(veh) do Citizen.Wait(10) end
+        while not DoesEntityExist(veh) do Wait(10) end
         return veh
     end
 end

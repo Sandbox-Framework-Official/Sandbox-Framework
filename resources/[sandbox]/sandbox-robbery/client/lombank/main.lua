@@ -200,7 +200,7 @@ AddEventHandler("Polyzone:Enter", function(id, testedPoint, insideZones, data)
 				TriggerServerEvent("Robbery:Server:Idiot", id)
 				if data.tpCoords ~= nil then
 					ClearPedTasksImmediately(PlayerPedId())
-					Citizen.Wait(100)
+					Wait(100)
 					SetEntityCoords(PlayerPedId(), data.tpCoords.x, data.tpCoords.y, data.tpCoords.z, 0, 0, 0, false)
 				end
 			end
@@ -307,7 +307,7 @@ AddEventHandler("Robbery:Client:Lombank:LootCart", function(entity, data)
 				local CashAppear = function()
 					RequestModel(GetHashKey("ch_prop_gold_bar_01a"))
 					while not HasModelLoaded(GetHashKey("ch_prop_gold_bar_01a")) do
-						Citizen.Wait(1)
+						Wait(1)
 					end
 					local grabobj = CreateObject(GetHashKey("ch_prop_gold_bar_01a"), myCoords, true)
 
@@ -334,9 +334,9 @@ AddEventHandler("Robbery:Client:Lombank:LootCart", function(entity, data)
 					)
 					local startedGrabbing = GetGameTimer()
 
-					Citizen.CreateThread(function()
+					CreateThread(function()
 						while GetGameTimer() - startedGrabbing < 37000 do
-							Citizen.Wait(1)
+							Wait(1)
 							DisableControlAction(0, 73, true)
 							if HasAnimEventFired(LocalPlayer.state.ped, GetHashKey("CASH_APPEAR")) then
 								if not IsEntityVisible(grabobj) then
@@ -362,7 +362,7 @@ AddEventHandler("Robbery:Client:Lombank:LootCart", function(entity, data)
 				RequestAnimDict("anim@heists@ornate_bank@grab_cash")
 				RequestModel(baghash)
 				while not HasAnimDictLoaded("anim@heists@ornate_bank@grab_cash") and not HasModelLoaded(baghash) do
-					Citizen.Wait(100)
+					Wait(100)
 				end
 
 				local GrabBag = CreateObject(
@@ -407,7 +407,7 @@ AddEventHandler("Robbery:Client:Lombank:LootCart", function(entity, data)
 				)
 				--SetPedComponentVariation(LocalPlayer.state.ped, 5, 0, 0, 0)
 				NetworkStartSynchronisedScene(Grab1)
-				Citizen.Wait(1500)
+				Wait(1500)
 				CashAppear()
 				local Grab2 = NetworkCreateSynchronisedScene(
 					coords,
@@ -443,7 +443,7 @@ AddEventHandler("Robbery:Client:Lombank:LootCart", function(entity, data)
 					1
 				)
 				NetworkStartSynchronisedScene(Grab2)
-				Citizen.Wait(37000)
+				Wait(37000)
 				local Grab3 = NetworkCreateSynchronisedScene(
 					coords,
 					rot.x,
@@ -484,7 +484,7 @@ AddEventHandler("Robbery:Client:Lombank:LootCart", function(entity, data)
 					{ coords = GetEntityCoords(entity.entity) }
 				)
 				Entity(entity.entity).state:set("looted", true, true)
-				Citizen.Wait(1800)
+				Wait(1800)
 				if DoesEntityExist(GrabBag) then
 					DeleteEntity(GrabBag)
 				end

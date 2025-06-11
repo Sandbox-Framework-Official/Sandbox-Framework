@@ -59,7 +59,7 @@ AddEventHandler('Vehicles:Client:CharacterLogin', function()
             end
         end
 
-        Citizen.Wait(2500)
+        Wait(2500)
         
         -- Add Restricted Ones After so the Blips Appear With the Restricted Ones at the end of the list
         -- for k, v in pairs(_vehicleStorage) do

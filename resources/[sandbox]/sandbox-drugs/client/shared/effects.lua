@@ -33,7 +33,7 @@ RegisterNetEvent("Drugs:Effects:RunSpeed", function(quality)
         SetSwimMultiplierForPlayer(pId, total)
 
 		loops = loops + 1
-		Citizen.Wait(1000)
+		Wait(1000)
 		RestorePlayerStamina(pId, 1.0)
 		_runSpeedTime = _runSpeedTime - 1
 		if IsPedRagdoll(ped) then
@@ -89,7 +89,7 @@ RegisterNetEvent("Drugs:Effects:Armor", function(quality)
 	Buffs:ApplyUniqueBuff("armor", _armorTime, false)
 	while _armorTime > 0 and not LocalPlayer.state.isDead do
 		loops = loops + 1
-		Citizen.Wait(1000)
+		Wait(1000)
 		_armorTime = _armorTime - 1
 		if IsPedRagdoll(PlayerPedId()) then
 			SetPedToRagdoll(PlayerPedId(), math.random(5), math.random(5), 3, 0, 0, 0)
@@ -143,7 +143,7 @@ RegisterNetEvent("Drugs:Effects:Heal", function(quality)
 	while _healTime > 0 and not LocalPlayer.state.isDead do
 		local ped = PlayerPedId()
 		loops = loops + 1
-		Citizen.Wait(1000)
+		Wait(1000)
 		_healTime = _healTime - 1
 		
 		local maxHp = GetEntityMaxHealth(ped)

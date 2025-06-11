@@ -14,7 +14,7 @@ local _nodes = nil
 AddEventHandler("Labor:Client:Setup", function()
 	PedInteraction:Add("FarmingJob", `a_m_m_farmer_01`, vector3(2016.165, 4987.541, 41.098), 225.995, 25.0, {
 		{
-			icon = "wheat",
+			icon = "wheat-awn",
 			text = "Start Work",
 			event = "Farming:Client:StartJob",
 			tempjob = "Farming",
@@ -23,7 +23,7 @@ AddEventHandler("Labor:Client:Setup", function()
 			end,
 		},
 		{
-			icon = "clipboard-list-check",
+			icon = "clipboard-list",
 			text = "Finish Job",
 			event = "Farming:Client:TurnIn",
 			tempjob = "Farming",
@@ -93,7 +93,7 @@ RegisterNetEvent("Farming:Client:OnDuty", function(joiner, time)
 			if closest ~= nil then
 				_doing = true
 				TaskTurnPedToFaceCoord(LocalPlayer.state.ped, closest.point.coords.x, closest.point.coords.y, closest.point.coords.z, 1.0)
-				Citizen.Wait(1000)
+				Wait(1000)
 				DoAction(closest.point.id)
 			else
 				_doing = false
@@ -116,7 +116,7 @@ RegisterNetEvent("Farming:Client:OnDuty", function(joiner, time)
             Blips:Add(string.format("FarmingNode-%s", v.id), "Farming Action", v.coords, 594, 0, 0.8)
 		end
 
-		Citizen.CreateThread(function()
+		CreateThread(function()
 			while _working do
 				local closest = nil
 				for k, v in ipairs(_nodes) do
@@ -126,7 +126,7 @@ RegisterNetEvent("Farming:Client:OnDuty", function(joiner, time)
 					end
 				end
 
-				Citizen.Wait(5)
+				Wait(5)
 			end
 		end)
 	end)

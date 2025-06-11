@@ -97,19 +97,17 @@ function RegisterRandomItems()
 	end)
 
 	INVENTORY.Items:RegisterUse("briefcase_cash", "RandomItems", function(source, item)
-		Execute:Client(source, "Notification", "Error", "No money to be found.")
-
-		-- local Winnings = 25000
-		-- local char = Fetch:CharacterSource(source)
-		-- INVENTORY.Items:RemoveSlot(item.Owner, item.Name, 1, item.Slot, item.invType)
-		-- TriggerClientEvent('Inventory:Client:RandomItems:BriefcaseCash', source)
-		-- Banking.Balance:Deposit(Banking.Accounts:GetPersonal(char:GetData("SID")).Account, Winnings, {
-		-- 	type = "deposit",
-		-- 	title = "Sandbox Lotto Event",
-		-- 	description = string.format("Lotto Earnings - $%s", Winnings),
-		-- 	data = Winnings
-		-- })
-		-- Execute:Client(source, "Notification", "Success", "You found a briefcase with $25,000!")
+		local Winnings = 25000
+		local char = Fetch:CharacterSource(source)
+		INVENTORY.Items:RemoveSlot(item.Owner, item.Name, 1, item.Slot, item.invType)
+		TriggerClientEvent('Inventory:Client:RandomItems:BriefcaseCash', source)
+		Banking.Balance:Deposit(Banking.Accounts:GetPersonal(char:GetData("SID")).Account, Winnings, {
+			type = "deposit",
+			title = "Sandbox Lotto Event",
+			description = string.format("Lotto Earnings - $%s", Winnings),
+			data = Winnings
+		})
+		Execute:Client(source, "Notification", "Success", "You found a briefcase with $25,000!")
 	end)
 
 	INVENTORY.Items:RegisterUse("cigarette_pack", "RandomItems", function(source, item)

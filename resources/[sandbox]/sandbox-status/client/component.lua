@@ -216,17 +216,17 @@ RegisterNetEvent("Characters:Client:Spawn", function()
 		end
 	end)
 
-	Citizen.CreateThread(function()
-		Citizen.Wait(60000)
+	CreateThread(function()
+		Wait(60000)
 		while LocalPlayer.state.loggedIn and _ts == ffs do
 			TriggerServerEvent("Status:Server:StoreAll", _statusVals)
-			Citizen.Wait(60000)
+			Wait(60000)
 		end
 	end)
 
 	--Spawn Tick Thread
-	Citizen.CreateThread(function()
-		Citizen.Wait(300000) -- Wait 5 mins before we start ticks
+	CreateThread(function()
+		Wait(300000) -- Wait 5 mins before we start ticks
 		while LocalPlayer.state.loggedIn and _ts == ffs do
 			if isEnabled then
 				for k, v in pairs(_statuses) do
@@ -236,10 +236,10 @@ RegisterNetEvent("Characters:Client:Spawn", function()
 					else
 						_recentCd[v.name] = _recentCd[v.name] + 1
 					end
-					Citizen.Wait((100000 / _statusCount)) -- Split tick events across the second-long tick to try to avoid spiking
+					Wait((100000 / _statusCount)) -- Split tick events across the second-long tick to try to avoid spiking
 				end
 			end
-			Citizen.Wait(0) -- Im just here so you dont crash
+			Wait(0) -- Im just here so you dont crash
 		end
 	end)
 

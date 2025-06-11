@@ -387,7 +387,7 @@ local requestedIpl = {
 }
 
 -- CreateThread(function()
---     Citizen.Wait(0)
+--     Wait(0)
 --     for k, v in ipairs(requestedIpl) do
 --         RequestIpl(v)
 --     end
@@ -440,7 +440,7 @@ AddEventHandler("Polyzone:Exit", function(id, point, insideZone, data)
 		inCayoPerico = false
 		Logger:Trace("Island", "Leaving Island Zone")
 
-		Citizen.Wait(50)
+		Wait(50)
 		for k, v in ipairs(requestedIpl) do
 			RemoveIpl(v)
 		end

@@ -44,7 +44,7 @@ AddEventHandler("Core:Shared:Ready", function()
 				Trunk:GetOut()
 
 				while LocalPlayer.state.inTrunk do
-					Citizen.Wait(5)
+					Wait(5)
 				end
 
 				cb(true)
@@ -70,7 +70,7 @@ end)
 function loadAnimDict(dict)
 	RequestAnimDict(dict)
 	while not HasAnimDictLoaded(dict) do
-		Citizen.Wait(0)
+		Wait(0)
 	end
 end
 
@@ -97,7 +97,7 @@ function InTrunk(veh)
 	if not DoesVehicleHaveDoor(veh, 6) and DoesVehicleHaveDoor(veh, 5) and IsThisModelACar(GetEntityModel(veh)) then
 		DoScreenFadeOut(200)
 		while not IsScreenFadedOut() do
-			Citizen.Wait(10)
+			Wait(10)
 		end
 
 		local min, max = GetModelDimensions(GetEntityModel(veh))
@@ -112,7 +112,7 @@ function InTrunk(veh)
 		TriggerServerEvent("Trunk:Server:Enter", VehToNet(veh))
 
 		while not LocalPlayer.state.inTrunk do
-			Citizen.Wait(5)
+			Wait(5)
 		end
 
 		local animDict = "mp_common_miss"
@@ -151,7 +151,7 @@ function InTrunk(veh)
 
 		DoScreenFadeIn(1000)
 		while not IsScreenFadedIn() do
-			Citizen.Wait(10)
+			Wait(10)
 		end
 
 		if not LocalPlayer.state.isCuffed and not LocalPlayer.state.isDead then
@@ -196,13 +196,13 @@ function InTrunk(veh)
 			end
 
 
-			Citizen.Wait(1)
+			Wait(1)
 		end
 
 		if veh == _inTrunkVeh then
 			DoScreenFadeOut(200)
 			while not IsScreenFadedOut() do
-				Citizen.Wait(10)
+				Wait(10)
 			end
 
 			Action:Hide("trunk")
@@ -219,7 +219,7 @@ function InTrunk(veh)
 			_inTrunkVeh = nil
 			DoScreenFadeIn(1000)
 			while not IsScreenFadedIn() do
-				Citizen.Wait(10)
+				Wait(10)
 			end
 		end
 	end

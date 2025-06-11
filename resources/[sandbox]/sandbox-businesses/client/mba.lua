@@ -58,13 +58,13 @@ end
 RegisterNetEvent("Characters:Client:Spawn")
 AddEventHandler("Characters:Client:Spawn", function()
     while GlobalState["MBA:Interior"] == nil do
-        Citizen.Wait(5)
+        Wait(5)
     end
 	print('GlobalState["MBA:Interior"]', GlobalState["MBA:Interior"])
     SetMBAInterior(GlobalState["MBA:Interior"])
 end)
 
-Citizen.CreateThread(function()
+CreateThread(function()
     if LocalPlayer.state.loggedIn then
         SetMBAInterior(GlobalState["MBA:Interior"])
     end

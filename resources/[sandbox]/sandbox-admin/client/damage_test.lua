@@ -13,7 +13,7 @@ local function startWeaponTest(bone)
 	SetEntityHeading(playerPed, 180.24)
 	SetPedInfiniteAmmoClip(playerPed, true)
 
-	Citizen.Wait(500)
+	Wait(500)
 
 	local coords = GetEntityCoords(playerPed)
 
@@ -21,12 +21,12 @@ local function startWeaponTest(bone)
 		local targetPed = CreatePed(0, `mp_m_freemode_01`, coords.x, coords.y - distance, coords.z, 0, false, false)
 
 		while not DoesEntityExist(targetPed) do
-			Citizen.Wait(1)
+			Wait(1)
 		end
 
 		registeredPeds[index] = targetPed
 
-		Citizen.Wait(500)
+		Wait(500)
 
 		FreezeEntityPosition(targetPed, true)
 		SetBlockingOfNonTemporaryEvents(targetPed, true)
@@ -34,16 +34,16 @@ local function startWeaponTest(bone)
 
 		local bonePosition = GetPedBoneCoords(targetPed, bone, 0, 0, 0)
 
-		Citizen.Wait(500)
+		Wait(500)
 
 		SetPedShootsAtCoord(playerPed, bonePosition.x, bonePosition.y, bonePosition.z, true)
 
-		Citizen.Wait(500)
+		Wait(500)
 
 		local hitCount, weaponDamage = 1, 100 - GetPedArmour(targetPed)
 
 		while true do
-			Citizen.Wait(500)
+			Wait(500)
 
 			if not HasEntityBeenDamagedByAnyPed(targetPed) and hitCount > 5 then
 				Notification:Info(("Weapon didn't reach the target, distance: %s"):format(distance))
@@ -90,9 +90,9 @@ RegisterNetEvent("Admin:Client:DamageTest", function(mode)
 			return cleanPeds()
 		end
 
-		Citizen.CreateThread(function()
+		CreateThread(function()
 			while _loggedIn and _running do
-				Citizen.Wait(0)
+				Wait(0)
 
 				SetVehicleDensityMultiplierThisFrame(0.0)
 				SetPedDensityMultiplierThisFrame(0.0)

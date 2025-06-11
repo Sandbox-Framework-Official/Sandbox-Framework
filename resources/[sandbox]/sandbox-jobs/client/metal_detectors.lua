@@ -18,7 +18,7 @@ function RegisterMetalDetectors()
 		if v.propInfo then
 			RequestModel(v.propInfo.model)
 			while not HasModelLoaded(v.propInfo.model) do
-				Citizen.Wait(1)
+				Wait(1)
 			end
 			local obj = CreateObject(
 				v.propInfo.model,

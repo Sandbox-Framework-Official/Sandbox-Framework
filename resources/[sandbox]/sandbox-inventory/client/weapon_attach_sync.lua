@@ -15,7 +15,7 @@ RegisterNetEvent("Weapons:Client:SetProps", function(props)
 		_cachedProps = props
 
 		while not _startup do
-			Citizen.Wait(5)
+			Wait(5)
 		end
 
 		for id, data in pairs(props) do
@@ -37,7 +37,7 @@ RegisterNetEvent("Weapons:Client:UpdateProps", function(id, data)
 	end
 
 	while not _startup do
-		Citizen.Wait(5)
+		Wait(5)
 	end
 
 	local myId = GetPlayerServerId(LocalPlayer.state.PlayerID)
@@ -52,10 +52,10 @@ RegisterNetEvent("Characters:Client:Spawn", function()
 	_loggedIn = true
 
 	while not _startup do
-		Citizen.Wait(5)
+		Wait(5)
 	end
 
-	Citizen.CreateThread(function()
+	CreateThread(function()
 		while _loggedIn do
 			local myId = GetPlayerServerId(LocalPlayer.state.PlayerID)
 			local myPed = PlayerPedId()
@@ -66,11 +66,11 @@ RegisterNetEvent("Characters:Client:Spawn", function()
                     _spawned[k] = false
 				end
 			end
-			Citizen.Wait(5000)
+			Wait(5000)
 		end
 	end)
 
-	Citizen.CreateThread(function()
+	CreateThread(function()
 		while _loggedIn do
 			local myPos = GetEntityCoords(LocalPlayer.state.ped)
 			for k, v in ipairs(GetActivePlayers()) do
@@ -89,14 +89,14 @@ RegisterNetEvent("Characters:Client:Spawn", function()
 				end
 			end
 
-			Citizen.Wait(2000)
+			Wait(2000)
 		end
 	end)
 
-	Citizen.CreateThread(function()
+	CreateThread(function()
 		local id = GetPlayerServerId(LocalPlayer.state.PlayerID)
 		while _cachedProps[id] == nil do
-			Citizen.Wait(1)
+			Wait(1)
 		end
 		CreateBackObjects(PlayerPedId(), id, _cachedProps[id] or {})
 	end)

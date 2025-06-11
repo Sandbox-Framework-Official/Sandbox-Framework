@@ -1,6 +1,6 @@
 function StartUsingGag()
 	if PLAYER_CONNECTED and (not CALL_CHANNEL or CALL_CHANNEL <= 0) and not RADIO_TALKING and not USING_MICROPHONE then
-		Citizen.CreateThread(function()
+		CreateThread(function()
 			Logger:Info("VOIP", "Gag Enabled")
 			USING_GAG = true
 			UpdateVOIPIndicatorStatus()
@@ -13,7 +13,7 @@ function StartUsingGag()
 			do
 				TriggerServerEvent("VOIP:Server:Gag:SetPlayerState", true)
 
-				Citizen.Wait(7500)
+				Wait(7500)
 			end
 
 			StopUsingGag()

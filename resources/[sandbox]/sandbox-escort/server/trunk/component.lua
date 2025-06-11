@@ -33,7 +33,7 @@ AddEventHandler("Core:Shared:Ready", function()
 
 			if entState.trunkOccupied then
 				Callbacks:ClientCallback(entState.trunkOccupied, "Trunk:GetPulledOut", {}, function()
-					Citizen.Wait(500)
+					Wait(500)
 					Escort:Do(source, {
 						target = entState.trunkOccupied,
 						inVeh = false,

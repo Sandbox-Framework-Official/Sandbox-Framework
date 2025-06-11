@@ -117,7 +117,7 @@ _LOOT = {
 					{75, "opal"},
 				})
 			end
-			
+
 			return INVENTORY:AddItem(owner, randomGem, 1, {}, invType)
 		end,
 		Ore = function(self, owner, invType, count)

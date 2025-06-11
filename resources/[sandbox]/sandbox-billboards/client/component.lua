@@ -63,7 +63,7 @@ AddEventHandler("Core:Shared:Ready", function()
 		-- local dui = CreateBillboardDUI('https://i.imgur.com/Zlf40QZ.png', 1024, 512)
 		-- AddReplaceTexture('ch2_03b_cg2_03b_bb', 'ch2_03b_bb_lowdown', dui.dictionary, dui.texture)
 
-		-- Citizen.Wait(10000)
+		-- Wait(10000)
 
 		-- print(dui.id)
 
@@ -90,8 +90,8 @@ function StartUp()
 end
 
 AddEventHandler("Characters:Client:Spawn", function()
-	Citizen.CreateThread(function()
-		Citizen.Wait(5000)
+	CreateThread(function()
+		Wait(5000)
 
 		while LocalPlayer.state.loggedIn do
 			for k, v in pairs(_billboardConfig) do
@@ -114,7 +114,7 @@ AddEventHandler("Characters:Client:Spawn", function()
 					_billboardDUIs[k] = nil
 				end
 			end
-			Citizen.Wait(1500)
+			Wait(1500)
 		end
 	end)
 end)

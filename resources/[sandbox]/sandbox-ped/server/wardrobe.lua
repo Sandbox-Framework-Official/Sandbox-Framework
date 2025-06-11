@@ -45,6 +45,11 @@ function RegisterChatCommands()
 	end, {
 		help = "Test Notification",
 	})
+	Chat:RegisterCommand("clearprops", function(source, args, rawCommand)
+  		TriggerClientEvent("Ped:Client:Clearprops", source)
+	end, {
+  		help = "Removes all the props attached to the entity",
+	})
 	Chat:RegisterAdminCommand("ped", function(source, args, rawCommand)
 		local char
 		local shopType = 0

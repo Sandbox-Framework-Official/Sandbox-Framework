@@ -23,7 +23,7 @@ function AddTaskBeforeVehicleThread(id, func)
 end
 
 AddEventHandler("Vehicles:Client:BecameDriver", function(veh, seat, class)
-	Citizen.CreateThread(function()
+	CreateThread(function()
 		if THREAD_VEHICLE then
 			THREAD_VEHICLE = false
 		end
@@ -60,7 +60,7 @@ AddEventHandler("Vehicles:Client:ExitVehicle", function(veh)
 end)
 
 AddEventHandler("Vehicles:Client:CharacterLogin", function()
-	Citizen.CreateThread(function()
+	CreateThread(function()
 		while _characterLoaded do
 			if THREAD_VEHICLE then
 				if DoesEntityExist(THREAD_VEHICLE) then
@@ -81,16 +81,16 @@ AddEventHandler("Vehicles:Client:CharacterLogin", function()
 					THREAD_VEHICLE = false
 				end
 			else
-				Citizen.Wait(1000)
+				Wait(1000)
 			end
-			Citizen.Wait(250)
+			Wait(250)
 		end
 	end)
 
 	local cleanupTick = 0
 	local syncTick = 0
 
-	Citizen.CreateThread(function()
+	CreateThread(function()
 		while _characterLoaded do
 			local vehicles = GetGamePool("CVehicle")
 			local tryingToEnter = GetVehiclePedIsTryingToEnter(GLOBAL_PED)
@@ -175,7 +175,7 @@ AddEventHandler("Vehicles:Client:CharacterLogin", function()
 				end
 			end
 
-			Citizen.Wait(750)
+			Wait(750)
 		end
 	end)
 
@@ -198,7 +198,7 @@ AddEventHandler("Vehicles:Client:CharacterLogin", function()
 							SetFollowVehicleCamViewMode(4)
 							SetCamViewModeForContext(2, 4)
 							SetCamViewModeForContext(3, 4)
-							Citizen.Wait(250)
+							Wait(250)
 							SetCurrentPedWeapon(playerPed, curWeapon, true)
 							SetCurrentPedVehicleWeapon(playerPed, curWeapon)
 							SetPlayerCanDoDriveBy(PlayerId(), true)
@@ -224,9 +224,9 @@ AddEventHandler("Vehicles:Client:CharacterLogin", function()
 						end
 					end
 				end
-				Citizen.Wait(1)
+				Wait(1)
 			else
-				Citizen.Wait(200)
+				Wait(200)
 			end
         end
     end)

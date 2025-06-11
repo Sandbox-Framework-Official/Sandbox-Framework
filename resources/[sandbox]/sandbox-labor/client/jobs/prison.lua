@@ -20,7 +20,7 @@ RegisterNetEvent("Prison:Client:OnDuty", function(joiner, time)
 
 			Blips:Add(id, data.blip.name, v.coords, data.blip.sprite or 188, data.blip.color or 56, 0.8)
 			if v.type == "box" then
-				Targeting.Zones:AddBox(id, "box-open-full", v.coords, v.length, v.width, v.options, {
+				Targeting.Zones:AddBox(id, "box", v.coords, v.length, v.width, v.options, {
 					{
 						icon = "hand-middle-finger",
 						text = data.action,
@@ -33,7 +33,7 @@ RegisterNetEvent("Prison:Client:OnDuty", function(joiner, time)
 					},
 				}, 3.0, true)
 			elseif v.type == "circle" then
-				Targeting.Zones:AddCircle(id, "box-open-full", v.coords, v.radius, v.options, {
+				Targeting.Zones:AddCircle(id, "box", v.coords, v.radius, v.options, {
 					{
 						icon = "hand-middle-finger",
 						text = data.action,
@@ -46,7 +46,7 @@ RegisterNetEvent("Prison:Client:OnDuty", function(joiner, time)
 					},
 				}, 3.0, true)
 			elseif v.type == "poly" then
-				Targeting.Zones:AddPoly(id, "box-open-full", v.points, v.options, {
+				Targeting.Zones:AddPoly(id, "box", v.points, v.options, {
 					{
 						icon = "hand-middle-finger",
 						text = data.action,

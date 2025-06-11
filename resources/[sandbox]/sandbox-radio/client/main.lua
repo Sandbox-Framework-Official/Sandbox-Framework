@@ -120,7 +120,7 @@ AddEventHandler("Characters:Client:Spawn", function()
 		force = "numbers",
 	})
 
-	Citizen.Wait(1000)
+	Wait(1000)
 
 	HAS_RADIO = CheckCharacterHasRadio()
 	LocalPlayer.state.radioType = HAS_RADIO
@@ -166,7 +166,7 @@ function OpenRadio()
 
 	Weapons:UnequipIfEquippedNoAnim()
 
-	Citizen.CreateThread(function()
+	CreateThread(function()
 		local playerPed = PlayerPedId()
 		LoadAnim("cellphone@")
 		LoadModel(`prop_cs_hand_radio`)
@@ -206,7 +206,7 @@ function OpenRadio()
 					false
 				)
 			end
-			Citizen.Wait(250)
+			Wait(250)
 		end
 
 		StopAnimTask(playerPed, "cellphone@", "cellphone_text_read_base", 3.0)
@@ -377,14 +377,14 @@ function CycleRadioChannel(up)
 end
 
 RegisterNetEvent("Job:Client:DutyChanged", function(state)
-	Citizen.Wait(1000)
+	Wait(1000)
 	if LocalPlayer.state.loggedIn then
 		CheckRadioChannelAuth()
 	end
 end)
 
 RegisterNetEvent("Characters:Client:SetData", function()
-	Citizen.Wait(1000)
+	Wait(1000)
 	if LocalPlayer.state.loggedIn then
 		local hasRadio = CheckCharacterHasRadio()
 		if HAS_RADIO and not hasRadio then

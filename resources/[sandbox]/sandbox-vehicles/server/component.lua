@@ -1013,7 +1013,7 @@ AddEventHandler('entityRemoved', function(entity)
                 Vehicles.Stores:Delete(ent.state.VIN)
             end
 
-            Citizen.Wait(1000)
+            Wait(1000)
 
             if isLocal then
                 Vehicles:SpawnTemp(-1, vehModel, nil, coords, heading, function(vehicleId)

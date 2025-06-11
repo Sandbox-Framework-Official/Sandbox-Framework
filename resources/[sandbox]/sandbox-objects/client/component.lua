@@ -69,7 +69,7 @@ _OBJECTS = {
 
 		FreezeEntityPosition(obj, isFrozen)
 		while not DoesEntityExist(obj) do
-			Citizen.Wait(1)
+			Wait(1)
 		end
 
 		local entState = Entity(obj).state

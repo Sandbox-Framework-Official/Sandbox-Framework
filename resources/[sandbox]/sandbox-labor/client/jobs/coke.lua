@@ -39,7 +39,7 @@ local _cokeWeapons = {
 local function SetupPeds(peds)
 	for k, v in ipairs(peds) do
 		while not DoesEntityExist(NetworkGetEntityFromNetworkId(v)) do
-			Citizen.Wait(1)
+			Wait(1)
 		end
 
 		local ped = NetworkGetEntityFromNetworkId(v)
@@ -118,7 +118,7 @@ AddEventHandler("Labor:Client:Setup", function()
 		100.0,
 		{
 			{
-				icon = "face-tongue-money",
+				icon = "money-bill",
 				text = "Let's Have Some Fun ($100,000)",
 				event = "Coke:Client:StartWork",
 				isEnabled = function()
@@ -145,7 +145,7 @@ AddEventHandler("Labor:Client:Setup", function()
 				end,
 			},
 		},
-		"block-question",
+		"circle-question",
 		false,
 		true,
 		{

@@ -118,7 +118,7 @@ local fullTrailers = {
 	`trailerlarge`,
 }
 
-for k, v in ipairs(fullTrailers) do
+for _, v in ipairs(fullTrailers) do
 	_modelOverride[v] = {
 		trunk = { slots = 64, capacity = 1200 },
 		glovebox = { slots = 4, capacity = 50 },

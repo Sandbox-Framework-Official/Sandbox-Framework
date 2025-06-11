@@ -71,7 +71,7 @@ end
 
 local _awarded = {}
 function SetupQueues()
-	Citizen.CreateThread(function()
+	CreateThread(function()
 		for k, v in ipairs(_queues) do
 			_received[v.id] = {}
 

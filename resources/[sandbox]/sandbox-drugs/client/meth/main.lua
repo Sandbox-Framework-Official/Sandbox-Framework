@@ -54,7 +54,7 @@ AddEventHandler("Drugs:Client:Startup", function()
     end)
 
     Callbacks:RegisterClientCallback("Drugs:Meth:Use", function(data, cb)
-        Citizen.Wait(400)
+        Wait(400)
         Minigame.Play:RoundSkillbar(1.0, 6, {
             onSuccess = function()
                 cb(true)
@@ -80,7 +80,7 @@ AddEventHandler("Drugs:Client:Startup", function()
     end)
 
     Callbacks:RegisterClientCallback("Drugs:Adrenaline:Use", function(data, cb)
-        Citizen.Wait(400)
+        Wait(400)
         Minigame.Play:RoundSkillbar(1.0, 6, {
             onSuccess = function()
                 cb(true)
@@ -107,14 +107,14 @@ AddEventHandler("Drugs:Client:Startup", function()
 end)
 
 RegisterNetEvent("Drugs:Client:Meth:SetupTables", function(tables)
-    Citizen.CreateThread(function()
+    CreateThread(function()
         loadModel(`bkr_prop_meth_table01a`)
         for k, v in pairs(tables) do
             _methTables[k] = v
             local obj = CreateObject(`bkr_prop_meth_table01a`, v.coords.x, v.coords.y, v.coords.z, false, true, false)
             SetEntityHeading(obj, v.heading)
             while not DoesEntityExist(obj) do
-                Citizen.Wait(1)
+                Wait(1)
             end
             _methTables[k].entity = obj
             Entity(obj).state.isMethTable = true
@@ -124,7 +124,7 @@ RegisterNetEvent("Drugs:Client:Meth:SetupTables", function(tables)
 end)
 
 RegisterNetEvent("Characters:Client:Logout", function()
-    Citizen.CreateThread(function()
+    CreateThread(function()
         for k, v in pairs(_methTables) do
             if v?.entity ~= nil and DoesEntityExist(v?.entity) then
                 DeleteEntity(v?.entity)
@@ -135,13 +135,13 @@ RegisterNetEvent("Characters:Client:Logout", function()
 end)
 
 RegisterNetEvent("Drugs:Client:Meth:CreateTable", function(table)
-    Citizen.CreateThread(function()
+    CreateThread(function()
         loadModel(`bkr_prop_meth_table01a`)
         _methTables[table.id] = table
         local obj = CreateObject(`bkr_prop_meth_table01a`, table.coords.x, table.coords.y, table.coords.z, false, true, false)
         SetEntityHeading(obj, table.heading)
         while not DoesEntityExist(obj) do
-            Citizen.Wait(1)
+            Wait(1)
         end
 
         _methTables[table.id].entity = obj
@@ -152,7 +152,7 @@ RegisterNetEvent("Drugs:Client:Meth:CreateTable", function(table)
 end)
 
 RegisterNetEvent("Drugs:Client:Meth:RemoveTable", function(tableId)
-    Citizen.CreateThread(function()
+    CreateThread(function()
         local objs = GetGamePool("CObject")
         for k, v in ipairs(objs) do
             local entState = Entity(v).state
@@ -170,7 +170,7 @@ end)
 
 AddEventHandler("Drugs:Client:Meth:FinishPlacement", function(data, endCoords)
     TaskTurnPedToFaceCoord(LocalPlayer.state.ped, endCoords.coords.x, endCoords.coords.y, endCoords.coords.z, 0.0)
-    Citizen.Wait(1000)
+    Wait(1000)
     Progress:Progress({
         name = "meth_pickup",
         duration = (math.random(5) + 10) * 1000,

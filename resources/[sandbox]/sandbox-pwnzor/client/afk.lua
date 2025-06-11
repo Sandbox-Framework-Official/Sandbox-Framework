@@ -18,7 +18,7 @@ local function ShowInput()
 	inputShowing = true
 
 	while afkAnswer == nil do
-		Citizen.Wait(1)
+		Wait(1)
 	end
 
 	Input:Show("Are You There?", string.format('Enter: "%s" To Prevent Being Kicked', afkAnswer), {
@@ -42,7 +42,7 @@ local function StartKickTimer()
 	timerStarted = true
 	isAfk = true
 
-	Citizen.CreateThread(function()
+	CreateThread(function()
 		afkAnswer = nil
 		GetCode()
 		ShowInput()
@@ -51,10 +51,10 @@ local function StartKickTimer()
 	local time = 0
 	local AFKTimer = 60 * 5
 
-	Citizen.CreateThread(function()
+	CreateThread(function()
 		while isAfk do
 			if time > AFKTimer then
-				if isAfk and not submitting and not (GlobalState["DisableAFK"] or false) then
+				if isAfk and not submitting and not (GlobalState.DisableAFK or false) then
 					Callbacks:ServerCallback("Pwnzor:AFK")
 				end
 			end
@@ -66,17 +66,17 @@ local function StartKickTimer()
 
 			time += 1
 
-			Citizen.Wait(1000)
+			Wait(1000)
 		end
 		timerStarted = false
 	end)
 
-	Citizen.CreateThread(function()
+	CreateThread(function()
 		while isAfk do
 			if afkAnswer ~= nil and not inputShowing then
 				ShowInput()
 			end
-			Citizen.Wait(1)
+			Wait(1)
 		end
 	end)
 end
@@ -93,7 +93,7 @@ AddEventHandler("Pwnzor:Client:EnterAFKCode", function(vals, data)
 			inputShowing = false
 
 			afkCd = true
-			Citizen.SetTimeout(1000 * GlobalState["AFKTimer"], function()
+			SetTimeout(1000 * GlobalState.AFKTimer, function()
 				afkCd = false
 			end)
 		else
@@ -111,28 +111,28 @@ RegisterNetEvent("Characters:Client:Spawn", function()
 		return
 	end
 
-	Citizen.CreateThread(function()
+	CreateThread(function()
 		local time = 0
 		local prevPos = nil
 		local currentPos = nil
 
-		Citizen.Wait(30000)
+		Wait(30000)
 
-		while GlobalState["AFKTimer"] == nil do
-			Citizen.Wait(1000)
+		while GlobalState.AFKTimer == nil do
+			Wait(1000)
 		end
 
-		local AFKTimer = GlobalState["AFKTimer"]
+		local AFKTimer = GlobalState.AFKTimer
 
 		while LocalPlayer.state.inCreator do
-			Citizen.Wait(30000)
+			Wait(30000)
 		end
 
 		while LocalPlayer.state.loggedIn do
-			Citizen.Wait(1000)
+			Wait(1000)
 			--TriggerServerEvent('mythic_pwnzor:server:PingCheck', securityToken, isLoggedIn)
 			local playerPed = PlayerPedId()
-			if playerPed and not afkCd and not isAfk and not (GlobalState["DisableAFK"] or false) then
+			if playerPed and not afkCd and not isAfk and not (GlobalState.DisableAFK or false) then
 				currentPos = GetEntityCoords(playerPed)
 				if prevPos ~= nil then
 					if
@@ -148,7 +148,7 @@ RegisterNetEvent("Characters:Client:Spawn", function()
 					else
 						time = 0
 						afkCd = true
-						Citizen.SetTimeout(1000 * 60, function()
+						SetTimeout(1000 * 60, function()
 							afkCd = false
 						end)
 					end

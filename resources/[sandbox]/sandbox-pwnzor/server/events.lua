@@ -232,8 +232,8 @@ local _blacklistedEvents = {
 	"esx_society:putVehicleDFWMInGarage",
 }
 
-Citizen.CreateThread(function()
-	GlobalState["BlacklistedVars"] = {
+CreateThread(function()
+	GlobalState.BlacklistedVars = {
 		"ESX",
 		"fESX",
 		"TiagoMenu",
@@ -253,7 +253,7 @@ Citizen.CreateThread(function()
 	}
 end)
 
-for k, v in ipairs(_blacklistedEvents) do
+for _, v in ipairs(_blacklistedEvents) do
 	RegisterNetEvent(v)
 	AddEventHandler(v, function()
 		local src = source

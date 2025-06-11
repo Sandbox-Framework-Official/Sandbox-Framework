@@ -57,7 +57,7 @@ function RemoveCraftingCooldown(source, bench, id)
 end
 
 function LoadCraftingCooldowns()
-	Citizen.CreateThread(function()
+	CreateThread(function()
 		local cds = MySQL.query.await('SELECT * FROM crafting_cooldowns WHERE expires > ?', { os.time() })
 
 		for k, v in ipairs(cds or {}) do
@@ -72,7 +72,7 @@ function CleanupExpiredCooldowns()
 	if _cdThreading then return end
 	_cdThreading = true
 
-	Citizen.CreateThread(function()
+	CreateThread(function()
 		while _cdThreading do
 			for k, v in pairs(_cooldowns) do
 				for k2, v2 in pairs(v) do
@@ -87,7 +87,7 @@ function CleanupExpiredCooldowns()
 					Logger:Info("Inventory", string.format("Remove ^2%s^7 Expired Crafting Cooldowns", d.affectedRows))
 				end
 			end)
-			Citizen.Wait(60000)
+			Wait(60000)
 		end
 	end)
 end
@@ -102,7 +102,7 @@ end
 CRAFTING = {
 	RegisterBench = function(self, id, label, targeting, location, restrictions, recipes, canUseSchematics, isPubSchemTable)
 		while not itemsLoaded do
-			Citizen.Wait(10)
+			Wait(10)
 		end
 
 		_cooldowns[id] = _cooldowns[id] or {}
@@ -158,7 +158,7 @@ CRAFTING = {
 			end
 
 			local recipe = nil
-			for k, v in pairs(recipies or {}) do
+			for _, v in pairs(recipies or {}) do
 				if v.id == schemId then
 					recipe = v
 					break
@@ -170,7 +170,7 @@ CRAFTING = {
 			end
 
 			local reagents = {}
-			for k, v in ipairs(recipe.items) do
+			for _, v in ipairs(recipe.items) do
 				if reagents[v.name] ~= nil then
 					reagents[v.name] = reagents[v.name] + (v.count * qty)
 				else
@@ -211,12 +211,12 @@ CRAFTING = {
 
 			local p = promise.new()
 
-			Citizen.CreateThread(function()
+			CreateThread(function()
 				local meta = {}
 				if itemsDatabase[recipe.result.name].type == 2 and not itemsDatabase[recipe.result.name].noSerial then
 					meta.Scratched = true
 				end
-	
+
 				if recipe.cooldown then
 					if _types[bench].isPubSchemTable then
 						InsertCooldown(string.format("%s:%s", bench, crafter), recipe.id, (os.time() * 1000) + recipe.cooldown)
@@ -224,7 +224,7 @@ CRAFTING = {
 						InsertCooldown(bench, recipe.id, (os.time() * 1000) + recipe.cooldown)
 					end
 				end
-	
+
 				if INVENTORY:AddItem(crafter, recipe.result.name, recipe.result.count * qty, meta, 1) then
 					local inv = getInventory(crafterSource, crafter, 1)
 					if _types[bench].isPubSchemTable then
@@ -340,7 +340,7 @@ CRAFTING = {
 			then
 				local recipies = bench.recipes
 				local cooldowns = _cooldowns[benchId]
-	
+
 				if bench.isPubSchemTable then
 					cooldowns = _cooldowns[string.format("%s:%s", benchId, char:GetData("SID"))]
 

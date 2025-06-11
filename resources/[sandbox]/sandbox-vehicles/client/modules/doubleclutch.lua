@@ -2,7 +2,7 @@ local _isEnabled = true
 local _threshold = 50
 local _minGears = 3
 
-Citizen.CreateThread(function()
+CreateThread(function()
 	while true do
 		if VEHICLE_SEAT == -1 and _isEnabled then
 			if
@@ -14,13 +14,13 @@ Citizen.CreateThread(function()
 
 				while GetVehicleCurrentRpm(VEHICLE_INSIDE) > 0.6 and maxGears > _minGears do
 					SetVehicleCurrentRpm(VEHICLE_INSIDE, 0.3)
-					Citizen.Wait(1)
+					Wait(1)
 				end
 
-				Citizen.Wait(800)
+				Wait(800)
 			end
 		end
-		Citizen.Wait(1000)
+		Wait(1000)
 	end
 end)
 

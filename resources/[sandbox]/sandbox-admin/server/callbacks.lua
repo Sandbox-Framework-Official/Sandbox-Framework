@@ -36,7 +36,7 @@ end
 
 function RegisterCallbacks()
     Callbacks:RegisterServerCallback('Admin:GetPlayerList', function(source, data, cb)
-        Citizen.CreateThread(function()
+        CreateThread(function()
             local player = Fetch:Source(source)
             if player and player.Permissions:IsStaff() then
                 local data = {}
@@ -521,7 +521,7 @@ function RegisterCallbacks()
                         local vehCoords = GetEntityCoords(data.target)
 
                         SetEntityCoords(pPed, vehCoords.x, vehCoords.y, vehCoords.z - 25.0, true, false, false, false)
-                        Citizen.Wait(300)
+                        Wait(300)
                         SetPedIntoVehicle(pPed, data.target, i)
 
                         break
