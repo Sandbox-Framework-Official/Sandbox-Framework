@@ -74,7 +74,6 @@ Spawn = {
 			Wait(500)
 		end
 		SetPlayerModel(PlayerId(), model)
-		player = PlayerPedId()
 		SetPedDefaultComponentVariation(player)
 		SetEntityAsMissionEntity(player, true, true)
 		SetModelAsNoLongerNeeded(model)
@@ -101,7 +100,6 @@ Spawn = {
 		SetCanAttackFriendly(player, true, true)
 		NetworkSetFriendlyFireOption(true)
 
-		SetEntityMaxHealth(player, 200)
 		SetEntityHealth(player, data.HP > 100 and data.HP or 200)
 		DisplayHud(true)
 
