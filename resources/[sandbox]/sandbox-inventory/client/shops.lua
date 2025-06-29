@@ -3,7 +3,7 @@ showingMarker = false
 _isLoggedIn = false
 
 function setupStores(shops)
-	for k, v in pairs(shops) do
+	for _, v in pairs(shops) do
 		if v.coords ~= nil then
 			local menu = {
 				icon = "sack-dollar",

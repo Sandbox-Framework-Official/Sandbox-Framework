@@ -60,7 +60,7 @@ RegisterNetEvent("Inventory:Client:UseVanityItem", function(sender, action, item
 			end
 		end
 	end
-	Citizen.SetTimeout(10000, function()
+	SetTimeout(10000, function()
 		Hud.Overlay:Hide()
 	end)
 end)

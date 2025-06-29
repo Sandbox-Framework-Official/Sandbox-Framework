@@ -84,11 +84,11 @@ AddEventHandler("Core:Shared:Ready", function()
 						disableMouse = false,
 						disableCombat = true,
 					},
-					-- animation = {
-					-- 	animDict = "weapons@rifle@lo@carbine_str",
-					-- 	anim = "reload_aim",
-					-- 	flags = 48,
-					-- },
+					animation = {
+						animDict = "weapons@rifle@lo@carbine_str",
+						anim = "reload_aim",
+						flags = 48,
+					},
 				}, function(status)
 					cb(not status)
 				end)
@@ -151,9 +151,9 @@ AddEventHandler("Core:Shared:Ready", function()
 						anim = "reload_aim",
 						flags = 48,
 					},
-					-- prop = {
-					-- 	model = "prop_ld_ammo_pack_01",
-					-- }
+					prop = {
+						model = "prop_ld_ammo_pack_01",
+					}
 				}, function(status)
 					if not status then
 						Weapons.Ammo:Add(data)
