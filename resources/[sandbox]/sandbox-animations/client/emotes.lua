@@ -172,7 +172,7 @@ function DoAnEmote(emoteData, fromUserInput, length, notCancellable, emoteName, 
         IsAbleToCancel = not notCancellable
 
         if LocalPlayer.state.sitting then
-            StandTheFuckUp(true)
+            StandUp(true)
         end
 
         if not skipDisarm then
@@ -317,7 +317,7 @@ function DoAnEmote(emoteData, fromUserInput, length, notCancellable, emoteName, 
         end
 
         if not isLooped or forcedLength then
-            Citizen.SetTimeout(animLength, function()
+            SetTimeout(animLength, function()
                 Animations.Emotes:ForceCancel()
                 IsAbleToCancel = true
             end)

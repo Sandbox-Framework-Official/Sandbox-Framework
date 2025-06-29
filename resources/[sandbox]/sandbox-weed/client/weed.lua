@@ -78,16 +78,16 @@ function RegisterCallbacks()
 		local rayHandle = StartExpensiveSynchronousShapeTestLosProbe(x, y, z + 4, x, y, z - 2, 1, 0, 4)
 		local retval, hit, endCoords, _, materialHash, _ = GetShapeTestResultIncludingMaterial(rayHandle)
 
-		local fuck = false
+		local plantWeed = false
 		for k,v in pairs(_activePlants) do
 			if v and v.plant and #(vector3(x, y, z) - vector3(v.plant.location.x, v.plant.location.y, v.plant.location.z)) <= 0.8 then
-				fuck = true
+				plantWeed = true
 			end
 		end
 
 		if hit then
 			if Materials[materialHash] ~= nil and not Polyzone:IsCoordsInZone(vector3(x, y, z), "cayo_perico") and not Polyzone:IsCoordsInZone(vector3(x, y, z), "casino_roof_weed_blocker") then
-				if not fuck then
+				if not plantWeed then
 					Progress:Progress({
 						name = "plant_weed",
 						duration = 15000,

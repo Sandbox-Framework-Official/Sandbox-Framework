@@ -458,22 +458,22 @@ AddEventHandler("Scenes:Client:OpenOptionsMenu", function(values, data)
 	_creationMenu:Show()
 end)
 
-function EditScene(id, fuckface, data)
+function EditScene(id, sceneid, data)
 	if _creationOpen then
 		return
 	end
-	local creatingSceneData = deepcopy(fuckface)
+	local creatingSceneData = deepcopy(sceneid)
 
 	_creationMenu = Menu:Create("scenes", "Edit Scene", function()
 		_creationOpen = true
-		_hiddenScenes[fuckface._id] = true
+		_hiddenScenes[sceneid._id] = true
 		CreateThread(function()
 			while _creationOpen do
 				DrawScene(creatingSceneData)
 				Wait(2)
 			end
 
-			_hiddenScenes[fuckface._id] = nil
+			_hiddenScenes[sceneid._id] = nil
 		end)
 
 		CreateThread(function()

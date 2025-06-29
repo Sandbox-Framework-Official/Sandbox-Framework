@@ -65,7 +65,7 @@ RegisterNUICallback("Boosting:AcceptContract", function(data, cb)
         if res?.success then
             Laptop.Data:Add("disabledBoostingContracts", data.id)
 
-            Citizen.SetTimeout(120000, function()
+            SetTimeout(120000, function()
                 Laptop.Data:Remove("disabledBoostingContracts", data.id)
             end)
         end

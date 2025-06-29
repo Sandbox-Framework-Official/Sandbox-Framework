@@ -1573,8 +1573,7 @@ _gangChains = {
 	},
 }
 
--- This needs to use the raw ids for various shit
--- if you dont know what your doing, dont do shit here :)
+-- This needs to use the raw ids
 _hideFromStore = {
 	props = {
 		[1] = {

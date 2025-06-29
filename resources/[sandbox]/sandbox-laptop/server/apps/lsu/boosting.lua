@@ -112,14 +112,14 @@ AddEventHandler("Laptop:Server:RegisterCallbacks", function()
 
                 }, function(success, results)
                     if success and results then
-                        local cunts = {}
+                        local bannedPlayers = {}
                         for k, v in ipairs(results) do
                             v.RacingAlias = v.Profiles?.redline?.name
 
-                            table.insert(cunts, v)
+                            table.insert(bannedPlayers, v)
                         end
 
-                        cb(cunts)
+                        cb(bannedPlayers)
                     else
                         cb(false)
                     end
@@ -569,7 +569,7 @@ AddEventHandler("Laptop:Server:RegisterCallbacks", function()
             and _boosting[team.ID].state == 2
             and (not _boosting[team.ID].trackerCooldown or GetGameTimer() >= _boosting[team.ID].trackerCooldown)
         then
-            Citizen.SetTimeout(500, function()
+            SetTimeout(500, function()
                 Callbacks:ClientCallback(source, "Laptop:LSUnderground:Boosting:TrackerHacker", {}, function(using, success)
                     if using and _boosting[team?.ID] then
 
@@ -1000,7 +1000,7 @@ LAPTOP.LSUnderground.Boosting = {
                         {}
                     )
 
-                    Citizen.SetTimeout(20000, function()
+                    SetTimeout(20000, function()
                         if DoesEntityExist(spawnedVehicle) then
                             vehState.Locked = true
                             SetVehicleDoorsLocked(spawnedVehicle, 2)
@@ -1101,7 +1101,7 @@ LAPTOP.LSUnderground.Boosting = {
                     end
                 end
 
-                Citizen.SetTimeout(60 * 1000, function()
+                SetTimeout(60 * 1000, function()
                     Vehicles:Delete(veh, function(success) end)
                 end)
             end

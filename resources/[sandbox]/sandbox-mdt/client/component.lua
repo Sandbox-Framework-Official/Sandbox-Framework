@@ -134,7 +134,7 @@ _MDT = {
 				_badgeOpen = true
 				badgeIdOpen = data.SID
 
-				Citizen.SetTimeout(9000, function()
+				SetTimeout(9000, function()
 					if _badgeOpen and badgeIdOpen == data.SID then
 						MDT.Badges:Close()
 					end
@@ -159,7 +159,7 @@ _MDT = {
 				_badgeOpen = true
 				badgeIdOpen = data.SID
 
-				Citizen.SetTimeout(9000, function()
+				SetTimeout(9000, function()
 					if _badgeOpen and badgeIdOpen == data.SID then
 						MDT.Licenses:Close()
 					end

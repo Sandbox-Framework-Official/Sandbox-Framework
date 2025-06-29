@@ -293,7 +293,7 @@ RegisterNUICallback("loaded", function(data, cb)
 
 	cb("ok")
 
-	Citizen.SetTimeout(5000, function()
+	SetTimeout(5000, function()
 		chatLoaded = true
 	end)
 end)

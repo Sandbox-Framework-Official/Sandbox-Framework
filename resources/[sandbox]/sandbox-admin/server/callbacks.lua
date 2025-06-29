@@ -1,6 +1,6 @@
 PER_PAGE = 10
 
-local fuckingCharProjection = {
+local CharProjection = {
     SID = 1,
     First = 1,
     Last = 1,
@@ -120,7 +120,7 @@ function RegisterCallbacks()
                         User = target:GetData('AccountID'),
                     },
                     options = {
-                        projection = fuckingCharProjection,
+                        projection = CharProjection,
                     }
                 }, function(success, results)
                     if success and results and #results > 0 then
@@ -245,7 +245,7 @@ function RegisterCallbacks()
                         ["$match"] = matchQuery,
                     },
                     {
-                        ["$project"] = fuckingCharProjection,
+                        ["$project"] = CharProjection,
                     },
                     {
                         ["$sort"] = {
@@ -320,7 +320,7 @@ function RegisterCallbacks()
         if player and data.action and data.targetSource and player.Permissions:IsStaff() then
             local target = Fetch:Source(data.targetSource)
             if target then
-                local canFuckWith = player.Permissions:GetLevel() > target.Permissions:GetLevel()
+                local permission = player.Permissions:GetLevel() > target.Permissions:GetLevel()
                 local notMe = player:GetData('Source') ~= target:GetData('Source')
                 local wasSuccessful = false
 
@@ -328,7 +328,7 @@ function RegisterCallbacks()
                 if targetChar then
                     local playerPed = GetPlayerPed(player:GetData('Source'))
                     local targetPed = GetPlayerPed(target:GetData('Source'))
-                    if data.action == 'bring' and canFuckWith and notMe then
+                    if data.action == 'bring' and permission and notMe then
                         local playerCoords = GetEntityCoords(playerPed)
                         Pwnzor.Players:TempPosIgnore(target:GetData("Source"))
                         SetEntityCoords(targetPed, playerCoords.x, playerCoords.y, playerCoords.z + 1.0)
@@ -365,7 +365,7 @@ function RegisterCallbacks()
                                 message = 'Can\'t Heal Yourself'
                             })
                         end
-                    elseif data.action == 'attach' and (canFuckWith or player.Permissions:GetLevel() == 100) and notMe then
+                    elseif data.action == 'attach' and (permission or player.Permissions:GetLevel() == 100) and notMe then
                         TriggerClientEvent('Admin:Client:Attach', source, target:GetData('Source'), GetEntityCoords(targetPed), {
                             First = targetChar:GetData("First"),
                             Last = targetChar:GetData("Last"),
@@ -379,7 +379,7 @@ function RegisterCallbacks()
                         })
 
                         wasSuccessful = true
-                    elseif data.action == 'marker' and (canFuckWith or player.Permissions:GetLevel() == 100) then
+                    elseif data.action == 'marker' and (permission or player.Permissions:GetLevel() == 100) then
                         local targetCoords = GetEntityCoords(targetPed)
                         TriggerClientEvent('Admin:Client:Marker', source, targetCoords.x, targetCoords.y)
 					else

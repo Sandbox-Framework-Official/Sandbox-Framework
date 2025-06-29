@@ -21,7 +21,7 @@ end)
 AddEventHandler('Keybinds:Client:KeyUp:primary_action', function()
     if _withinBallistics and LocalPlayer.state.loggedIn then
         Action:Hide('ballistics')
-        Inventory.Dumbfuck:Open({
+        Inventory.InventoryManager:Open({
             invType = 212,
             owner = _ballisticsId,
         })

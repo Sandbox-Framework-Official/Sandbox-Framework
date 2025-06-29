@@ -84,11 +84,11 @@ AddEventHandler("Core:Shared:Ready", function()
 						disableMouse = false,
 						disableCombat = true,
 					},
-					-- animation = {
-					-- 	animDict = "weapons@rifle@lo@carbine_str",
-					-- 	anim = "reload_aim",
-					-- 	flags = 48,
-					-- },
+					animation = {
+						animDict = "weapons@rifle@lo@carbine_str",
+						anim = "reload_aim",
+						flags = 48,
+					},
 				}, function(status)
 					cb(not status)
 				end)
@@ -151,9 +151,9 @@ AddEventHandler("Core:Shared:Ready", function()
 						anim = "reload_aim",
 						flags = 48,
 					},
-					-- prop = {
-					-- 	model = "prop_ld_ammo_pack_01",
-					-- }
+					prop = {
+						model = "prop_ld_ammo_pack_01",
+					}
 				}, function(status)
 					if not status then
 						Weapons.Ammo:Add(data)
@@ -702,7 +702,7 @@ function WeaponsThread()
 				if hasWeapon and not LocalPlayer.state.holstering then
 					if not ignoredHackerWeapons[hasHash] and hasHash ~= 0 and hasHash ~= _equippedHash then
 						RemoveAllPedWeapons(LocalPlayer.state.ped)
-						if not spammyFuck and not LocalPlayer.state.isDead and not ignoredWarningWeapons[hasHash] then
+						if not spam and not LocalPlayer.state.isDead and not ignoredWarningWeapons[hasHash] then
 							Callbacks:ServerCallback("Weapons:PossibleCheaterWarning", {
 								h = hasHash,
 								s = _equippedHash
@@ -710,9 +710,9 @@ function WeaponsThread()
 
 							end)
 
-							spammyFuck = true
-							Citizen.SetTimeout(10000, function()
-								spammyFuck = false
+							spam = true
+							SetTimeout(10000, function()
+								spam = false
 							end)
 						end
 					end
@@ -904,7 +904,7 @@ AddEventHandler("Weapons:Client:SmokeGrenade", function()
 end)
 
 AddEventHandler("Weapons:Client:Flashbang", function()
-	Citizen.SetTimeout(1500, function()
+	SetTimeout(1500, function()
 		local _, coords, prop = GetProjectileNearPed(PlayerPedId(), `WEAPON_FLASHBANG`, 1000.0, false)
 		AddExplosion(coords.x, coords.y, coords.z, 25, 1.0, true, true, true)
 		TriggerServerEvent("Weapons:Server:DoFlashFx", coords, NetworkGetNetworkIdFromEntity(prop) or prop)

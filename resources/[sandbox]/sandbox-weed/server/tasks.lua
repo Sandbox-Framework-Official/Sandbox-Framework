@@ -56,7 +56,7 @@ function RegisterTasks()
 
 			for k, v in pairs(_plants) do
 				if (os.time() - v.plant.planted) >= Config.Lifetime then
-					Logger:Trace("Weed", "Deleting Weed Plant Because Some Dumb Cunt Didn't Harvest It")
+					Logger:Trace("Weed", "Deleting Weed Plant")
 					Weed.Planting:Delete(k)
 				else
 					if v.plant.growth < 100 then
@@ -136,7 +136,7 @@ function RegisterTasks()
 						Weed.Planting:Delete(k)
 					end
 				else
-					Logger:Trace("Weed", "Deleting Weed Plant Because Some Dumb Cunt Didn't Water It")
+					Logger:Trace("Weed", "Deleting Weed Plant")
 					Weed.Planting:Delete(k)
 				end
 			end

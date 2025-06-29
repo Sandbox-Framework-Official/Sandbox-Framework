@@ -39,7 +39,7 @@ function RegisterJobChatCommands()
                     Chat.Send.System:Single(source, 'Error Giving Job - Maybe that State ID Doesn\'t Exist')
                 end
             else
-                Chat.Send.System:Single(source, 'Job Doesn\'t Exist Fuckface')
+                Chat.Send.System:Single(source, 'Job Doesn\'t Exist')
             end
             return
         else
@@ -87,7 +87,7 @@ function RegisterJobChatCommands()
                     Chat.Send.System:Single(source, 'Error Setting Job Owner')
                 end
             else
-                Chat.Send.System:Single(source, 'Job Doesn\'t Exist or Isn\'t a Company You Fuck')
+                Chat.Send.System:Single(source, 'Job Doesn\'t Exist or Isn\'t a Company')
             end
         else
             Chat.Send.System:Single(source, 'Invalid Job or State ID')

@@ -8,8 +8,8 @@ stupidFocusLoss = false
 MENU_OPEN = false
 
 --RetrieveComponents
-AddEventHandler("Menu:Shared:DependencyUpdate", SomeBullshitNameThatIsntFuckingUsedFUCKYOUBITCH)
-function SomeBullshitNameThatIsntFuckingUsedFUCKYOUBITCH()
+AddEventHandler("Menu:Shared:DependencyUpdate", RegisterComponents)
+function RegisterComponents()
 	UISounds = exports["sandbox-base"]:FetchComponent("UISounds")
 end
 
@@ -17,7 +17,7 @@ AddEventHandler("Core:Shared:Ready", function(component)
 	exports["sandbox-base"]:RequestDependencies("Menu", {
 		"UISounds",
 	}, function(error)
-		SomeBullshitNameThatIsntFuckingUsedFUCKYOUBITCH()
+		RegisterComponents()
 		if #error > 0 then
 			return
 		end

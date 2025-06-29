@@ -6,7 +6,7 @@ VEHICLES_PENDING_PROPERTIES = {}
 
 LICENSE_PLATE_DATA = {}
 
-_savedVehiclePropertiesClusterfuck = {}
+_savedVehicleProperties = {}
 
 AddEventHandler('Vehicles:Shared:DependencyUpdate', RetrieveComponents)
 function RetrieveComponents()
@@ -108,8 +108,8 @@ RegisterNetEvent('Vehicles:Server:PlayerSetProperties', function(veh, properties
                 vData:SetData('FirstSpawn', false)
                 VEHICLES_PENDING_PROPERTIES[veh] = nil
                 SaveVehicle(vState.VIN)
-            elseif vState.PleaseDoNotFuckingDelete then
-                _savedVehiclePropertiesClusterfuck[vState.VIN] = properties
+            elseif vState.DoNotDelete then
+                _savedVehicleProperties[vState.VIN] = properties
                 VEHICLES_PENDING_PROPERTIES[veh] = nil
             end
         end
@@ -485,7 +485,7 @@ VEHICLE = {
         Spawn = function(self, source, VIN, coords, heading, cb, extraData)
             Vehicles.Owned:GetVIN(VIN, function(vehicle)
                 if vehicle and not Vehicles.Owned:GetActive(VIN) then
-                    local spawnedVehicle = CreateFuckingVehicle(vehicle.ModelType, vehicle.Vehicle, coords, (heading and heading + 0.0 or 0.0))
+                    local spawnedVehicle = CreateVehicle(vehicle.ModelType, vehicle.Vehicle, coords, (heading and heading + 0.0 or 0.0))
                     if spawnedVehicle then
                         -- Set State
                         local vehState = Entity(spawnedVehicle).state
@@ -810,7 +810,7 @@ VEHICLE = {
     },
 
     SpawnTemp = function(self, source, model, modelType, coords, heading, cb, vehicleInfoData, properties, preDamage, suppliedPlate, suppliedVIN, spawnAsShit)
-        local spawnedVehicle = CreateFuckingVehicle(modelType, model, coords, heading, spawnAsShit)
+        local spawnedVehicle = CreateVehicle(modelType, model, coords, heading, spawnAsShit)
         local vehState = Entity(spawnedVehicle).state
         local plate = suppliedPlate or Vehicles.Identification.Plate:Generate(true)
         vehState.VIN = suppliedVIN or Vehicles.Identification.VIN:GenerateLocal()
@@ -821,7 +821,7 @@ VEHICLE = {
         vehState.Plate = plate
 
         vehState.ServerEntity = spawnedVehicle
-        vehState.PleaseDoNotFuckingDelete = true
+        vehState.DoNotDelete = true
 
         if vehicleInfoData then
             vehState.Make = vehicleInfoData.Make
@@ -869,8 +869,8 @@ VEHICLE = {
                 end)
             else
                 vehState.Deleted = true
-                if _savedVehiclePropertiesClusterfuck[vehState.VIN] ~= nil then
-                    _savedVehiclePropertiesClusterfuck[vehState.VIN] = nil
+                if _savedVehicleProperties[vehState.VIN] ~= nil then
+                    _savedVehicleProperties[vehState.VIN] = nil
                 end
 
                 DeleteEntity(vehicleId)
@@ -889,7 +889,7 @@ VEHICLE = {
                 VEHICLES_PENDING_PROPERTIES[vehicle] = true
 
                 ent.state.ServerEntity = vehicle
-                ent.state.PleaseDoNotFuckingDelete = true
+                ent.state.DoNotDelete = true
                 ent.state.awaitingProperties = {
                     stopDespawnInit = true,
                 }
@@ -963,7 +963,7 @@ function ApplyOldVehicleState(veh, fuel, damage, damagedParts, mileage, engineHe
         ent.state.awaitingBlownUp = isBlownUp
 
         if localProperties then
-            ent.state.PleaseDoNotFuckingDelete = true
+            ent.state.DoNotDelete = true
             ent.state.awaitingProperties = {
                 needInit = false,
                 properties = localProperties,
@@ -984,8 +984,8 @@ end)
 AddEventHandler('entityRemoved', function(entity)
     if GetEntityType(entity) == 2 then
         local ent = Entity(entity)
-        if ent?.state?.VIN and (ent.state.Owned or ent.state.PleaseDoNotFuckingDelete) and not ent.state.Deleted then
-            local isLocal = ent.state.PleaseDoNotFuckingDelete
+        if ent?.state?.VIN and (ent.state.Owned or ent.state.DoNotDelete) and not ent.state.Deleted then
+            local isLocal = ent.state.DoNotDelete
 
             local vehModel = GetEntityModel(entity)
             local vehPlate = GetVehicleNumberPlateText(entity)
@@ -1019,7 +1019,7 @@ AddEventHandler('entityRemoved', function(entity)
                 Vehicles:SpawnTemp(-1, vehModel, nil, coords, heading, function(vehicleId)
                     SetVehicleBodyHealth(vehicleId, bodyHealth + 0.0)
 
-                    ApplyOldVehicleState(vehicleId, fuel, damage, damagedParts, mileage, engineHealth, bodyHealth, isBlownUp, _savedVehiclePropertiesClusterfuck[VIN], lastDriven, spawnedTemp)
+                    ApplyOldVehicleState(vehicleId, fuel, damage, damagedParts, mileage, engineHealth, bodyHealth, isBlownUp, _savedVehicleProperties[VIN], lastDriven, spawnedTemp)
                 end, false, false, false, vehPlate, VIN, true)
             else
                 Vehicles.Owned:Spawn(-1, VIN, coords, heading, function(success, vehicleData, vehicleId)

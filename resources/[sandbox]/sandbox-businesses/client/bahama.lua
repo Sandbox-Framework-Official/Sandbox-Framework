@@ -114,7 +114,7 @@ AddEventHandler("Businesses:Client:Startup", function()
 						icon = "money-bill-1-wave",
 						label = v.text,
 						action = function()
-							local nearestStripper = GetNearbyFuckingStripper()
+							local nearestStripper = GetNearbyStripper()
 							if nearestStripper then
 								MakeItRainBitchBahama(nearestStripper, v.type, v.time)
 							end
@@ -129,7 +129,7 @@ AddEventHandler("Businesses:Client:Startup", function()
 		end
 	end, function()
 		return Polyzone:IsCoordsInZone(GetEntityCoords(LocalPlayer.state.ped), "bh_makeitrain")
-			and GetNearbyFuckingStripper()
+			and GetNearbyStripper()
 	end)
 end)
 

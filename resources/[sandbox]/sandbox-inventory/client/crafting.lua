@@ -225,5 +225,3 @@ RegisterNUICallback("Crafting:Craft", function(data, cb)
 		end
 	end)
 end)
-
-function RegisterBenches() end

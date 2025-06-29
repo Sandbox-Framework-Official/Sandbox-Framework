@@ -16,7 +16,7 @@ RegisterNetEvent("Properties:Client:InnerStuff", function(propertyData, int, fur
 	TriggerEvent("Interiors:Enter", interior.locations.front.coords, propertyData.id, int, propertyData.data)
 
 	-- if wakeUp and intr.locations.wakeup then
-	-- 	Citizen.SetTimeout(250, function()
+	-- 	SetTimeout(250, function()
 	-- 		Animations.Emotes:WakeUp(intr.locations.wakeup)
 	-- 	end)
 	-- end

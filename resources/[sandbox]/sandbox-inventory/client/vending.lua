@@ -20,7 +20,7 @@ local vendingMachines = {
 }
 
 function CreateVendingMachines()
-	for k, v in ipairs(vendingMachines) do
+	for _, v in ipairs(vendingMachines) do
 		Targeting:AddObject(v.model, v.icon, {
 			{
 				text = v.text or "Use Vending Machine",

@@ -64,17 +64,17 @@ export default ({ current, history }) => {
 
     useEffect(() => {
         const now = moment().unix();
-        let cunts = history.map(h => {
+        let formattedHistory = history.map(h => {
             return { ...h, name: moment.unix(h.time).format('HH:mm') };
         });
 
-        cunts.push({
+        formattedHistory.push({
             time: now,
             count: current,
             name: 'Now',
         });
 
-        setPHistory(cunts);
+        setPHistory(formattedHistory);
     }, [history, current]);
 
 	return (

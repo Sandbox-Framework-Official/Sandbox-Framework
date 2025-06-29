@@ -34,7 +34,7 @@ function StartRouletteGame(tableId)
 
         print(string.format("Roulette Game Table: %s Num: %s", tableId, winningBetIndex))
 
-        Citizen.SetTimeout(30000, function()
+        SetTimeout(30000, function()
             _roulette[tableId].Started = true
 
             UpdateRouletteGameState(tableId)
@@ -158,7 +158,7 @@ function CheckRouletteWinners(tableId, bets, winningIndex)
     for k, v in pairs(totalsLost) do
         if v > 0 then
             UpdateCharacterCasinoStats(k, "roulette", false, v)
-            GiveCasinoFuckingMoney(k, "Roulette", v)
+            GiveCasinoMoney(k, "Roulette", v)
         end
     end
 
@@ -278,8 +278,8 @@ AddEventHandler("Casino:Server:Startup", function()
                     --SendCasinoSpentChipsPhoneNotification(source, amount)
 
                     if amount > 10000 then
-                        local shit = math.floor(amount / 10000)
-                        for i = 1, shit do
+                        local betCount = math.floor(amount / 10000)
+                        for i = 1, betCount do
                             table.insert(_roulette[roulettePlayer.Table].Bets, {
                                 betId = betId,
                                 Source = source,

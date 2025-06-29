@@ -29,7 +29,7 @@ AddEventHandler('Finance:Server:Startup', function()
 
     Chat:RegisterAdminCommand('testbilling', function(source, args, rawCommand)
         Execute:Client(source, 'Notification', 'Info', 'Bill Created')
-        Billing:Create(source, 'Some Random Fucking Business', 1500, 'This is a shitty description of a test bill.', function(wasPayed)
+        Billing:Create(source, 'Some Random Business', 1500, 'This is a description of a test bill.', function(wasPayed)
             if wasPayed then
                 Execute:Client(source, 'Notification', 'Success', 'Bill Accepted')
             else

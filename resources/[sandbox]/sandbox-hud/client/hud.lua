@@ -408,13 +408,13 @@ HUD = {
 				if not _idsCd then
 					ShowIds()
 					_idsCd = true
-					Citizen.SetTimeout(6000, function()
+					SetTimeout(6000, function()
 						HUD.ID:Toggle()
 					end)
 				end
 			else
 				_showingIds = false
-				Citizen.SetTimeout(10000, function()
+				SetTimeout(10000, function()
 					_idsCd = false
 				end)
 			end

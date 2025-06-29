@@ -28,10 +28,6 @@ AddEventHandler("Core:Shared:Ready", function()
 			return
 		end
 		RetrieveComponents()
-
-		-- PedInteraction:Add('fuck', `a_m_y_soucent_04`, vector3(-810.171, -1311.092, 4.000), 332.419, 50.0, {
-		--     { icon = 'boxes-stacked', text = 'F', event = 'F', data = {}, minDist = 2.0, jobs = false },
-		-- })
 	end)
 end)
 

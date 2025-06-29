@@ -14,9 +14,9 @@ end)
 
 local function DirectionToRotation(dir, roll)
 	local x, y, z
-	z = -(math.deg(math.atan2(dir.x, dir.y)))
+	z = -(math.deg(math.atan(dir.x, dir.y)))
 	local rotpos = vector3(dir.z, #vector2(dir.x, dir.y), 0.0)
-	x = math.deg(math.atan2(rotpos.x, rotpos.y))
+	x = math.deg(math.atan(rotpos.x, rotpos.y))
 	y = roll
 	return vector3(x, y, z)
 end

@@ -73,7 +73,7 @@ AddEventHandler('Vehicles:Client:StartUp', function()
             TriggerEvent("EmergencyAlerts:Client:PursuitModeChange", _inPursuitVehicleSettings[_inPursuitVehicleMode].name or _inPursuitVehicleMode)
 
             _timeout = true
-            Citizen.SetTimeout(2000, function()
+            SetTimeout(2000, function()
                 _timeout = false
             end)
         end

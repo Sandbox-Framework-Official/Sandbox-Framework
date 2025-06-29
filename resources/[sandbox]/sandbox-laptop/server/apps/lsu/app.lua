@@ -324,7 +324,7 @@ AddEventHandler("Laptop:Server:RegisterCallbacks", function()
 							)
 						)
 
-						Citizen.SetTimeout(5000, function()
+						SetTimeout(5000, function()
 							Laptop.Notification:Add(
 								source,
 								"Program Installed",

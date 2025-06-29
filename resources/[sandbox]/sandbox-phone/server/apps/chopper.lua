@@ -41,7 +41,7 @@ AddEventHandler("Phone:Server:RegisterCallbacks", function()
 
 						char:SetData("Apps", Phone.Store.Install:Do("chopper", char:GetData("Apps"), "force"))
 
-						Citizen.SetTimeout(5000, function()
+						SetTimeout(5000, function()
 							Phone.Notification:Add(source, "App Installed", nil, os.time(), 6000, "chopper", {
 								view = "",
 							}, nil)

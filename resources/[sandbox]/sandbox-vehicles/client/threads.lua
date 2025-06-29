@@ -179,7 +179,7 @@ AddEventHandler("Vehicles:Client:CharacterLogin", function()
 		end
 	end)
 
-    Citizen.CreateThread( function()
+    CreateThread( function()
 		local restoreMode1, restoreMode2 = nil, nil
         while _characterLoaded do
 			if IsPedInAnyVehicle(LocalPlayer.state.ped) then

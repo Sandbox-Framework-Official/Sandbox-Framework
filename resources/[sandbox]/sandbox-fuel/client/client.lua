@@ -235,7 +235,7 @@ function LowFuelEffects(veh)
 	end
 
 	_engineShutoff = true
-	Citizen.SetTimeout(2000, function()
+	SetTimeout(2000, function()
 		_engineShutoff = false
 	end)
 
@@ -344,7 +344,7 @@ AddEventHandler("Vehicles:Client:StartFueling", function(entityData, data)
 
 				Notification:Info("Nice One Champ")
 
-				Citizen.SetTimeout(60000, function()
+				SetTimeout(60000, function()
 					for k, v in ipairs(_fuelFires) do
 						RemoveScriptFire(v)
 					end
@@ -394,7 +394,7 @@ AddEventHandler("Vehicles:Client:StartJerryFueling", function(entityData)
 				local hasWeapon, weapon = GetCurrentPedWeapon(LocalPlayer.state.ped)
 				local ammoAmount = GetPedAmmoByType(LocalPlayer.state.ped, `AMMO_PETROLCAN`)
 				local fuelAmount = 50 * ammoAmount / 4500
-				local fuck = fuelAmount
+				local newFuelAmount = fuelAmount
 				local fuelAmountAfterUse = 0
 
 				if not hasWeapon or weapon ~= `WEAPON_PETROLCAN` then
@@ -486,7 +486,7 @@ AddEventHandler("Vehicles:Client:StartJerryFueling", function(entityData)
 
 							Notification:Info("Nice One Champ")
 
-							Citizen.SetTimeout(60000, function()
+							SetTimeout(60000, function()
 								for k, v in ipairs(_fuelFires) do
 									RemoveScriptFire(v)
 								end
@@ -501,7 +501,7 @@ AddEventHandler("Vehicles:Client:StartJerryFueling", function(entityData)
 					_fueling = false
 					if wasCancelled then
 						fuelAmount = math.ceil(fuelAmount * (secondsElapsed / time))
-						fuelAmountAfterUse = math.floor(fuck - fuelAmount)
+						fuelAmountAfterUse = math.floor(newFuelAmount - fuelAmount)
 					end
 
 					SetPedAmmoByType(LocalPlayer.state.ped, `AMMO_PETROLCAN`, (fuelAmountAfterUse / 50 * 4500))

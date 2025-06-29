@@ -42,7 +42,7 @@ _vehicleRepair = {
 				local driverPed = GetPedInVehicleSeat(veh, -1)
 				if driverPed == 0 or driverPed == GLOBAL_PED then
 					local timeout = false
-					Citizen.SetTimeout(2000, function()
+					SetTimeout(2000, function()
 						timeout = true
 					end)
 
@@ -169,7 +169,7 @@ _vehicleRepair = {
 				local driverPed = GetPedInVehicleSeat(veh, -1)
 				if driverPed == 0 or driverPed == GLOBAL_PED then
 					local timeout = false
-					Citizen.SetTimeout(2000, function()
+					SetTimeout(2000, function()
 						timeout = true
 					end)
 

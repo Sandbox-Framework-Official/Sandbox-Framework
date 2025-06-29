@@ -221,7 +221,7 @@ function getDealerAnimString(tableId)
     return ""
 end
 
-function doStupidFuckingAnimation(dict, anim)
+function doAnimation(dict, anim)
     local duration = GetAnimDuration(dict, anim)
     TaskPlayAnim(LocalPlayer.state.ped, dict, anim, 2.0, 0.0, duration, 48, 0.0, 0, 0, 0)
 
@@ -1593,7 +1593,7 @@ end
 
 function DoBlackjackDeclineCardAnimation()
     shouldForceIdleCardGames = false
-    local duration = doStupidFuckingAnimation("anim_casino_b@amb@casino@games@blackjack@player", "decline_card_001")
+    local duration = doAnimation("anim_casino_b@amb@casino@games@blackjack@player", "decline_card_001")
     SetTimeout(duration, function()
         shouldForceIdleCardGames = true
     end)
@@ -1601,7 +1601,7 @@ end
 
 function DoBlackjackRequestCardAnimation()
     shouldForceIdleCardGames = false
-    local duration = doStupidFuckingAnimation("anim_casino_b@amb@casino@games@blackjack@player", "request_card")
+    local duration = doAnimation("anim_casino_b@amb@casino@games@blackjack@player", "request_card")
     SetTimeout(duration, function()
         shouldForceIdleCardGames = true
     end)
@@ -1609,7 +1609,7 @@ end
 
 function DoBlackjackPlaceBetAnimation()
     shouldForceIdleCardGames = false
-    local duration = doStupidFuckingAnimation("anim_casino_b@amb@casino@games@blackjack@player", getAnimNameFromBet(100))
+    local duration = doAnimation("anim_casino_b@amb@casino@games@blackjack@player", getAnimNameFromBet(100))
 
     SetTimeout(duration, function()
         shouldForceIdleCardGames = true
@@ -1618,7 +1618,7 @@ end
 
 function DoBlackjackBustAnimation()
     shouldForceIdleCardGames = false
-    local duration = doStupidFuckingAnimation("anim_casino_b@amb@casino@games@shared@player@", "reaction_terrible_var_01")
+    local duration = doAnimation("anim_casino_b@amb@casino@games@shared@player@", "reaction_terrible_var_01")
     SetTimeout(duration, function()
         shouldForceIdleCardGames = true
     end)
@@ -1626,7 +1626,7 @@ end
 
 function DoBlackjackLossAnimation()
     shouldForceIdleCardGames = false
-    local duration = doStupidFuckingAnimation("anim_casino_b@amb@casino@games@shared@player@", "reaction_bad_var_01")
+    local duration = doAnimation("anim_casino_b@amb@casino@games@shared@player@", "reaction_bad_var_01")
     SetTimeout(duration * 0.9, function()
         shouldForceIdleCardGames = true
     end)
@@ -1634,7 +1634,7 @@ end
 
 function DoBlackjackPushAnimation()
     shouldForceIdleCardGames = false
-    local duration = doStupidFuckingAnimation("anim_casino_b@amb@casino@games@shared@player@", "reaction_impartial_var_01")
+    local duration = doAnimation("anim_casino_b@amb@casino@games@shared@player@", "reaction_impartial_var_01")
     SetTimeout(duration * 0.9, function()
         shouldForceIdleCardGames = true
     end)
@@ -1642,7 +1642,7 @@ end
 
 function DoBlackjackWinAnimation()
     shouldForceIdleCardGames = false
-    local duration = doStupidFuckingAnimation("anim_casino_b@amb@casino@games@shared@player@", "reaction_good_var_01")
+    local duration = doAnimation("anim_casino_b@amb@casino@games@shared@player@", "reaction_good_var_01")
     SetTimeout(duration * 0.9, function()
         shouldForceIdleCardGames = true
     end)

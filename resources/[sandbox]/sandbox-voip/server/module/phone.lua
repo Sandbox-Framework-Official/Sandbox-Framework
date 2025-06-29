@@ -1,4 +1,4 @@
-_fuckingVOIPPhone = {
+_Phone = {
 	Phone = {
 		AddToCall = function(self, source, callChannel)
 			if not voiceData[source] then
@@ -65,7 +65,7 @@ _fuckingVOIPPhone = {
 
 AddEventHandler("Proxy:Shared:ExtendReady", function(component)
 	if component == "VOIP" then
-		exports["sandbox-base"]:ExtendComponent(component, _fuckingVOIPPhone)
+		exports["sandbox-base"]:ExtendComponent(component, _Phone)
 	end
 end)
 

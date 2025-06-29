@@ -494,7 +494,7 @@ export default connect(null, {
 		setLoading(false);
 	};
 
-	const fuckme = (m) => {
+	const addMessage = (m) => {
 		setMessages([...messages, { ...m, time: m.time }]);
 		clearUnread();
 	};
@@ -506,7 +506,7 @@ export default connect(null, {
 	return (
 		<EventListener
 			event="RECEIVED_NEW_MESSAGE"
-			onEvent={fuckme}
+			onEvent={addMessage}
 			state={messages}
 		>
 			<AppContainer

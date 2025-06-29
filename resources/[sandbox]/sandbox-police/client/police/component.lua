@@ -374,7 +374,7 @@ AddEventHandler("Core:Shared:Ready", function()
                             },
                         })
 
-                        Citizen.SetTimeout(60 * 1000 * 5, function()
+                        SetTimeout(60 * 1000 * 5, function()
                             UISounds.Play:FrontEnd(-1, "TIMER_STOP", "HUD_MINI_GAME_SOUNDSET")
                         end)
 					end,
@@ -437,9 +437,9 @@ AddEventHandler("Core:Shared:Ready", function()
 		Interaction:RegisterMenu("pd-breach-robbery", "Breach House Robbery", "bomb", function(data)
 			local bruh = GlobalState["Robbery:InProgress"]
 			for k, v in ipairs(bruh) do
-				local fuck = GlobalState[string.format("Robbery:InProgress:%s", v)]
-				if fuck then
-					local dist = #(vector3(LocalPlayer.state.myPos.x, LocalPlayer.state.myPos.y, LocalPlayer.state.myPos.z) - vector3(fuck.x, fuck.y, fuck.z))
+				local inProgress = GlobalState[string.format("Robbery:InProgress:%s", v)]
+				if inProgress then
+					local dist = #(vector3(LocalPlayer.state.myPos.x, LocalPlayer.state.myPos.y, LocalPlayer.state.myPos.z) - vector3(inProgress.x, inProgress.y, inProgress.z))
 					if dist <= 3.0 then
 						Callbacks:ServerCallback("Police:Breach", {
 							type = "robbery",
@@ -455,9 +455,9 @@ AddEventHandler("Core:Shared:Ready", function()
 			if LocalPlayer.state.onDuty and LocalPlayer.state.onDuty == "police" then
 				local bruh = GlobalState["Robbery:InProgress"]
 				for k, v in ipairs(bruh) do
-					local fuck = GlobalState[string.format("Robbery:InProgress:%s", v)]
-					if fuck then
-						local dist = #(vector3(LocalPlayer.state.myPos.x, LocalPlayer.state.myPos.y, LocalPlayer.state.myPos.z) - vector3(fuck.x, fuck.y, fuck.z))
+					local inProgress = GlobalState[string.format("Robbery:InProgress:%s", v)]
+					if inProgress then
+						local dist = #(vector3(LocalPlayer.state.myPos.x, LocalPlayer.state.myPos.y, LocalPlayer.state.myPos.z) - vector3(inProgress.x, inProgress.y, inProgress.z))
 						if dist <= 3.0 then
 							return true
 						end
@@ -597,7 +597,7 @@ AddEventHandler("Core:Shared:Ready", function()
 				if not _cuffCd then
 					TriggerServerEvent("Police:Server:Cuff")
 					_cuffCd = true
-					Citizen.SetTimeout(3000, function()
+					SetTimeout(3000, function()
 						_cuffCd = false
 					end)
 				end
@@ -609,7 +609,7 @@ AddEventHandler("Core:Shared:Ready", function()
 				if not _cuffCd then
 					TriggerServerEvent("Police:Server:Uncuff")
 					_cuffCd = true
-					Citizen.SetTimeout(3000, function()
+					SetTimeout(3000, function()
 						_cuffCd = false
 					end)
 				end

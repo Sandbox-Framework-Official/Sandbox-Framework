@@ -1,27 +1,27 @@
 _tempLastLocation = {}
 _lastSpawnLocations = {}
 
-_pleaseFuckingWorkSID = {}
-_pleaseFuckingWorkID = {}
+_SID = {}
+_ID = {}
 
-_fuckingBozos = {}
+_player = {}
 
 AddEventHandler("Player:Server:Connected", function(source)
-	_fuckingBozos[source] = os.time()
+	_player[source] = os.time()
 end)
 
 function RegisterCallbacks()
 	CreateThread(function()
 		while true do
 			if not (GlobalState["DisableAFK"] or false) then
-				for k, v in pairs(_fuckingBozos) do
+				for k, v in pairs(_player) do
 					if v < (os.time() - (60 * 10)) then
 						local pState = Player(k).state
 						if not pState.isDev and not pState.isAdmin and not pState.isStaff then
 							Punishment:Kick(k, "You Were Kicked For Being AFK On Character Select", "Pwnzor", true)
 						else
 							Logger:Warn("Characters", "Staff or Admin Was AFK, Removing From Checks")
-							_fuckingBozos[k] = nil
+							_player[k] = nil
 						end
 					elseif v < (os.time() - (60 * 5)) then
 						-- TODO: Implement better alert when at this stage when we have someway to do it
@@ -100,10 +100,10 @@ function RegisterCallbacks()
 			end)
 
 			local pedData = Citizen.Await(p)
-			local shit = {}
+			local pedMap = {}
 
 			for k, v in ipairs(pedData) do
-				shit[v.Char] = v.Ped
+				pedMap[v.Char] = v.Ped
 			end
 
 			for k, v in ipairs(results) do
@@ -118,7 +118,7 @@ function RegisterCallbacks()
 					Jobs = v.Jobs,
 					SID = v.SID,
 					GangChain = v.GangChain,
-					Preview = shit[v._id] or false,
+					Preview = pedMap[v._id] or false,
 				})
 			end
 
@@ -387,8 +387,8 @@ function RegisterCallbacks()
 			local store = DataStore:CreateStore(source, "Character", cData)
 			ONLINE_CHARACTERS[source] = store
 
-			_pleaseFuckingWorkSID[cData.SID] = source
-			_pleaseFuckingWorkID[cData.ID] = source
+			_SID[cData.SID] = source
+			_ID[cData.ID] = source
 
 			GlobalState[string.format("SID:%s", source)] = cData.SID
 
@@ -399,13 +399,13 @@ function RegisterCallbacks()
 	end)
 
 	Callbacks:RegisterServerCallback("Characters:Logout", function(source, data, cb)
-		_fuckingBozos[source] = os.time()
+		_player[source] = os.time()
 		local c = Fetch:CharacterSource(source)
 		if c ~= nil then
 			local cData = c:GetData()
 			if cData.SID and cData.ID then
-				_pleaseFuckingWorkSID[cData.SID] = nil
-				_pleaseFuckingWorkID[cData.ID] = nil
+				_SID[cData.SID] = nil
+				_ID[cData.ID] = nil
 			end
 
 			TriggerEvent("Characters:Server:PlayerLoggedOut", source, cData)
@@ -427,14 +427,14 @@ function RegisterCallbacks()
 end
 
 AddEventHandler("Characters:Server:DropCleanup", function(source, cData)
-	_fuckingBozos[source] = nil
+	_player[source] = nil
 	ONLINE_CHARACTERS[source] = nil
 
 	GlobalState[string.format("SID:%s", source)] = nil
 
 	if cData and cData.SID and cData.ID then
-		_pleaseFuckingWorkSID[cData.SID] = nil
-		_pleaseFuckingWorkID[cData.ID] = nil
+		_SID[cData.SID] = nil
+		_ID[cData.ID] = nil
 	end
 end)
 
@@ -466,7 +466,7 @@ end)
 
 function RegisterMiddleware()
 	Middleware:Add("Characters:Spawning", function(source)
-		_fuckingBozos[source] = nil
+		_player[source] = nil
 		TriggerClientEvent("Characters:Client:Spawned", source)
 	end, 100000)
 	Middleware:Add("Characters:ForceStore", function(source)

@@ -13,11 +13,11 @@ function deepcopy(orig)
 	return copy
 end
 
-local function dumbFuckingShitCuntFucker(type, amount)
+local function pluralize(word, amount)
     if not amount or amount > 1 then
-        return type .. 's'
+        return word .. 's'
     end
-    return type
+    return word
 end
 
 function GetFormattedTimeFromSeconds(seconds)
@@ -32,16 +32,16 @@ function GetFormattedTimeFromSeconds(seconds)
     if days > 0 or hours > 0 then
         if days > 1 then
             if hours > 0 then
-                timeString = string.format('%d %s and %d %s', days, dumbFuckingShitCuntFucker('day', days), hours, dumbFuckingShitCuntFucker('hour', hours))
+                timeString = string.format('%d %s and %d %s', days, pluralize('day', days), hours, pluralize('hour', hours))
             else
-                timeString = string.format('%d %s', days, dumbFuckingShitCuntFucker('day', days))
+                timeString = string.format('%d %s', days, pluralize('day', days))
             end
         else
-            timeString = string.format('%d %s', hours, dumbFuckingShitCuntFucker('hour', hours))
+            timeString = string.format('%d %s', hours, pluralize('hour', hours))
         end
     else
         local minutes = Utils:Round(seconds / 60, 0)
-        timeString = string.format('%d %s', minutes, dumbFuckingShitCuntFucker('minute', minutes))
+        timeString = string.format('%d %s', minutes, pluralize('minute', minutes))
     end
     return timeString
 end

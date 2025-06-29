@@ -1097,7 +1097,6 @@ AddEventHandler("Robbery:Server:Setup", function()
 				else
 					GlobalState[string.format("Bobcat:Loot:%s", data.id)] = true
 					_bcInUse.loot[data.id] = false
-					-- Dumb cunt trying to cheat :)
 					cb(false)
 				end
 			end

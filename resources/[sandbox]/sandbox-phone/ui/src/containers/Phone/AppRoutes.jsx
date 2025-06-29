@@ -21,7 +21,7 @@ export default memo(({ apps }) => {
 				return <AppLoader app={apps[app]} />;
 			},
 		});
-		LoadableSubComponent.preload(); // Hopefully load the shit? idk lol
+		LoadableSubComponent.preload();
 		return <LoadableSubComponent />;
 	};
 

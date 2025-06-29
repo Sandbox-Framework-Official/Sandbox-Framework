@@ -109,7 +109,7 @@ AddEventHandler('Businesses:Client:Startup', function()
     end)
 
     Callbacks:RegisterClientCallback('Bowling:DoBowl', function(data, cb)
-        local bowlingResults = StartBowlingShit(data)
+        local bowlingResults = StartBowling(data)
         cb(bowlingResults)
     end)
 end)
@@ -178,7 +178,7 @@ function SkillCheckBowler()
     return Citizen.Await(p)
 end
 
-function StartBowlingShit(alleyId, isSecondTry, currentPinsDown, currentHitPins)
+function StartBowling(alleyId, isSecondTry, currentPinsDown, currentHitPins)
     isBowling = true
     awaitingBowl = true
 
@@ -239,7 +239,7 @@ function StartBowlingShit(alleyId, isSecondTry, currentPinsDown, currentHitPins)
 
     local pinsBitch = true
     local pinsTarget = false
-    Citizen.SetTimeout(4000, function()
+    SetTimeout(4000, function()
         pinsBitch = false
     end)
 
@@ -299,7 +299,7 @@ function StartBowlingShit(alleyId, isSecondTry, currentPinsDown, currentHitPins)
         }
     else
         if not isSecondTry then -- Hasn't Had 2nd Attempt Yet
-            return StartBowlingShit(alleyId, true, pinsDown, hitPins)
+            return StartBowling(alleyId, true, pinsDown, hitPins)
         else
             return {
                 first = currentPinsDown,
@@ -398,7 +398,7 @@ AddEventHandler('Keybinds:Client:KeyUp:primary_action', function()
                 Action:Hide('bowling')
                 TriggerServerEvent('Bowling:Server:StartBowling', insideBowlingStart)
                 _actionCD = true
-                Citizen.SetTimeout(30000, function()
+                SetTimeout(30000, function()
                     _actionCD = false
                 end)
             end

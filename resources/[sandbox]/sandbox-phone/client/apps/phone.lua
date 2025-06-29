@@ -25,7 +25,7 @@ function StartCallTimeout()
 	end)
 end
 
-function fucksound()
+function stopsound()
 	Sounds.Stop:Distance(GetPlayerServerId(LocalPlayer.state.PlayerID), _settings.ringtone or "ringtone1.ogg")
 	Sounds.Stop:One("ringing.ogg")
 	Sounds.Stop:One("vibrate.ogg")
@@ -75,7 +75,7 @@ PHONE.Call = {
 		end
 	end,
 	Accept = function(self)
-		fucksound()
+		stopsound()
 		if LocalPlayer.state.phoneOpen then
 			PhoneTextToCall()
 		end
@@ -83,7 +83,7 @@ PHONE.Call = {
 	end,
 	End = function(self)
 		_calling = false
-		fucksound()
+		stopsound()
 		Callbacks:ServerCallback("Phone:Phone:EndCall")
 	end,
 	Read = function(self)
@@ -134,7 +134,7 @@ RegisterNetEvent("Phone:Client:Phone:EndCall", function()
 	SendNUIMessage({ type = "END_CALL" })
 	_call = nil
 
-	fucksound()
+	stopsound()
 
 	CreateThread(function()
 		Wait(100)
@@ -160,18 +160,18 @@ RegisterNetEvent("Phone:Client:Phone:AcceptCall", function(number)
 	_calling = false
 	_call.state = 2
 	_call.duration = 0
-	fucksound()
+	stopsound()
 	SendNUIMessage({ type = "SET_CALL_ACTIVE" })
 	PhonePlayCall(false)
 end)
 
 AddEventHandler("Phone:Nui:Phone:AcceptCall", function()
-	fucksound()
+	stopsound()
 	Phone.Call:Accept()
 end)
 
 AddEventHandler("Phone:Nui:Phone:EndCall", function()
-	fucksound()
+	stopsound()
 	Phone.Call:End()
 end)
 
@@ -181,13 +181,13 @@ end)
 
 RegisterNUICallback("AcceptCall", function(data, cb)
 	cb("OK")
-	fucksound()
+	stopsound()
 	Phone.Call:Accept()
 end)
 
 RegisterNUICallback("EndCall", function(data, cb)
 	cb("OK")
-	fucksound()
+	stopsound()
 	Phone.Call:End()
 end)
 

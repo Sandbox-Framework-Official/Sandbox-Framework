@@ -279,7 +279,7 @@ AddEventHandler("SAGMA:Client:Sell", function()
 end)
 
 AddEventHandler("Businesses:Client:SAGMA:OpenTable", function(e, data)
-	Inventory.Dumbfuck:Open({
+	Inventory.InventoryManager:Open({
 		invType = 132,
 		owner = data.id,
 	})

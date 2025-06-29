@@ -154,7 +154,7 @@ AddEventHandler("Robbery:Client:Holdup:Do", function(entity, data)
 	end, function(cancelled)
 		if not cancelled then
 			Callbacks:ServerCallback("Robbery:Holdup:Do", entity.serverId, function(s)
-				Inventory.Dumbfuck:Open(s)
+				Inventory.InventoryManager:Open(s)
 
 				while not LocalPlayer.state.inventoryOpen do
 					Wait(1)

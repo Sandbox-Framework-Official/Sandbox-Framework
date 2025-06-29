@@ -241,7 +241,7 @@ local forceDelete = {}
 
 AddEventHandler("Keybinds:Client:KeyDown:cancel_action", function()
 	if spikesOut then
-		Citizen.SetTimeout(300, function()
+		SetTimeout(300, function()
 			TriggerServerEvent("Police:Server:RemoveSpikes")
 		end)
 	end
@@ -251,7 +251,7 @@ RegisterNetEvent("Police:Client:AddDeployedSpike", function(positions, h, owner)
 	if #(GetEntityCoords(LocalPlayer.state.ped) - positions[1]) <= 800.0 then
 		local start = GetGameTimer()
 		local timeout = false
-		Citizen.SetTimeout(spikeTime - 2000, function()
+		SetTimeout(spikeTime - 2000, function()
 			timeout = true
 		end)
 
@@ -288,16 +288,16 @@ end)
 
 RegisterNetEvent("Police:Client:RemoveSpikes", function(owner)
 	forceDelete[owner] = true
-	Citizen.SetTimeout(500, function()
+	SetTimeout(500, function()
 		forceDelete[owner] = false
 	end)
 end)
 
 -- watching each object then deleting after 5s
-AddEventHandler("Police:Client:SpikeyBois", function(x, y, z, obj, cunts, owner)
+AddEventHandler("Police:Client:SpikeyBois", function(x, y, z, obj, duration, owner)
 	local pos = vector3(x, y, z)
 	local timer = 0
-	while timer < cunts and not forceDelete[owner] do
+	while timer < duration and not forceDelete[owner] do
 		local veh = GetVehiclePedIsIn(LocalPlayer.state.ped)
 		if veh ~= 0 and LocalPlayer.state.loggedIn then
 			local driver = GetPedInVehicleSeat(veh, -1)

@@ -117,8 +117,8 @@ AddEventHandler("Casino:Client:UseSlotMachine", function()
                 loadAnim("anim_casino_a@amb@casino@games@slots@male")
                 FreezeEntityPosition(LocalPlayer.state.ped, true)
                 TaskPlayAnim(LocalPlayer.state.ped, "anim_casino_a@amb@casino@games@slots@male", "betidle_idle_a", 2.0, 1.0, -1, 0)
-                local fuck = GetOffsetFromEntityInWorldCoords(tableObj, 0.0, -0.85, 0.0)
-                SetEntityCoords(LocalPlayer.state.ped, fuck.x, fuck.y, _satInChair.position.z - 0.34)
+                local chairOffset = GetOffsetFromEntityInWorldCoords(tableObj, 0.0, -0.85, 0.0)
+                SetEntityCoords(LocalPlayer.state.ped, chairOffset.x, chairOffset.y, _satInChair.position.z - 0.34)
 
                 TaskPlayAnim(LocalPlayer.state.ped, "anim_casino_a@amb@casino@games@slots@male", "betidle_idle_a", 2.0, 1.0, -1, 0)
 

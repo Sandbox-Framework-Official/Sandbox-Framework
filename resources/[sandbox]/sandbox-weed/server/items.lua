@@ -83,7 +83,7 @@ function RegisterItems()
 				end
 			end)
 		else
-			Execute:Client(source, "Notification", "Error", "You need bud you fucking idiot")
+			Execute:Client(source, "Notification", "Error", "You need bud")
 		end
 	end)
 
@@ -96,8 +96,8 @@ function RegisterItems()
 			for i = 0, count do
 				table.insert(stressTicks, "3")
 			end
-			--Player(source).state.armorTicks = { "2", "2", "2", "2", "2" }
-			--TriggerClientEvent("Damage:Client:Ticks:Armor", source)
+			Player(source).state.armorTicks = { "2", "2", "2", "2", "2" }
+			TriggerClientEvent("Damage:Client:Ticks:Armor", source)
 			Player(source).state.stressTicks = stressTicks
 		end)
 	end)
@@ -115,7 +115,7 @@ function RegisterItems()
 				end
 			end)
 		else
-			Execute:Client(source, "Notification", "Error", "You need 200 bud you fucking idiot")
+			Execute:Client(source, "Notification", "Error", "You need 200 bud")
 		end
 	end)
 
@@ -132,7 +132,7 @@ function RegisterItems()
 				end
 			end)
 		else
-			Execute:Client(source, "Notification", "Error", "You need 200 bud you fucking idiot")
+			Execute:Client(source, "Notification", "Error", "You need 200 bud")
 		end
 	end)
 end

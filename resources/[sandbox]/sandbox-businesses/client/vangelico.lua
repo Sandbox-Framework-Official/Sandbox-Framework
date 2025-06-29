@@ -115,7 +115,7 @@ AddEventHandler("VANGELICO:Client:Sell", function()
 end)
 
 AddEventHandler("Businesses:Client:VANGELICO:OpenTable", function(e, data)
-	Inventory.Dumbfuck:Open({
+	Inventory.InventoryManager:Open({
 		invType = 196,
 		owner = data.id,
 	})

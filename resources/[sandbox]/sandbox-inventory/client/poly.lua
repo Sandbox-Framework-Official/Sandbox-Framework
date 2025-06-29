@@ -1,7 +1,7 @@
 _inInvPoly = nil
 
 RegisterNetEvent("Inventory:Client:PolySetup", function(locs)
-	for k, v in ipairs(locs) do
+	for _, v in ipairs(locs) do
 		local data = GlobalState[string.format("Inventory:%s", v)]
 		if data ~= nil then
 			if data.data ~= nil then
