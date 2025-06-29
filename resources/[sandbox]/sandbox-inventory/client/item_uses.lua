@@ -1,7 +1,5 @@
 local _energyCd = false
 
-function RegisterRandomItems() end
-
 local _runSpeed = false
 function RunSpeed(modifier, duration, cd, ss)
 	if _runSpeed then
