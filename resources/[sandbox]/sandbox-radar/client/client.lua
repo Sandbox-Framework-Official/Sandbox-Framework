@@ -336,7 +336,7 @@ function CheckPlateFlagged(direction, vehicle, plate)
 			),
 		}, false, nil, 0)
 
-		Citizen.SetTimeout(30000, function() -- So the plate doesn't constantly get flagged
+		SetTimeout(30000, function() -- So the plate doesn't constantly get flagged
 			RECENT_FLAGS[plate] = nil
 		end)
 	else

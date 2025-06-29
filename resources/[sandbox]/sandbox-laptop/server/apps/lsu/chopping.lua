@@ -327,7 +327,7 @@ AddEventHandler("Laptop:Server:RegisterCallbacks", function()
 						Reputation.Modify:Add(source, "Chopping", 250 * list.type)
 						Laptop.LSUnderground.Chopping:CreatePickupBox(source, list?.entry?.hv or false, list.type)
 
-						Citizen.SetTimeout(1000 * math.random(20, 60), function()
+						SetTimeout(1000 * math.random(20, 60), function()
 							if char ~= nil then
 								Phone.Email:Send(
 									source,

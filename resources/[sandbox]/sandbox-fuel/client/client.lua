@@ -235,7 +235,7 @@ function LowFuelEffects(veh)
 	end
 
 	_engineShutoff = true
-	Citizen.SetTimeout(2000, function()
+	SetTimeout(2000, function()
 		_engineShutoff = false
 	end)
 
@@ -344,7 +344,7 @@ AddEventHandler("Vehicles:Client:StartFueling", function(entityData, data)
 
 				Notification:Info("Nice One Champ")
 
-				Citizen.SetTimeout(60000, function()
+				SetTimeout(60000, function()
 					for k, v in ipairs(_fuelFires) do
 						RemoveScriptFire(v)
 					end
@@ -486,7 +486,7 @@ AddEventHandler("Vehicles:Client:StartJerryFueling", function(entityData)
 
 							Notification:Info("Nice One Champ")
 
-							Citizen.SetTimeout(60000, function()
+							SetTimeout(60000, function()
 								for k, v in ipairs(_fuelFires) do
 									RemoveScriptFire(v)
 								end

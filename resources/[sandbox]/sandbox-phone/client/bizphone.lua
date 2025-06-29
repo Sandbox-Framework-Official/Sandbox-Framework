@@ -248,7 +248,7 @@ RegisterNetEvent("Phone:Client:Biz:Recieve", function(id, coords, radius)
         local myCoords = GetEntityCoords(LocalPlayer.state.ped)
         if #(myCoords - coords) <= 150.0 then
             Sounds.Do.Loop:Location(string.format("bizphones-%s", id), coords, radius, "bizphone.ogg", 0.1)
-            Citizen.SetTimeout(30000, function()
+            SetTimeout(30000, function()
                 Sounds.Do.Stop:Distance(string.format("bizphones-%s", id), "bizphone.ogg")
             end)
         end

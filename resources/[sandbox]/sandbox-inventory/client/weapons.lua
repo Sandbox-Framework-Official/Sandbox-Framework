@@ -711,7 +711,7 @@ function WeaponsThread()
 							end)
 
 							spammyFuck = true
-							Citizen.SetTimeout(10000, function()
+							SetTimeout(10000, function()
 								spammyFuck = false
 							end)
 						end
@@ -904,7 +904,7 @@ AddEventHandler("Weapons:Client:SmokeGrenade", function()
 end)
 
 AddEventHandler("Weapons:Client:Flashbang", function()
-	Citizen.SetTimeout(1500, function()
+	SetTimeout(1500, function()
 		local _, coords, prop = GetProjectileNearPed(PlayerPedId(), `WEAPON_FLASHBANG`, 1000.0, false)
 		AddExplosion(coords.x, coords.y, coords.z, 25, 1.0, true, true, true)
 		TriggerServerEvent("Weapons:Server:DoFlashFx", coords, NetworkGetNetworkIdFromEntity(prop) or prop)

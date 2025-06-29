@@ -237,7 +237,7 @@ function RegisterPersonalPlateCallbacks()
     end)
 end
 
--- Citizen.SetTimeout(2500, function()
+-- SetTimeout(2500, function()
 --     print(IsPersonalPlateValid('FFFF'))
 --     print(IsPersonalPlateValid('FFFFF'))
 --     print(IsPersonalPlateValid('FFFFFF'))

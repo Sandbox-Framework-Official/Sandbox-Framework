@@ -156,7 +156,7 @@ AddEventHandler("Casino:Server:Startup", function()
 
                         winnings = math.floor(winnings)
 
-                        Citizen.SetTimeout(time, function()
+                        SetTimeout(time, function()
                             if _slotMachines[k] then
                                 local char = Fetch:CharacterSource(source)
                                 if char then

@@ -138,7 +138,7 @@ AddEventHandler("Robbery:Client:Signs:StealSign", function(data, entity)
 	if math.random(100) >= 85 then
 		alarm = true
 		if coords ~= nil then
-			Citizen.SetTimeout(1000, function()
+			SetTimeout(1000, function()
 				TriggerServerEvent("Robbery:Server:Signs:AlertPolice", coords)
 			end)
 		end

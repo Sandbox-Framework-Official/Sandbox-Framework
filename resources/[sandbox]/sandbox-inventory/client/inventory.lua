@@ -507,7 +507,7 @@ INVENTORY = {
 						})
 					end
 
-					Citizen.SetTimeout(3000, function()
+					SetTimeout(3000, function()
 						_hkCd = false
 					end)
 				end)

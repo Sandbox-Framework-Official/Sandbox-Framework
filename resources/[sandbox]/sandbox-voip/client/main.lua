@@ -119,7 +119,7 @@ AddEventHandler("Characters:Client:Spawn", function()
 	local address, port = GetVOIPMumbleAddress()
 	MumbleSetServerAddress(address, port)
 
-	Citizen.SetTimeout(5000, function()
+	SetTimeout(5000, function()
 		UpdateVOIPIndicatorStatus()
 	end)
 

@@ -374,7 +374,7 @@ AddEventHandler("Core:Shared:Ready", function()
                             },
                         })
 
-                        Citizen.SetTimeout(60 * 1000 * 5, function()
+                        SetTimeout(60 * 1000 * 5, function()
                             UISounds.Play:FrontEnd(-1, "TIMER_STOP", "HUD_MINI_GAME_SOUNDSET")
                         end)
 					end,
@@ -597,7 +597,7 @@ AddEventHandler("Core:Shared:Ready", function()
 				if not _cuffCd then
 					TriggerServerEvent("Police:Server:Cuff")
 					_cuffCd = true
-					Citizen.SetTimeout(3000, function()
+					SetTimeout(3000, function()
 						_cuffCd = false
 					end)
 				end
@@ -609,7 +609,7 @@ AddEventHandler("Core:Shared:Ready", function()
 				if not _cuffCd then
 					TriggerServerEvent("Police:Server:Uncuff")
 					_cuffCd = true
-					Citizen.SetTimeout(3000, function()
+					SetTimeout(3000, function()
 						_cuffCd = false
 					end)
 				end

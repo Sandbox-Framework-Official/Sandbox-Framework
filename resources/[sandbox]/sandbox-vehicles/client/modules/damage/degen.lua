@@ -269,7 +269,7 @@ function RunVehiclePartsDamageEffects(veh)
                 if wait then
                     Logger:Trace('Vehicles', 'Running Damage Effects - Clutch')
                     local lolGetFucked = true
-                    Citizen.SetTimeout(wait, function()
+                    SetTimeout(wait, function()
                         lolGetFucked = false
                     end)
                     CreateThread(function()
