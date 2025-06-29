@@ -60,12 +60,12 @@ AddEventHandler('Vehicles:Client:CharacterLogin', function()
         end
 
         Wait(2500)
-        
+
         -- Add Restricted Ones After so the Blips Appear With the Restricted Ones at the end of the list
         -- for k, v in pairs(_vehicleStorage) do
         --     if v.restricted then
         --         local charJobs = Jobs.Permissions:GetJobs()
-                
+
         --         if #charJobs > 0 then
         --             if DoesCharacterPassStorageRestrictions(-1, charJobs, v.restricted) then
         --                 Blips:Add('veh_storage_'.. k, v.name .. ' [Restricted]', v.coords, blipsForVehType[v.vehType], 6, 0.45, false, 10)
@@ -158,7 +158,7 @@ function OpenVehicleStorage()
             else
                 parkingSpace = GetClosestAvailableParkingSpace(pedCoords, vehStorageData.spaces)
             end
-            
+
             if parkingSpace then
                 Callbacks:ServerCallback('Vehicles:GetVehiclesInStorage', vehicleStorageZoneId, function(storedVehicles)
                     if not storedVehicles then
@@ -495,14 +495,14 @@ AddEventHandler("Vehicles:Client:Storage:GoBack", function()
 
     if cachedStorageShit then
         OpenVehicleStorageMenu(
-            cachedStorageShit.storageType, 
-            cachedStorageShit.storageId, 
-            cachedStorageShit.storedVehicleData, 
-            cachedStorageShit.parkingSpace, 
-            cachedStorageShit.characterDuty, 
-            cachedStorageShit.maxCount, 
-            cachedStorageShit.currentCount, 
-            cachedStorageShit.characterId, 
+            cachedStorageShit.storageType,
+            cachedStorageShit.storageId,
+            cachedStorageShit.storedVehicleData,
+            cachedStorageShit.parkingSpace,
+            cachedStorageShit.characterDuty,
+            cachedStorageShit.maxCount,
+            cachedStorageShit.currentCount,
+            cachedStorageShit.characterId,
             cachedStorageShit.characters
         )
     end
@@ -544,13 +544,13 @@ AddEventHandler("Vehicles:Client:Storage:Select", function(data)
         }
 
         local vehItems = {}
-    
+
         table.insert(vehItems, {
             label = 'Vehicle\'s Identification',
             description = string.format('VIN: %s, Plate: %s', vehicle.VIN, vehicle.RegisteredPlate or 'N/A'),
             event = false,
         })
-    
+
         if vehicle.Owner.Type == 1 and vehicle.Type ~= 2 then
             table.insert(vehItems, {
                 label = 'Vehicle\'s Current State',
@@ -564,36 +564,36 @@ AddEventHandler("Vehicles:Client:Storage:Select", function(data)
                 event = false,
             })
         end
-    
-    
+
+
         if vehicle.Owner.Type == 1 then
             table.insert(vehItems, {
                 label = 'Vehicle\'s Fleet Information',
                 description = string.format('Req. Level: %s, Ownership Type: %s', vehicle.Owner.Level, vehicle.Owner.Workplace and string.upper(vehicle.Owner.Workplace) or 'All'),
                 event = false,
             })
-    
+
             if vehicle.LastDriver and #vehicle.LastDriver > 0 then
                 local fhId = vehicle.VIN .. '-fleet-history'
-                local shitCunt = {}
-    
+                local fleetHistoryItems = {}
+
                 local timeNow = GetCloudTimeAsInt() or 0
                 for i = #vehicle.LastDriver, 1, -1 do
                     local driver = vehicle.LastDriver[i]
                     local timeString = GetFormattedTimeFromSeconds(timeNow - driver.time)
-    
-                    table.insert(shitCunt, {
+
+                    table.insert(fleetHistoryItems, {
                         label = string.format('Driver SID: %s', driver.char),
                         description = string.format('Returned Vehicle %s Ago', timeString),
                         event = false,
                     })
                 end
-    
+
                 subMenu[fhId] = {
                     label = (vehicle.RegisteredPlate or 'Vehicle') .. ' Fleet History',
-                    items = shitCunt
+                    items = fleetHistoryItems
                 }
-    
+
                 table.insert(vehItems, {
                     label = 'Fleet History',
                     description = 'Latest Driver: ' .. (vehicle.LastDriver[#vehicle.LastDriver]?.char or '?'),
@@ -601,14 +601,14 @@ AddEventHandler("Vehicles:Client:Storage:Select", function(data)
                 })
             end
         end
-    
+
         local desc = 'Take the Vehicle Out of Storage'
         local disabled = false
-    
+
         if vehicle.Owner and vehicle.Owner.Qualification then
             desc = 'This Vehicle Requires Qualifications'
             disabled = true
-    
+
             local char = LocalPlayer.state.Character
             if char and char:GetData('Qualifications') and #char:GetData('Qualifications') > 0 then
                 if hasValue(char:GetData('Qualifications'), vehicle.Owner.Qualification) then
@@ -616,7 +616,7 @@ AddEventHandler("Vehicles:Client:Storage:Select", function(data)
                 end
             end
         end
-    
+
         table.insert(vehItems, {
             label = 'Retrieve',
             description = desc,
@@ -626,7 +626,7 @@ AddEventHandler("Vehicles:Client:Storage:Select", function(data)
         })
 
         subMenu.main.items = vehItems
-    
+
         ListMenu:Show(subMenu)
     end)
 end)

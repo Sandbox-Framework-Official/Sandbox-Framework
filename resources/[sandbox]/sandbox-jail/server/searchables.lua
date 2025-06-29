@@ -215,7 +215,6 @@ function RegisterPrisonSearchStartup()
 					_loot = _lootTables.high
 				elseif _PlayerRep >= 7500 then
 					_loot = _lootTables.high
-					-- maybe give a fucking rifle or some shit kekw
 				end
 				Loot:CustomWeightedSetWithCountAndModifier(_loot, char:GetData("SID"), 1, 1, false)
 				Reputation.Modify:Add(source, _repName, _rando)

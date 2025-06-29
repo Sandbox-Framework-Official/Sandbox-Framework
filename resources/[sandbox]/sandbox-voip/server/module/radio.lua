@@ -1,4 +1,4 @@
-_fuckingVOIPRadio = {
+_Radio = {
 	Radio = {
 		AddToChannel = function(self, source, radioChannel)
 			if not voiceData[source] then return end
@@ -85,7 +85,7 @@ _fuckingVOIPRadio = {
 
 AddEventHandler('Proxy:Shared:ExtendReady', function(component)
 	if component == 'VOIP' then
-		exports['sandbox-base']:ExtendComponent(component, _fuckingVOIPRadio)
+		exports['sandbox-base']:ExtendComponent(component, _Radio)
 	end
 end)
 

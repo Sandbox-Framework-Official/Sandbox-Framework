@@ -39,7 +39,7 @@ function RegisterChairTargets()
 
 	Interaction:RegisterMenu("chairs-stand-up", "Stand Up", "chair", function(data)
 		Interaction:Hide()
-		StandTheFuckUp()
+		StandUp()
 	end, function()
 		return isSitting
 	end)
@@ -85,7 +85,7 @@ AddEventHandler("Animations:Client:Chair", function(entityData, data)
 	end
 end)
 
-function StandTheFuckUp(forced, cry)
+function StandUp(forced, cry)
 	if isSitting then
 		ClearPedTasks(LocalPlayer.state.ped)
 		isSitting = false
@@ -103,7 +103,7 @@ function StandTheFuckUp(forced, cry)
 end
 
 RegisterNetEvent("Animations:Client:StandUp", function(forced, cry)
-	StandTheFuckUp(forced, cry)
+	StandUp(forced, cry)
 end)
 
 _sittableChairs = {

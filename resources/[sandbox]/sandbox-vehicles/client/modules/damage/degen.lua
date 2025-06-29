@@ -268,12 +268,12 @@ function RunVehiclePartsDamageEffects(veh)
 
                 if wait then
                     Logger:Trace('Vehicles', 'Running Damage Effects - Clutch')
-                    local lolGetFucked = true
+                    local damageClutch = true
                     SetTimeout(wait, function()
-                        lolGetFucked = false
+                        damageClutch = false
                     end)
                     CreateThread(function()
-                        while lolGetFucked do
+                        while damageClutch do
                             Wait(5)
                             SetVehicleCurrentRpm(veh, 0.2)
                         end

@@ -219,14 +219,14 @@ function RegisterBankingCallbacks()
 					local jPData = jobBankPerms[account.Account]
 					if jPData then
 						for _, job in ipairs(jPData) do
-							local fuckingWorkplace = false
+							local Workplace = false
 							if job.workplace and job.workplace ~= "" and #job.workplace > 0 then
-								fuckingWorkplace = job.workplace
+								Workplace = job.workplace
 							end
 							local jobPermissions = Jobs.Permissions:GetPermissionsFromJob(
 								source,
 								job.job,
-								fuckingWorkplace
+								Workplace
 							)
 
 							if jobPermissions then

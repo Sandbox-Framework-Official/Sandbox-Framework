@@ -112,14 +112,14 @@ AddEventHandler("Laptop:Server:RegisterCallbacks", function()
 
                 }, function(success, results)
                     if success and results then
-                        local cunts = {}
+                        local bannedPlayers = {}
                         for k, v in ipairs(results) do
                             v.RacingAlias = v.Profiles?.redline?.name
 
-                            table.insert(cunts, v)
+                            table.insert(bannedPlayers, v)
                         end
 
-                        cb(cunts)
+                        cb(bannedPlayers)
                     else
                         cb(false)
                     end

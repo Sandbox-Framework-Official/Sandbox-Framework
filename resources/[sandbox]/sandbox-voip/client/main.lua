@@ -236,7 +236,7 @@ function UpdateVOIPIndicatorStatus()
 	Hud:UpdateVoip(stage, talking, indicatorIcon)
 end
 
-_fuckingVOIP = {
+_VOIP = {
 	Cycle = function(self, num)
 		if playerMuted or USING_MEGAPHONE or USING_MICROPHONE then
 			return
@@ -348,7 +348,7 @@ _fuckingVOIP = {
 }
 
 AddEventHandler("Proxy:Shared:RegisterReady", function()
-	exports["sandbox-base"]:RegisterComponent("VOIP", _fuckingVOIP)
+	exports["sandbox-base"]:RegisterComponent("VOIP", _VOIP)
 end)
 
 CreateThread(function()

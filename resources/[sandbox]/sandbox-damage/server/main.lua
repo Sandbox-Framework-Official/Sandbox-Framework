@@ -1,5 +1,5 @@
 _damagedLimbs = {}
-_deadCunts = {}
+_deadPlayers = {}
 
 function table.copy(t)
 	local u = {}
@@ -45,12 +45,12 @@ AddEventHandler("Core:Shared:Ready", function()
 			local char = Fetch:CharacterSource(source)
 			if char ~= nil then
 				local sid = char:GetData("SID")
-				if _deadCunts[sid] ~= nil then
+				if _deadPlayers[sid] ~= nil then
 					local pState = Player(source).state
 					pState.isDead = true
-					pState.deadData = _deadCunts[sid].deadData
-					pState.isDeadTime = _deadCunts[sid].isDeadTime
-					pState.releaseTime = _deadCunts[sid].releaseTime
+					pState.deadData = _deadPlayers[sid].deadData
+					pState.isDeadTime = _deadPlayers[sid].isDeadTime
+					pState.releaseTime = _deadPlayers[sid].releaseTime
 
 					Wait(100)
 				end
@@ -156,7 +156,7 @@ RegisterNetEvent("Ped:Server:Died", function()
 	local char = Fetch:CharacterSource(src)
 	if char ~= nil then
 		local pState = Player(src).state
-		_deadCunts[char:GetData("SID")] = {
+		_deadPlayers[char:GetData("SID")] = {
 			deadData = pState.deadData,
 			isDeadTime = pState.isDeadTime,
 			releaseTime = pState.releaseTime,
@@ -199,7 +199,7 @@ RegisterNetEvent("Damage:Server:Revived", function(wasMinor, wasFieldTreatment)
 	local src = source
 	local char = Fetch:CharacterSource(src)
 	if char ~= nil then
-		_deadCunts[char:GetData("SID")] = nil
+		_deadPlayers[char:GetData("SID")] = nil
 		if not wasMinor and not wasFieldTreatment then
 			Logger:Trace(
 				"Damage",

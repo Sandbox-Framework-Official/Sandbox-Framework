@@ -120,7 +120,7 @@ AddEventHandler("Core:Shared:Ready", function()
 			if char then
 				if Wallet:Modify(source, -10000) then
 					Inventory:AddItem(char:GetData("SID"), "diamond_vip", 1, {}, 1)
-					GiveCasinoFuckingMoney(source, "VIP Card", 10000)
+					GiveCasinoMoney(source, "VIP Card", 10000)
 				else
 					Execute:Client(source, "Notification", "Error", "Not Enough Cash")
 				end
@@ -282,7 +282,7 @@ function SendCasinoPhoneNotification(source, title, description, time)
 	}, {}, nil)
 end
 
-function GiveCasinoFuckingMoney(source, game, amount)
+function GiveCasinoMoney(source, game, amount)
 	local charInfo = "Unknown"
 	local char = Fetch:CharacterSource(source)
 	if char then

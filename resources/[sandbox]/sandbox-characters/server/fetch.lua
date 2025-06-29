@@ -15,13 +15,13 @@ FETCH = {
 		end
 	end,
 	ID = function(self, value)
-		local source = _pleaseFuckingWorkID[value]
+		local source = _ID[value]
 		if source then
 			return Fetch:CharacterSource(tonumber(source))
 		end
 	end,
 	SID = function(self, value)
-		local source = _pleaseFuckingWorkSID[value]
+		local source = _SID[value]
 		if source then
 			return Fetch:CharacterSource(tonumber(source))
 		end

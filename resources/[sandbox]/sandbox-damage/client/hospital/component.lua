@@ -143,7 +143,7 @@ HOSPITAL = {
 		end)
 	end,
 	SendToBed = function(self, bed, isRp, bedId)
-		local fuck = false
+		local inBed = false
 
 		if bedId then
 			local p = promise.new()
@@ -151,14 +151,14 @@ HOSPITAL = {
 				p:resolve(s)
 			end)
 
-			fuck = Citizen.Await(p)
+			inBed = Citizen.Await(p)
 		else
-			fuck = true
+			inBed = true
 		end
 
 		_bedId = bedId
 
-		if bed ~= nil and fuck then
+		if bed ~= nil and inBed then
 			SetBedCam(bed)
 			if isRp then
 				_healEnd = GetCloudTimeAsInt()

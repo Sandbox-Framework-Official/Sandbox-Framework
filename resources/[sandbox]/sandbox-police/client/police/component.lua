@@ -437,9 +437,9 @@ AddEventHandler("Core:Shared:Ready", function()
 		Interaction:RegisterMenu("pd-breach-robbery", "Breach House Robbery", "bomb", function(data)
 			local bruh = GlobalState["Robbery:InProgress"]
 			for k, v in ipairs(bruh) do
-				local fuck = GlobalState[string.format("Robbery:InProgress:%s", v)]
-				if fuck then
-					local dist = #(vector3(LocalPlayer.state.myPos.x, LocalPlayer.state.myPos.y, LocalPlayer.state.myPos.z) - vector3(fuck.x, fuck.y, fuck.z))
+				local inProgress = GlobalState[string.format("Robbery:InProgress:%s", v)]
+				if inProgress then
+					local dist = #(vector3(LocalPlayer.state.myPos.x, LocalPlayer.state.myPos.y, LocalPlayer.state.myPos.z) - vector3(inProgress.x, inProgress.y, inProgress.z))
 					if dist <= 3.0 then
 						Callbacks:ServerCallback("Police:Breach", {
 							type = "robbery",
@@ -455,9 +455,9 @@ AddEventHandler("Core:Shared:Ready", function()
 			if LocalPlayer.state.onDuty and LocalPlayer.state.onDuty == "police" then
 				local bruh = GlobalState["Robbery:InProgress"]
 				for k, v in ipairs(bruh) do
-					local fuck = GlobalState[string.format("Robbery:InProgress:%s", v)]
-					if fuck then
-						local dist = #(vector3(LocalPlayer.state.myPos.x, LocalPlayer.state.myPos.y, LocalPlayer.state.myPos.z) - vector3(fuck.x, fuck.y, fuck.z))
+					local inProgress = GlobalState[string.format("Robbery:InProgress:%s", v)]
+					if inProgress then
+						local dist = #(vector3(LocalPlayer.state.myPos.x, LocalPlayer.state.myPos.y, LocalPlayer.state.myPos.z) - vector3(inProgress.x, inProgress.y, inProgress.z))
 						if dist <= 3.0 then
 							return true
 						end

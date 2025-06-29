@@ -702,7 +702,7 @@ function WeaponsThread()
 				if hasWeapon and not LocalPlayer.state.holstering then
 					if not ignoredHackerWeapons[hasHash] and hasHash ~= 0 and hasHash ~= _equippedHash then
 						RemoveAllPedWeapons(LocalPlayer.state.ped)
-						if not spammyFuck and not LocalPlayer.state.isDead and not ignoredWarningWeapons[hasHash] then
+						if not spam and not LocalPlayer.state.isDead and not ignoredWarningWeapons[hasHash] then
 							Callbacks:ServerCallback("Weapons:PossibleCheaterWarning", {
 								h = hasHash,
 								s = _equippedHash
@@ -710,9 +710,9 @@ function WeaponsThread()
 
 							end)
 
-							spammyFuck = true
+							spam = true
 							SetTimeout(10000, function()
-								spammyFuck = false
+								spam = false
 							end)
 						end
 					end

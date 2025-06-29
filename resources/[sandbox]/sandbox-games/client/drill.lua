@@ -54,7 +54,7 @@ function ShittyDrillAnim()
 	end
 end
 
-function YouFuckingSuck()
+function DrillFail()
 	local waitTime = math.random(5000, 10000)
 	StopAnimTask(LocalPlayer.state.ped, "anim@heists@fleeca_bank@drilling", "drill_straight_start")
 	StopAnimTask(LocalPlayer.state.ped, "anim@heists@fleeca_bank@drilling", "drill_straight_idle")
@@ -288,7 +288,7 @@ Drilling.HandleControls = function()
 	end
 
 	if Drilling.DrillTemp >= 1.0 then
-		YouFuckingSuck()
+		DrillFail()
 		Drilling.Result = false
 		Drilling.Active = false
 	elseif Drilling.DrillPos >= 1.0 then

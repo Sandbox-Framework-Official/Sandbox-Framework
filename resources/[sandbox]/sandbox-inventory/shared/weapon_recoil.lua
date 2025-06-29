@@ -14,8 +14,8 @@ _weaponRecoilOverrides = {
 	[`WEAPON_44MAGNUM_PD`] = 4.0,
 	[`WEAPON_PISTOL50`] = 4.0,
 	[`WEAPON_L5`] = 4.0,
-	[`WEAPON_HKUMP`] = 0.85, -- Bcuz this dogshit gun has some weird camera raise shit
-	[`WEAPON_HKUMP_PD`] = 0.85, -- Bcuz this dogshit gun has some weird camera raise shit
-	[`WEAPON_AR15`] = 0.8, -- these weapons are fucking dogshit
-	[`WEAPON_AR15_PD`] = 0.8, -- these weapons are fucking dogshit
+	[`WEAPON_HKUMP`] = 0.85,
+	[`WEAPON_HKUMP_PD`] = 0.85,
+	[`WEAPON_AR15`] = 0.8,
+	[`WEAPON_AR15_PD`] = 0.8,
 }

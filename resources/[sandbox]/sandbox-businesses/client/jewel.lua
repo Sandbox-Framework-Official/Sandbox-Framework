@@ -101,7 +101,7 @@ AddEventHandler("JEWEL:Client:Sell", function()
 end)
 
 AddEventHandler("Businesses:Client:JEWEL:OpenTable", function(e, data)
-	Inventory.Dumbfuck:Open({
+	Inventory.InventoryManager:Open({
 		invType = 149,
 		owner = data.id,
 	})

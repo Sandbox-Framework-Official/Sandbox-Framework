@@ -64,7 +64,6 @@ function StartEscortThread(t)
 end
 
 RegisterNetEvent("Escort:Client:Escorted", function()
-	_fuckSake = true
 	while LocalPlayer.state.myEscorter == nil do
 		Wait(10)
 	end

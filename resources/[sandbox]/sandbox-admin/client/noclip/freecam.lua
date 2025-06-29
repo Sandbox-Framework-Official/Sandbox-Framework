@@ -37,7 +37,7 @@ local settings = {
     easingDuration = 1000
 }
 
-local _stupidShit = false
+local _isFocusSet = false
 
 --------------------------------------------------------------------------------
 
@@ -61,7 +61,7 @@ function SetFreecamPosition(x, y, z)
     local int = GetInteriorAtCoords(pos)
 
     LoadInterior(int)
-    if not _stupidShit then
+    if not _isFocusSet then
         SetFocusArea(pos)
     end
     LockMinimapPosition(x, y)
@@ -191,7 +191,7 @@ function SetFreecamEnabled(enable, isNoclip)
         return
     end
 
-    _stupidShit = isNoclip
+    _isFocusSet = isNoclip
 
     if enable then
         local pos = GetGameplayCamCoord()
@@ -211,7 +211,7 @@ function SetFreecamEnabled(enable, isNoclip)
         end)
     else
         DestroyCam(_internal_camera)
-        if not _stupidShit then
+        if not _isFocusSet then
             ClearFocus()
         end
         UnlockMinimapPosition()

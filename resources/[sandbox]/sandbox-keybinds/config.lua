@@ -18,7 +18,7 @@ Config = {
 	},
 }
 
-_dumbFuckingKeyStrings = {
+_KeyStrings = {
 	--[[ TODO: All the controller stuff
     b_0 = '',
     b_1 = '',

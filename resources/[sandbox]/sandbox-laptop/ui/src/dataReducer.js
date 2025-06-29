@@ -20,8 +20,8 @@ export const initialState = {
 							},
 							{
 								SID: 2,
-								First: 'Shit',
-								Last: 'Dick',
+								First: 'Test',
+								Last: 'Test',
 							},
 						),
 						State: 0,
@@ -889,7 +889,7 @@ export const initialState = {
 							],
 							team: {
 								id: 2,
-								name: 'Dumbfucks',
+								name: 'Test',
 							},
 							payment: {
 								coin: 'PLEB',

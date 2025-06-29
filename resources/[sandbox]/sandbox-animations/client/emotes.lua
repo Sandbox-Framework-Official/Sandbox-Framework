@@ -172,7 +172,7 @@ function DoAnEmote(emoteData, fromUserInput, length, notCancellable, emoteName, 
         IsAbleToCancel = not notCancellable
 
         if LocalPlayer.state.sitting then
-            StandTheFuckUp(true)
+            StandUp(true)
         end
 
         if not skipDisarm then

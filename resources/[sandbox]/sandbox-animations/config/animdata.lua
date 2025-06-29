@@ -847,7 +847,7 @@ AnimData.Shared = {
 }
 
 AnimData.Emotes = {
-	["reviveshit"] = {
+	["revive"] = {
 		AnDictionary = "weapons@first_person@aim_rng@generic@projectile@thermal_charge@",
 		AnAnim = "plant_floor",
 		AdditionalOptions = {

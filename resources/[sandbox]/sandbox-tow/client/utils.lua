@@ -26,7 +26,7 @@ function GetVehicleAttachOffset(towModel, targetVeh)
     end
 end
 
-function CanFuckingTowVehicle(truck, vehicle)
+function CanTowVehicle(truck, vehicle)
     if vehicle and IsEntityAVehicle(vehicle) and #(GetEntityCoords(truck) - GetEntityCoords(vehicle)) <= 20.0 and not _bannedClasses[GetVehicleClass(vehicle)] and not _bannedModels[GetEntityModel(vehicle)] and not Entity(vehicle).state.towingVehicle then
         if IsVehicleEmpty(vehicle) then
             if GetEntitySpeed(vehicle) <= 1.0 then
@@ -93,7 +93,7 @@ function IsParkingSpaceFree(spaceCoords)
     return GetClosestVehicleWithinRadius(spaceCoords.xyz, 2.0) == false
 end
 
--- Because the normal one doesn't fucking work
+-- Because the normal one doesn't work
 function GetClosestVehicleWithinRadius(coords, radius)
     if not radius then
         radius = 5.0
@@ -102,7 +102,7 @@ function GetClosestVehicleWithinRadius(coords, radius)
     local poolVehicles = GetGamePool('CVehicle')
     local lastDist = radius
     local lastVeh = false
-    
+
     for k, v in ipairs(poolVehicles) do
         if DoesEntityExist(v) then
             local dist = #(coords - GetEntityCoords(v))

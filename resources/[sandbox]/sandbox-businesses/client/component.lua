@@ -236,7 +236,7 @@ RegisterNetEvent("Businesses:Client:CreatePoly", function(pickups, onSpawn)
 end)
 
 AddEventHandler("Businesses:Client:Pickup", function(entity, data)
-	Inventory.Dumbfuck:Open(data.inventory)
+	Inventory.InventoryManager:Open(data.inventory)
 end)
 
 function GetBusinessClockInMenu(businessName)

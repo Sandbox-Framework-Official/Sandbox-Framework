@@ -132,7 +132,7 @@ KEYBINDS = {
 		end
 		local key = GetControlInstructionalButton(0, GetHashKey("+" .. id) | 0x80000000, 1):gsub("t_", "")
 		if key:find("^b_") then
-			key = _dumbFuckingKeyStrings[key] or "Unknown"
+			key = _KeyStrings[key] or "Unknown"
 		end
 		return key
 	end,

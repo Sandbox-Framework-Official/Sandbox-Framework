@@ -145,24 +145,24 @@ AddEventHandler("Core:Shared:Ready", function()
 							return false
 						end,
 						action = function()
-							local fuckingSeats = {}
+							local seats = {}
 							local seatAmount = GetVehicleModelNumberOfSeats(GetEntityModel(VEHICLE_INSIDE))
 							for i = 1, seatAmount do
-								local actualFuckingSeatNumber = i - 2
-								if GetPedInVehicleSeat(VEHICLE_INSIDE, actualFuckingSeatNumber) == 0 then
-									table.insert(fuckingSeats, {
+								local actualSeatNumber = i - 2
+								if GetPedInVehicleSeat(VEHICLE_INSIDE, actualSeatNumber) == 0 then
+									table.insert(seats, {
 										icon = "person-seat",
-										label = actualFuckingSeatNumber == -1 and "Driver's Seat" or "Seat #" .. i,
+										label = actualSeatNumber == -1 and "Driver's Seat" or "Seat #" .. i,
 										action = function()
-											TriggerEvent("Vehicles:Client:Actions:SwitchSeat", actualFuckingSeatNumber)
+											TriggerEvent("Vehicles:Client:Actions:SwitchSeat", actualSeatNumber)
 											Interaction:Hide()
 										end,
 									})
 								end
 							end
 
-							if #fuckingSeats > 0 then
-								Interaction:ShowMenu(fuckingSeats)
+							if #seats > 0 then
+								Interaction:ShowMenu(seats)
 							else
 								Notification:Error("No Seats Free")
 							end
@@ -180,10 +180,10 @@ AddEventHandler("Core:Shared:Ready", function()
 							return false
 						end,
 						action = function()
-							local fuckingDoors = {}
+							local doors = {}
 							for doorId, doorName in pairs(vehicleDoorNames) do
 								if GetIsDoorValid(VEHICLE_INSIDE, doorId) then
-									table.insert(fuckingDoors, {
+									table.insert(doors, {
 										icon = "car-side",
 										label = doorName,
 										action = function()
@@ -193,7 +193,7 @@ AddEventHandler("Core:Shared:Ready", function()
 								end
 							end
 
-							Interaction:ShowMenu(fuckingDoors)
+							Interaction:ShowMenu(doors)
 						end,
 					},
 					{
@@ -242,8 +242,8 @@ AddEventHandler("Core:Shared:Ready", function()
 							return false
 						end,
 						action = function()
-							local fuckingDoors = {}
-							table.insert(fuckingDoors, {
+							local windows = {}
+							table.insert(windows, {
 								icon = "window-frame",
 								label = "Driver Window",
 								action = function()
@@ -251,7 +251,7 @@ AddEventHandler("Core:Shared:Ready", function()
 								end,
 							})
 
-							table.insert(fuckingDoors, {
+							table.insert(windows, {
 								icon = "window-frame",
 								label = "Passenger Window",
 								action = function()
@@ -259,7 +259,7 @@ AddEventHandler("Core:Shared:Ready", function()
 								end,
 							})
 
-							table.insert(fuckingDoors, {
+							table.insert(windows, {
 								icon = "window-frame",
 								label = "Close All",
 								action = function()
@@ -267,7 +267,7 @@ AddEventHandler("Core:Shared:Ready", function()
 								end,
 							})
 
-							table.insert(fuckingDoors, {
+							table.insert(windows, {
 								icon = "window-frame",
 								label = "Open All",
 								action = function()
@@ -275,7 +275,7 @@ AddEventHandler("Core:Shared:Ready", function()
 								end,
 							})
 
-							Interaction:ShowMenu(fuckingDoors)
+							Interaction:ShowMenu(windows)
 						end,
 					},
 					{
