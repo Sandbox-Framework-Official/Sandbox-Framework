@@ -292,7 +292,7 @@ RegisterNetEvent("Characters:Client:Logout", function()
 	_loggedIn = false
 
 	CleanupBizPhones()
-	fucksound()
+	stopsound()
 end)
 
 function hasValue(tbl, value)

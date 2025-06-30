@@ -100,7 +100,7 @@ AddEventHandler("Casino:Server:Startup", function()
             for k, v in pairs(_slotMachines) do
                 if v and v.Source == source then
                     if Casino.Chips:Modify(source, -bet) then
-                        GiveCasinoFuckingMoney(source, "Slots", bet)
+                        GiveCasinoMoney(source, "Slots", bet)
                         SendCasinoSpentChipsPhoneNotification(source, bet)
 
                         _slotMachines[k].Spinning = true
@@ -156,7 +156,7 @@ AddEventHandler("Casino:Server:Startup", function()
 
                         winnings = math.floor(winnings)
 
-                        Citizen.SetTimeout(time, function()
+                        SetTimeout(time, function()
                             if _slotMachines[k] then
                                 local char = Fetch:CharacterSource(source)
                                 if char then

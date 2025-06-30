@@ -555,13 +555,13 @@ AddEventHandler("Labor:Server:HouseRobbery:Queue", function(source, data)
 				true,
 				true
 			)
-			local fuckme = Routing:RequestRouteId(string.format("Robbery:Properties:%s", house))
+			local robberyBucket = Routing:RequestRouteId(string.format("Robbery:Properties:%s", house))
 
 			local w = Weapons[math.random(#Weapons)]
 
 			GiveWeaponToPed(p, w, 250, false, true)
 			SetCurrentPedWeapon(p, w, true)
-			SetEntityRoutingBucket(p, fuckme)
+			SetEntityRoutingBucket(p, robberyBucket)
 			SetPedArmour(p, 200)
 			TaskCombatPed(p, GetPlayerPed(source), 0, 16)
 

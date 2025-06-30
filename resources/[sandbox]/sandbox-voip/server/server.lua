@@ -83,7 +83,7 @@ function RegisterMiddleware()
 	end, 3)
 end
 
-_fuckingVOIP = {
+_VOIP = {
 	AddPlayer = function(self, source)
 		if not voiceData[source] then
 			voiceData[source] = GetDefaultPlayerVOIPData()
@@ -123,7 +123,7 @@ _fuckingVOIP = {
 }
 
 AddEventHandler("Proxy:Shared:RegisterReady", function()
-	exports["sandbox-base"]:RegisterComponent("VOIP", _fuckingVOIP)
+	exports["sandbox-base"]:RegisterComponent("VOIP", _VOIP)
 end)
 
 AddEventHandler("Characters:Server:PlayerLoggedOut", function(source)

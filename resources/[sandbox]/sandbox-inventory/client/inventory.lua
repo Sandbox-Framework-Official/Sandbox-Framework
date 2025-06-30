@@ -507,7 +507,7 @@ INVENTORY = {
 						})
 					end
 
-					Citizen.SetTimeout(3000, function()
+					SetTimeout(3000, function()
 						_hkCd = false
 					end)
 				end)
@@ -650,7 +650,7 @@ INVENTORY = {
 	Toggle = function(self)
 		LocalPlayer.state.InventoryDisabled = not LocalPlayer.state.InventoryDisabled
 	end,
-	Dumbfuck = {
+	InventoryManager = {
 		Open = function(self, data)
 			Callbacks:ServerCallback("Inventory:Server:Open", data, function(state)
 				if state then
@@ -979,7 +979,7 @@ RegisterNUICallback("MergeSlot", function(data, cb)
 				local veh = NetToVeh(SecondInventory.netId)
 				if veh then
 					local vEnt = Entity(veh)
-					if vEnt and not vEnt.state.Owned and not vEnt.state.PleaseDoNotFuckingDelete then
+					if vEnt and not vEnt.state.Owned and not vEnt.state.DoNotDelete then
 						TriggerServerEvent("Vehicles:Server:StopDespawn", SecondInventory.netId)
 					end
 				end
@@ -1007,7 +1007,7 @@ RegisterNUICallback("SwapSlot", function(data, cb)
 				local veh = NetToVeh(SecondInventory.netId)
 				if veh then
 					local vEnt = Entity(veh)
-					if vEnt and not vEnt.state.Owned and not vEnt.state.PleaseDoNotFuckingDelete then
+					if vEnt and not vEnt.state.Owned and not vEnt.state.DoNotDelete then
 						TriggerServerEvent("Vehicles:Server:StopDespawn", SecondInventory.netId)
 					end
 				end
@@ -1035,7 +1035,7 @@ RegisterNUICallback("MoveSlot", function(data, cb)
 				local veh = NetToVeh(SecondInventory.netId)
 				if veh then
 					local vEnt = Entity(veh)
-					if vEnt and not vEnt.state.Owned and not vEnt.state.PleaseDoNotFuckingDelete then
+					if vEnt and not vEnt.state.Owned and not vEnt.state.DoNotDelete then
 						TriggerServerEvent("Vehicles:Server:StopDespawn", SecondInventory.netId)
 					end
 				end

@@ -126,7 +126,7 @@ export default (props) => {
 			case _partDmg >= 30 && _partDmg < 50:
 				return 'Needs Work';
 			case _partDmg < 30:
-				return "You're fucked";
+				return "Broken";
 			default:
 				return 'Unknown';
 		}
@@ -144,7 +144,7 @@ export default (props) => {
 			case _partDmg >= 30 && _partDmg < 50:
 				return 'Needs Work';
 			case _partDmg < 30:
-				return "You're fucked";
+				return "Broken";
 			default:
 				return 'Unknown';
 		}

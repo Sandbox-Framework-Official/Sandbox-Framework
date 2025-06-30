@@ -93,8 +93,8 @@ export default ({ onNav, data }) => {
 		//   lastUpdated: {
 		//     SID: 3,
 		//     Callsign: 302,
-		//     First: 'Shit',
-		//     Last: 'Cunt',
+		//     First: 'Test',
+		//     Last: 'Test',
 		//     Time: 1628967582 * 1000,
 		//   }
 		// });

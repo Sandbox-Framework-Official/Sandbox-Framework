@@ -8,16 +8,16 @@ DEALERSHIPS.Management = {
             query = {}
         }, function(success, results)
             if success then
-                local fuckface = {}
+                local dealer = {}
                 for k, v in ipairs(results) do
                     if v.dealership then
-                        fuckface[v.dealership] = v
+                        dealer[v.dealership] = v
                     end
                 end
 
                 for k, v in pairs(_dealerships) do
-                    if fuckface[k] then
-                        _managementData[k] = fuckface[k]
+                    if dealer[k] then
+                        _managementData[k] = dealer[k]
                     else
                         _managementData[k] = _defaultDealershipSalesData
                     end

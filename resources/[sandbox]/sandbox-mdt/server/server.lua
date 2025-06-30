@@ -98,7 +98,7 @@ function RegisterMiddleware()
     Middleware:Add('Characters:Spawning', function(source)
 		local char = Fetch:CharacterSource(source)
 		if char and char:GetData("Attorney") then
-			Citizen.SetTimeout(5000, function()
+			SetTimeout(5000, function()
 				TriggerClientEvent("MDT:Client:Login", source, nil, nil, nil, true, {
 					governmentJobs = _governmentJobs,
 					charges = _charges,

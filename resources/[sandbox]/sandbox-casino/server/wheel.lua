@@ -21,7 +21,7 @@ AddEventHandler("Casino:Server:Startup", function()
                         Turbo = true,
                     }
 
-                    Citizen.SetTimeout(3000, function()
+                    SetTimeout(3000, function()
                         GlobalState["Casino:WheelStarted"] = false
                     end)
 
@@ -36,7 +36,7 @@ AddEventHandler("Casino:Server:Startup", function()
                         Turbo = false,
                     }
 
-                    Citizen.SetTimeout(3000, function()
+                    SetTimeout(3000, function()
                         GlobalState["Casino:WheelStarted"] = false
                     end)
 
@@ -56,12 +56,12 @@ AddEventHandler("Casino:Server:Startup", function()
 
             if GlobalState["Casino:WheelStarted"].Turbo then
                 _wheelAccumulator += 7500
-                GiveCasinoFuckingMoney(source, "Lucky Wheel", 7500)
+                GiveCasinoMoney(source, "Lucky Wheel", 7500)
 
                 for i = 1, 5 do
                     local randomPrize = GenerateWheelPrize()
 
-                    SpinTheFuckingWheel(randomPrize.slice)
+                    SpinTheWheel(randomPrize.slice)
 
                     GiveWheelPrize(source, randomPrize)
 
@@ -76,11 +76,11 @@ AddEventHandler("Casino:Server:Startup", function()
                 GlobalState["Casino:WheelSpinning"] = false
             else
                 _wheelAccumulator += 1500
-                GiveCasinoFuckingMoney(source, "Lucky Wheel", 1500)
+                GiveCasinoMoney(source, "Lucky Wheel", 1500)
 
                 local randomPrize = GenerateWheelPrize()
 
-                SpinTheFuckingWheel(randomPrize.slice)
+                SpinTheWheel(randomPrize.slice)
 
                 GiveWheelPrize(source, randomPrize)
             end
@@ -149,7 +149,7 @@ function GenerateWheelPrize()
     return randomPrize
 end
 
-function SpinTheFuckingWheel(slice)
+function SpinTheWheel(slice)
     local p = promise.new()
     local offset = math.random(2, 16)
     local spins = math.random(6, 12)
@@ -159,7 +159,7 @@ function SpinTheFuckingWheel(slice)
 
     TriggerClientEvent("Casino:Client:SpinWheel", -1)
 
-    Citizen.SetTimeout(math.random(3, 5) * 1000, function()
+    SetTimeout(math.random(3, 5) * 1000, function()
         GlobalState["Casino:WheelLastRotation"] = finalRotation
         TriggerClientEvent("Casino:Client:WheelLastRotation", -1, finalRotation)
 

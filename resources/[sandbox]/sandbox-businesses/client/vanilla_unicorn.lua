@@ -137,7 +137,7 @@ AddEventHandler('Businesses:Client:Startup', function()
                         icon = 'money-bill-1-wave',
                         label = v.text,
                         action = function()
-                            local nearestStripper = GetNearbyFuckingStripper()
+                            local nearestStripper = GetNearbyStripper()
                             if nearestStripper then
                                 MakeItRainBitch(nearestStripper, v.type, v.time)
                             end
@@ -151,7 +151,7 @@ AddEventHandler('Businesses:Client:Startup', function()
             Interaction:ShowMenu(subMenu)
         end
     end, function()
-        return Polyzone:IsCoordsInZone(GetEntityCoords(LocalPlayer.state.ped), 'vu_makeitrain') and GetNearbyFuckingStripper()
+        return Polyzone:IsCoordsInZone(GetEntityCoords(LocalPlayer.state.ped), 'vu_makeitrain') and GetNearbyStripper()
     end)
 end)
 
@@ -237,7 +237,7 @@ function IsDoingStripperDance(anim)
     return anim and stripperAnims[anim]
 end
 
-function GetNearbyFuckingStripper()
+function GetNearbyStripper()
     local myCoords = GetEntityCoords(LocalPlayer.state.ped)
     local closest, lastDist = nil, 1000.0
 

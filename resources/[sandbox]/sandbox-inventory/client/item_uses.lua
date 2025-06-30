@@ -1,7 +1,5 @@
 local _energyCd = false
 
-function RegisterRandomItems() end
-
 local _runSpeed = false
 function RunSpeed(modifier, duration, cd, ss)
 	if _runSpeed then
@@ -62,7 +60,7 @@ RegisterNetEvent("Inventory:Client:UseVanityItem", function(sender, action, item
 			end
 		end
 	end
-	Citizen.SetTimeout(10000, function()
+	SetTimeout(10000, function()
 		Hud.Overlay:Hide()
 	end)
 end)

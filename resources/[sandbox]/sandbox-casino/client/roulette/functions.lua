@@ -477,7 +477,7 @@ function RouletteStandUpAnim(chairId)
     TaskPlayAnim(LocalPlayer.state.ped, "anim_casino_b@amb@casino@games@shared@player@", whichAnim, 1.0, 1.0, 2500, 0)
 end
 
-local fuckface = {
+local chip_props = {
     [100] = `vw_prop_chip_100dollar_x1`,
     [500] = `vw_prop_chip_500dollar_x1`,
     [1000] = `vw_prop_chip_1kdollar_x1`,
@@ -486,12 +486,12 @@ local fuckface = {
 }
 
 function getRouletteBetObjectType(betAmount)
-    return fuckface[betAmount]
+    return chip_props[betAmount]
 end
 
 function DoRouletteBetAnimation()
     _rouletteForceIdle = false
-    local duration = doStupidFuckingAnimation("anim_casino_b@amb@casino@games@blackjack@player", getAnimNameFromBet(100))
+    local duration = doAnimation("anim_casino_b@amb@casino@games@blackjack@player", getAnimNameFromBet(100))
 
     SetTimeout(duration, function()
         _rouletteForceIdle = true
@@ -500,7 +500,7 @@ end
 
 function DoRouletteLossAnimation()
     _rouletteForceIdle = false
-    local duration = doStupidFuckingAnimation("anim_casino_b@amb@casino@games@shared@player@", "reaction_bad_var_01")
+    local duration = doAnimation("anim_casino_b@amb@casino@games@shared@player@", "reaction_bad_var_01")
     SetTimeout(duration * 0.9, function()
         _rouletteForceIdle = true
     end)
@@ -508,7 +508,7 @@ end
 
 function DoRoulettePushAnimation()
     _rouletteForceIdle = false
-    local duration = doStupidFuckingAnimation("anim_casino_b@amb@casino@games@shared@player@", "reaction_impartial_var_01")
+    local duration = doAnimation("anim_casino_b@amb@casino@games@shared@player@", "reaction_impartial_var_01")
     SetTimeout(duration * 0.9, function()
         _rouletteForceIdle = true
     end)
@@ -516,7 +516,7 @@ end
 
 function DoRouletteWinAnimation()
     _rouletteForceIdle = false
-    local duration = doStupidFuckingAnimation("anim_casino_b@amb@casino@games@shared@player@", "reaction_good_var_01")
+    local duration = doAnimation("anim_casino_b@amb@casino@games@shared@player@", "reaction_good_var_01")
     SetTimeout(duration * 0.9, function()
         _rouletteForceIdle = true
     end)

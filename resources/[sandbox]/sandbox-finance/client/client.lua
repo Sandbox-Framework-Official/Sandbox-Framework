@@ -56,7 +56,7 @@ AddEventHandler("Core:Shared:Ready", function()
 		}, "money-check-dollar")
 
 		Targeting.Zones:AddBox(
-			"paycheck-fuckingcunt",
+			"paycheck-bankman",
 			"money-check-dollar",
 			vector3(254.53, 216.58, 106.28),
 			0.8,
@@ -94,7 +94,7 @@ AddEventHandler("Core:Shared:Ready", function()
 		}, "money-check-dollar")
 
 		Targeting.Zones:AddBox(
-			"paycheck-fuckingcunt-2",
+			"paycheck-bankman-2",
 			"money-check-dollar",
 			vector3(16.72, -927.74, 29.9),
 			2.0,
@@ -132,7 +132,7 @@ AddEventHandler("Core:Shared:Ready", function()
 		}, "money-check-dollar")
 
 		Targeting.Zones:AddBox(
-			"paycheck-fuckingcunt-3",
+			"paycheck-bankman-3",
 			"money-check-dollar",
 			vector3(-109.04, 6471.68, 31.63),
 			1.6,

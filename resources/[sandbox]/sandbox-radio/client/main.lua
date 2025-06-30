@@ -63,7 +63,7 @@ AddEventHandler("Core:Shared:Ready", function()
 			if LocalPlayer.state.loggedIn and HAS_RADIO and not radioChannelCycle then
 				radioChannelCycle = true
 				ToggleRadioPower(false)
-				Citizen.SetTimeout(1000, function()
+				SetTimeout(1000, function()
 					radioChannelCycle = false
 				end)
 			end
@@ -371,7 +371,7 @@ function CycleRadioChannel(up)
 		SetCharacterRadioFrequency(switchingRadioChannel, true)
 	end
 
-	Citizen.SetTimeout(1000, function()
+	SetTimeout(1000, function()
 		radioChannelCycle = false
 	end)
 end

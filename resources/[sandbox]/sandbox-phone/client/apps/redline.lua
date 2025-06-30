@@ -1,10 +1,3 @@
---[[
-	This code is probably a steaming pile of shit, I beg someone
-	that still has a few functioning brain cells to rewrite this
-	so it isn't as much of a steaming pile of shit.
-
-	Send Help.
-]]
 lapTimes = {}
 lap_start = nil
 
@@ -715,7 +708,7 @@ function SetupTrack(skipBlip)
 	end
 end
 
--- This is a fucking mess that somehow functions? Someone that is sane pls rewrite
+-- This is a mess that somehow functions? Someone that is sane pls rewrite
 function StartRace()
 	cCp = 1
 	sCp = -1
@@ -876,7 +869,7 @@ function StartRace()
 				end
 				SetBlipColour(blip, 6)
 
-				-- Like what the fuck is this code?
+				-- Like what is this code?
 				local ftr = nil
 				if cCp > #_activeRace.trackData.Checkpoints then
 					ftr = _activeRace.trackData.Checkpoints[1]
@@ -1053,16 +1046,16 @@ function CreateCheckpoint()
 	end
 
 	if lcp == nil or dist > 5 then
-		local fuckme = rotateVector(facingVector, 90)
+		local rotatedVector = rotateVector(facingVector, 90)
 		local left = enlargeVector(
 			{ x = pX, y = pY, z = pZ },
-			{ x = pX + fuckme.x, y = pY + fuckme.y, z = pZ + fuckme.z },
+			{ x = pX + rotatedVector.x, y = pY + rotatedVector.y, z = pZ + rotatedVector.z },
 			_size / 2
 		)
-		local fuckme2 = rotateVector(facingVector, -90)
+		local rotatedVector2 = rotateVector(facingVector, -90)
 		local right = enlargeVector(
 			{ x = pX, y = pY, z = pZ },
-			{ x = pX + fuckme2.x, y = pY + fuckme2.y, z = pZ + fuckme2.z },
+			{ x = pX + rotatedVector2.x, y = pY + rotatedVector2.y, z = pZ + rotatedVector2.z },
 			_size / 2
 		)
 		-- _pendingTrack.Checkpoints[(#_pendingTrack.Checkpoints + 1)] = {
@@ -1127,16 +1120,16 @@ function DisplayTempCheckpoint()
 	}
 	local pX, pY, pZ = table.unpack(GetEntityCoords(pPed))
 
-	local fuckme = rotateVector(facingVector, 90)
+	local rotatedVector = rotateVector(facingVector, 90)
 	local left = enlargeVector(
 		{ x = pX, y = pY, z = pZ },
-		{ x = pX + fuckme.x, y = pY + fuckme.y, z = pZ + fuckme.z },
+		{ x = pX + rotatedVector.x, y = pY + rotatedVector.y, z = pZ + rotatedVector.z },
 		_size / 2
 	)
-	local fuckme2 = rotateVector(facingVector, -90)
+	local rotatedVector2 = rotateVector(facingVector, -90)
 	local right = enlargeVector(
 		{ x = pX, y = pY, z = pZ },
-		{ x = pX + fuckme2.x, y = pY + fuckme2.y, z = pZ + fuckme2.z },
+		{ x = pX + rotatedVector2.x, y = pY + rotatedVector2.y, z = pZ + rotatedVector2.z },
 		_size / 2
 	)
 

@@ -53,7 +53,6 @@ SPAWN = {
 		else
 			LocalPlayer.state.isK9Ped = false
 		end
-		player = PlayerPedId()
 		LocalPlayer.state.ped = player
 		SetPedDefaultComponentVariation(player)
 		SetEntityAsMissionEntity(player, true, true)
@@ -71,7 +70,6 @@ SPAWN = {
 		SetCanAttackFriendly(player, true, true)
 		NetworkSetFriendlyFireOption(true)
 
-		SetEntityMaxHealth(PlayerPedId(), 200)
 		SetEntityHealth(PlayerPedId(), data.HP or 200)
 		DisplayHud(true)
 		SetNuiFocus(false, false)
@@ -102,7 +100,7 @@ SPAWN = {
 			DoScreenFadeIn(500)
 		end
 
-		Citizen.SetTimeout(500, function()
+		SetTimeout(500, function()
 			SetPedArmour(player, data.Armor)
 		end)
 

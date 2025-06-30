@@ -151,7 +151,6 @@ AddEventHandler('Vehicles:Client:BecameDriver', function(veh, seat, class)
         while SYNC_DRIVING_VEHICLE do
             local sleep = true
             if DISABLE_AIR_CONTROL then
-                -- Why the hell can't disabling shit be nicer
                 DisableControlAction(0, 59, true)
                 DisableControlAction(0, 60, true)
                 sleep = false

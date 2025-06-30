@@ -432,7 +432,7 @@ PropertyConfig = {
                         maxZ = 58.44
                     }
                 },
-                { -- Hallway Shit
+                { -- Hallway
                     type = "standard",
                     coords = vector3(980.03, -718.84, 58.02),
                     length = 2.8,

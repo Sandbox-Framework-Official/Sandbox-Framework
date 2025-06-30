@@ -161,7 +161,7 @@ DAMAGE = {
         Hud:ForceHP()
     end,
     WasDead = function(self, sid)
-        return _deadCunts[sid] ~= nil
+        return _deadPlayers[sid] ~= nil
     end,
     Revive = function(self, fieldTreat)
         local player = PlayerPedId()

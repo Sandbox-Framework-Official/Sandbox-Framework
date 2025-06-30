@@ -143,7 +143,7 @@ HOSPITAL = {
 		end)
 	end,
 	SendToBed = function(self, bed, isRp, bedId)
-		local fuck = false
+		local inBed = false
 
 		if bedId then
 			local p = promise.new()
@@ -151,14 +151,14 @@ HOSPITAL = {
 				p:resolve(s)
 			end)
 
-			fuck = Citizen.Await(p)
+			inBed = Citizen.Await(p)
 		else
-			fuck = true
+			inBed = true
 		end
 
 		_bedId = bedId
 
-		if bed ~= nil and fuck then
+		if bed ~= nil and inBed then
 			SetBedCam(bed)
 			if isRp then
 				_healEnd = GetCloudTimeAsInt()
@@ -166,7 +166,7 @@ HOSPITAL = {
 			else
 				_healEnd = GetCloudTimeAsInt() + (60 * 1)
 				Hud.DeathTexts:Show("hospital", GetCloudTimeAsInt(), _healEnd, "primary_action")
-				Citizen.SetTimeout(((_healEnd - GetCloudTimeAsInt()) - 10) * 1000, function()
+				SetTimeout(((_healEnd - GetCloudTimeAsInt()) - 10) * 1000, function()
 					if LocalPlayer.state.loggedIn and LocalPlayer.state.isHospitalized then
 						LocalPlayer.state.deadData = {}
 						Damage.Reductions:Reset()
