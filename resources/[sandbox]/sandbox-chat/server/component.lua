@@ -96,22 +96,24 @@ CHAT = {
 								end
 							elseif commands[k].job ~= nil then
 								local canUse = false
-								for k2, v2 in pairs(commands[k].job) do
-									if
-										v2.Id == nil
-										or (
-											myDuty
-											and myDuty == v2.Id
-											and Jobs.Permissions:HasJob(
-												source,
-												v2.Id,
-												v2.Workplace or false,
-												v2.Grade or false,
-												v2.Level or false
+								if type(commands[k].job) == "table" then
+									for _, v2 in pairs(commands[k].job) do
+										if
+											v2.Id == nil
+											or (
+												myDuty
+												and myDuty == v2.Id
+												and Jobs.Permissions:HasJob(
+													source,
+													v2.Id,
+													v2.Workplace or false,
+													v2.Grade or false,
+													v2.Level or false
+												)
 											)
-										)
-									then
-										canUse = true
+										then
+											canUse = true
+										end
 									end
 								end
 
@@ -158,8 +160,8 @@ AddEventHandler("chatMessage", function(source, n, message)
 
 		local commandName = command_args[1]
 		if not commands[commandName] then
-			-- print("Invalid Command: " .. commandName)
-			--Chat.Send.Server:Single(source, "Invalid Command: " .. commandName)
+			print("Invalid Command: " .. commandName)
+			Chat.Send.Server:Single(source, "Invalid Command: " .. commandName)
 		end
 	end
 	CancelEvent()
