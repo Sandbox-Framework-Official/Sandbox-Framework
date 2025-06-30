@@ -7,7 +7,3 @@ client_script("@sandbox-pwnzor/client/check.lua")
 client_scripts({
 	"client/**/*.lua",
 })
-
-shared_scripts({
-	"shared/**/*.lua",
-})
